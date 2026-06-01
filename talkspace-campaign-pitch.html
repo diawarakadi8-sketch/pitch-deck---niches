@@ -1,0 +1,3883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Talkspace Campaign Pitch 2024</title>
+
+<!-- Playfair Display (editorial serif) + DM Sans (clean body) -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<!-- Three.js + OrbitControls (ES module, used by the Panel 2 galaxy) -->
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"}}</script>
+
+<style>
+/* ===========================================
+   CSS CUSTOM PROPERTIES — TALKSPACE PALETTE
+   Warm cream, deep forest green, soft coral.
+   Matches talkspace.com visual identity.
+   =========================================== */
+:root {
+  /* Core palette — pulled directly from Talkspace.com */
+  --cream:        #F5EEE3;   /* warm off-white — page background */
+  --cream-light:  #FBF7F2;   /* lighter cream for cards */
+  --forest:       #1C5E52;   /* deep forest green — primary brand */
+  --forest-mid:   #2E7A6A;   /* mid-green for hover / accents */
+  --forest-dark:  #133F37;   /* darkest green for high-contrast text */
+  --sage:         #8CB5A7;   /* muted sage — secondary accent */
+  --sage-light:   #C8DDD8;   /* very light sage — borders, tints */
+  --coral:        #E07B5C;   /* warm coral — accent, highlights */
+  --peach:        #F5C4A8;   /* soft peach — card warmth */
+  --peach-light:  #FDF0E8;   /* near-white peach — section tint */
+  --warm-white:   #FEFCF8;   /* white with warmth */
+  --dark:         #1A2E28;   /* very dark forest for body text */
+  --text-muted:   rgba(26,46,40,0.50);
+  --text-light:   rgba(255,255,255,0.70);
+  --border:       rgba(26,46,40,0.10);
+  --border-light: rgba(255,255,255,0.22);
+
+  /* Typography */
+  --serif:       'Playfair Display', Georgia, serif;
+  --sans:        'DM Sans', system-ui, sans-serif;
+  --title-size:  clamp(2.2rem,  5.5vw, 5rem);
+  --h2-size:     clamp(1.75rem, 4vw,   3.5rem);
+  --h3-size:     clamp(1.1rem,  2.5vw, 1.9rem);
+  --body-size:   clamp(0.8rem,  1.4vw, 1.05rem);
+  --small-size:  clamp(0.65rem, 1vw,   0.82rem);
+  --label-size:  clamp(0.55rem, 0.85vw,0.72rem);
+
+  /* Spacing */
+  --pad:       clamp(1.5rem, 4vw,   4rem);
+  --gap:       clamp(0.75rem,2vw,   2rem);
+  --elem-gap:  clamp(0.4rem, 1vw,   1rem);
+
+  /* Animation */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur:  0.65s;
+}
+
+/* ===========================================
+   RESET & VIEWPORT BASE
+   =========================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+  font-family: var(--sans);
+  background: var(--cream);
+  color: var(--dark);
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+.slide {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: var(--cream);
+}
+
+/* === SHARED TYPOGRAPHY === */
+.serif  { font-family: var(--serif); }
+.eyebrow {
+  font-family: var(--sans);
+  font-size: var(--label-size);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--forest-mid);
+}
+.eyebrow-light {
+  font-family: var(--sans);
+  font-size: var(--label-size);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+
+h1 {
+  font-family: var(--serif);
+  font-size: var(--title-size);
+  font-weight: 700;
+  line-height: 1.08;
+  color: var(--forest-dark);
+}
+h1 em { font-style: italic; color: var(--forest-mid); }
+
+h2 {
+  font-family: var(--serif);
+  font-size: var(--h2-size);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--forest-dark);
+}
+h2 em { font-style: italic; }
+
+h3 {
+  font-family: var(--serif);
+  font-size: var(--h3-size);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--forest-dark);
+}
+
+.slide-sub {
+  font-family: var(--sans);
+  font-size: var(--body-size);
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 44ch;
+}
+
+/* === LAYOUT PRIMITIVES === */
+.two-col {
+  display: flex;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.col-l {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--pad);
+  gap: var(--gap);
+}
+.col-r {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--pad);
+  gap: var(--gap);
+}
+
+.slide-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  padding: var(--pad);
+  gap: var(--gap);
+  overflow: hidden;
+}
+
+/* === SLIDE CHROME (header / footer) === */
+.s-header {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 20;
+  padding: clamp(0.9rem,1.8vw,1.4rem) var(--pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  background: rgba(245,238,227,0.85);
+  backdrop-filter: blur(8px);
+}
+.s-brand {
+  font-family: var(--sans);
+  font-size: var(--label-size);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--forest);
+}
+.s-tag {
+  font-family: var(--sans);
+  font-size: var(--label-size);
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+.s-header.dark-header {
+  background: rgba(19,63,55,0.9);
+  border-bottom-color: rgba(255,255,255,0.1);
+}
+.s-header.dark-header .s-brand { color: rgba(255,255,255,0.7); }
+.s-header.dark-header .s-tag   { color: rgba(255,255,255,0.4); }
+
+.s-footer {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 20;
+  padding: clamp(0.6rem,1.2vw,1rem) var(--pad);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  background: rgba(245,238,227,0.7);
+  backdrop-filter: blur(6px);
+}
+.s-footer.dark-footer {
+  background: rgba(19,63,55,0.7);
+  border-top-color: rgba(255,255,255,0.08);
+}
+.s-footer .fn { font-family: var(--sans); font-size: var(--label-size); color: var(--text-muted); }
+.s-footer.dark-footer .fn { color: rgba(255,255,255,0.35); }
+
+/* === DECORATIVE: organic blob shapes (replace sharp sweeps) === */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+.blob-forest {
+  background: radial-gradient(ellipse, var(--forest) 0%, var(--forest-dark) 100%);
+}
+.blob-sage {
+  background: radial-gradient(ellipse, var(--sage-light) 0%, rgba(200,221,216,0.3) 100%);
+}
+.blob-peach {
+  background: radial-gradient(ellipse, var(--peach-light) 0%, rgba(245,196,168,0.2) 100%);
+}
+.blob-coral {
+  background: radial-gradient(ellipse, var(--peach) 0%, rgba(224,123,92,0.15) 100%);
+}
+
+/* === FOREST PANEL (replaces teal sweep — used for right panels on dark slides) === */
+.forest-panel {
+  background: linear-gradient(160deg, var(--forest) 0%, var(--forest-dark) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.forest-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 22px 22px;
+  pointer-events: none;
+}
+
+/* === CARDS === */
+.warm-card {
+  background: var(--cream-light);
+  border: 1px solid rgba(26,46,40,0.09);
+  border-radius: 16px;
+  padding: clamp(1rem,2vh,1.75rem) clamp(1rem,2vw,1.75rem);
+}
+.forest-card {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 14px;
+  padding: clamp(0.8rem,1.6vh,1.3rem) clamp(1rem,2vw,1.6rem);
+}
+
+/* === METRIC CARDS (on forest background) === */
+.metric-stack { display: flex; flex-direction: column; gap: clamp(0.75rem,1.5vh,1.2rem); }
+.metric-card {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem,1.5vw,1.25rem);
+}
+.metric-card { composes: forest-card; }
+.metric-card {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 14px;
+  padding: clamp(0.8rem,1.6vh,1.3rem) clamp(1rem,2vw,1.6rem);
+}
+.metric-num {
+  font-family: var(--serif);
+  font-size: clamp(1.75rem,3vw,2.75rem);
+  font-weight: 700;
+  color: var(--warm-white);
+  line-height: 1;
+  min-width: 3.5ch;
+}
+.metric-info { display: flex; flex-direction: column; gap: 0.25rem; }
+.metric-label { font-size: clamp(0.7rem,1.1vw,0.9rem); font-weight: 500; color: rgba(255,255,255,0.85); }
+.metric-delta {
+  font-size: var(--label-size);
+  font-weight: 600;
+  padding: 0.15em 0.55em;
+  border-radius: 4px;
+  display: inline-block;
+  width: fit-content;
+}
+.delta-pos { color: #5ad4a8; background: rgba(90,212,168,0.18); }
+.delta-neg { color: #f0a090; background: rgba(240,160,144,0.18); }
+
+/* === BIG STAT BLOCKS === */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.75rem,1.5vw,1.25rem);
+}
+.stat-block {
+  background: var(--cream-light);
+  border-radius: 16px;
+  padding: clamp(1.25rem,2.5vh,2rem) clamp(1rem,2vw,1.75rem);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.stat-num {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem,5vw,4.5rem);
+  font-weight: 700;
+  color: var(--forest);
+  line-height: 1;
+}
+.stat-label  { font-size: var(--body-size);  font-weight: 600; color: var(--dark); }
+.stat-note   { font-size: var(--label-size); color: var(--text-muted); line-height: 1.4; }
+.stat-bar    { height: 3px; background: var(--sage-light); border-radius: 2px; margin-top: 0.4rem; overflow: hidden; }
+.stat-fill   {
+  height: 100%;
+  background: linear-gradient(90deg, var(--forest), var(--forest-mid));
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s var(--ease);
+}
+.slide.visible .stat-fill { transform: scaleX(1); }
+
+/* =============================================
+   SLIDE 2 — STAT CAROUSEL
+   ============================================= */
+/* Body: fills space between header and footer */
+.s2-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  min-height: 0;
+}
+
+/* Panel container — panels stack on top of each other */
+.s2-panels-wrap {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Every panel is absolutely positioned; only .s2-active is visible */
+.s2-panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem,3vh,2.5rem) clamp(3rem,8vw,7rem);
+  opacity: 0;
+  pointer-events: none;
+}
+.s2-panel.s2-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Navigation arrows ── */
+.s2-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(40px,4vw,60px);
+  height: clamp(40px,4vw,60px);
+  border-radius: 50%;
+  border: 1.5px solid rgba(26,46,40,0.15);
+  background: rgba(255,255,255,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.15s ease, background 0.15s, box-shadow 0.15s, opacity 0.15s;
+  color: var(--forest-dark);
+}
+.s2-nav-btn:hover {
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 4px 18px rgba(26,46,40,0.12);
+}
+.s2-nav-btn:hover { transform: translateY(-50%) scale(1.08); }
+.s2-nav-btn svg { width: clamp(11px,1vw,15px); height: clamp(11px,1vw,15px); display: block; }
+.s2-prev { left: clamp(10px,2vw,28px); }
+.s2-next { right: clamp(10px,2vw,28px); }
+.s2-nav-btn:disabled { opacity: 0.28; pointer-events: none; cursor: default; }
+
+/* ── Dots ── */
+.s2-dots-row {
+  display: flex;
+  justify-content: center;
+  padding: clamp(6px,1.2vh,14px) 0;
+  flex-shrink: 0;
+}
+.s2-dots { display: flex; gap: 8px; }
+.s2-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(26,46,40,0.18);
+  border: none; cursor: pointer; padding: 0;
+  transition: background 0.22s, transform 0.22s;
+}
+.s2-dot.active { background: var(--forest); transform: scale(1.3); }
+
+/* ── Shared text styles ── */
+.s2-counter-eyebrow {
+  font-family: var(--sans);
+  font-size: clamp(10px,0.85vw,12.5px);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--forest-mid);
+  margin-bottom: clamp(0.4rem,0.8vh,0.75rem);
+}
+.s2-big-num {
+  font-family: var(--serif);
+  font-size: clamp(3.5rem,8.5vw,7.5rem);
+  font-weight: 700;
+  color: var(--forest);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.s2-stat-title {
+  font-family: var(--sans);
+  font-size: clamp(0.85rem,1.5vw,1.2rem);
+  font-weight: 600;
+  color: var(--dark);
+  margin-top: 0.2rem;
+}
+.s2-stat-context {
+  font-family: var(--sans);
+  font-size: clamp(0.78rem,1.1vw,0.95rem);
+  color: var(--text-muted);
+  max-width: 42ch;
+  text-align: center;
+  line-height: 1.6;
+  margin-top: clamp(0.4rem,0.8vh,0.7rem);
+}
+.s2-stat-tag {
+  font-family: var(--sans);
+  font-size: clamp(10px,0.82vw,12px);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--forest);
+  background: rgba(28,94,82,0.08);
+  border: 1px solid rgba(28,94,82,0.15);
+  border-radius: 100px;
+  padding: 5px 14px;
+  margin-top: clamp(0.5rem,1vh,0.9rem);
+}
+
+/* ── Panel 1: Split hero layout ── */
+.s2-hero-split {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+.s2-hero-left {
+  flex: 0 0 auto;
+  width: clamp(180px, 30%, 310px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.55rem, 1.1vh, 1rem);
+}
+.s2-hero-slide-num {
+  font-family: var(--sans);
+  font-size: clamp(9px, 0.75vw, 11px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.s2-hero-headline {
+  font-family: var(--serif);
+  font-size: clamp(1.35rem, 2.8vw, 2.5rem);
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.s2-hero-sub {
+  font-family: var(--sans);
+  font-size: clamp(0.7rem, 0.95vw, 0.875rem);
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+.s2-hero-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.4rem, 0.8vh, 0.65rem);
+}
+/* Giant tabular number with cream reflection below */
+.s2-counter-num {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 8vw, 7.5rem);
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  font-variant-numeric: tabular-nums;
+  -webkit-box-reflect: below 3px
+    linear-gradient(transparent 55%, rgba(245,238,227,0.55) 100%);
+}
+.s2-views-label {
+  font-family: var(--sans);
+  font-size: clamp(9px, 0.78vw, 12px);
+  font-weight: 600;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--forest-mid);
+  margin-top: clamp(2.5rem, 5vh, 4rem);
+}
+
+/* ── Panel 2: Compare row ── */
+.s2-compare-row {
+  display: flex;
+  gap: clamp(1.5rem,3.5vw,3rem);
+  align-items: flex-end;
+  margin-top: clamp(0.75rem,1.5vh,1.25rem);
+}
+.s2-compare-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.s2-compare-val {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem,3.8vw,3rem);
+  font-weight: 700;
+  line-height: 1;
+}
+.s2-compare-lbl {
+  font-family: var(--sans);
+  font-size: clamp(9px,0.7vw,11px);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── Panel 4: Audience ── */
+.s2-stat-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.5rem,1vh,0.8rem);
+}
+.s2-audience-split {
+  display: flex;
+  gap: clamp(2rem,5vw,4.5rem);
+  align-items: center;
+  margin-top: clamp(0.5rem,1vh,0.75rem);
+}
+.s2-audience-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+.s2-audience-num {
+  font-family: var(--serif);
+  font-size: clamp(3rem,7vw,6.5rem);
+  font-weight: 700;
+  color: var(--forest);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.s2-audience-divider {
+  width: 1px;
+  height: clamp(60px,8vh,100px);
+  background: rgba(26,46,40,0.12);
+}
+
+/* =============================================
+   SLIDE 2 PANEL 2 — 3D GALAXY
+   ============================================= */
+/* Remove padding; let the canvas fill the whole panel */
+.s2-galaxy-panel {
+  padding: 0 !important;
+  align-items: stretch !important;
+  justify-content: stretch !important;
+  background: #0D1F17;
+}
+/* Three.js canvas fills the entire panel */
+.s2-galaxy-canvas {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.s2-galaxy-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+/* Text overlay — left column, readable above the 3D scene */
+.s2-galaxy-overlay {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: clamp(210px, 28%, 330px);
+  padding: clamp(1.5rem,4vh,3rem) clamp(1.5rem,3.5vw,2.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(0.65rem,1.3vh,1.1rem);
+  background: linear-gradient(90deg, rgba(13,31,23,0.92) 0%, rgba(13,31,23,0.68) 72%, transparent 100%);
+  z-index: 10;
+  pointer-events: none; /* let mouse events reach the canvas */
+}
+.s2-galaxy-section-num {
+  font-family: var(--sans);
+  font-size: clamp(9px,0.72vw,11px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(126,221,177,0.55);
+}
+.s2-galaxy-headline {
+  font-family: var(--serif);
+  font-size: clamp(1.3rem,2.7vw,2.4rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.s2-galaxy-sub {
+  font-family: var(--sans);
+  font-size: clamp(0.68rem,0.92vw,0.85rem);
+  color: rgba(200,240,220,0.68);
+  line-height: 1.65;
+  margin: 0;
+}
+.s2-galaxy-metric {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: clamp(0.4rem,0.8vh,0.7rem);
+  padding: clamp(9px,1.1vh,14px) clamp(11px,1.4vw,16px);
+  background: rgba(126,221,177,0.09);
+  border: 1px solid rgba(126,221,177,0.18);
+  border-radius: 12px;
+  pointer-events: none;
+}
+.s2-galaxy-icon {
+  width: clamp(17px,1.7vw,22px);
+  height: clamp(17px,1.7vw,22px);
+  color: rgba(126,221,177,0.75);
+  flex-shrink: 0;
+}
+.s2-galaxy-reach-num {
+  font-family: var(--serif);
+  font-size: clamp(1rem,2vw,1.7rem);
+  font-weight: 700;
+  color: #c8ffe8;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.s2-galaxy-reach-lbl {
+  font-family: var(--sans);
+  font-size: clamp(8px,0.62vw,10px);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(200,240,220,0.5);
+}
+
+/* =============================================
+   SLIDE 3 — CARD STACK CONTENT SHOWCASE
+   ============================================= */
+
+/* CSS custom props for card dimensions — edit these to resize everything */
+#slide-3 {
+  --s3-cw: clamp(155px, 16vw, 230px);
+  --s3-ch: clamp(215px, 22vw, 316px);
+  --s3-ox: 7px;
+  --s3-oy: 12px;
+}
+
+.s3-body {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding-top: clamp(52px, 7vh, 70px);
+  padding-bottom: clamp(38px, 5.5vh, 52px);
+  overflow: hidden;
+}
+.s3-intro {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(1rem, 3vw, 2rem);
+  padding: clamp(0.6rem,1.8vh,1.4rem) clamp(2rem,5vw,4rem) 0;
+}
+.s3-eyebrow {
+  font-family: var(--sans);
+  font-size: clamp(9px,0.8vw,11.5px);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--forest-mid);
+  margin-bottom: clamp(0.28rem,0.5vh,0.45rem);
+}
+.s3-title {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem,3.2vw,2.8rem);
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.s3-tagline {
+  font-family: var(--sans);
+  font-size: clamp(0.68rem,0.9vw,0.85rem);
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 36ch;
+  text-align: right;
+  margin: 0;
+  flex-shrink: 0;
+}
+.s3-gallery {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(3rem,7vw,7rem);
+  padding: clamp(0.5rem,1.2vh,1rem) clamp(2rem,5vw,4rem);
+  min-height: 0;
+}
+.s3-stack-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(0.65rem,1.2vh,1rem);
+  flex-shrink: 0;
+}
+.s3-stack-info { line-height: 1.3; }
+.s3-creator-handle {
+  font-family: var(--sans);
+  font-size: clamp(10px,0.88vw,13px);
+  font-weight: 600;
+  color: var(--dark);
+}
+.s3-creator-format {
+  font-family: var(--sans);
+  font-size: clamp(9px,0.72vw,10.5px);
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+.s3-stack {
+  position: relative;
+  width: calc(var(--s3-cw) + var(--s3-ox) * 3);
+  height: calc(var(--s3-ch) + var(--s3-oy) * 3);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.s3-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--s3-cw);
+  height: var(--s3-ch);
+  border-radius: clamp(12px,1.3vw,18px);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-color: #c8ddd6;
+  box-shadow:
+    0 1px 3px rgba(0,0,0,0.04),
+    0 6px 18px rgba(26,46,40,0.09),
+    0 18px 44px rgba(26,46,40,0.06);
+  will-change: transform, opacity, box-shadow;
+  transform-origin: center bottom;
+  overflow: hidden;
+}
+.s3-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(165deg, rgba(255,255,255,0.13) 0%, transparent 45%);
+  pointer-events: none;
+}
+.s3-ph-a { background-image: linear-gradient(145deg, #d4ede4 0%, #a8ccbc 55%, #8db5a6 100%); }
+.s3-ph-b { background-image: linear-gradient(145deg, #f5ede0 0%, #e8cdb5 55%, #d4b49a 100%); }
+.s3-card--top:hover {
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.06),
+    0 12px 32px rgba(26,46,40,0.14),
+    0 28px 60px rgba(26,46,40,0.10) !important;
+}
+.s3-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.55rem,1.1vw,0.9rem);
+}
+.s3-nav-btn {
+  width: clamp(32px,3.2vw,42px);
+  height: clamp(32px,3.2vw,42px);
+  border-radius: 50%;
+  border: 1.5px solid rgba(26,46,40,0.14);
+  background: rgba(255,255,255,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--forest-dark);
+  transition: transform 0.13s ease, background 0.13s, box-shadow 0.13s;
+  flex-shrink: 0;
+}
+.s3-nav-btn:hover {
+  transform: scale(1.1);
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 3px 14px rgba(26,46,40,0.1);
+}
+.s3-nav-btn svg { width: clamp(10px,0.88vw,13px); height: clamp(10px,0.88vw,13px); display: block; }
+.s3-card-counter {
+  font-family: var(--sans);
+  font-size: clamp(9px,0.72vw,11px);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--forest-mid);
+  min-width: 4.5ch;
+  text-align: center;
+  user-select: none;
+}
+
+/* === PERFORMANCE BARS === */
+.perf-list { display: flex; flex-direction: column; gap: clamp(0.9rem,1.8vh,1.4rem); }
+.perf-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.45rem; }
+.perf-name { font-size: var(--body-size); font-weight: 500; color: var(--dark); }
+.perf-pct  { font-size: var(--label-size); font-weight: 700; color: var(--forest); }
+.perf-track { height: 5px; background: var(--sage-light); border-radius: 10px; overflow: hidden; }
+.perf-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--forest), var(--forest-mid));
+  border-radius: 10px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.9s var(--ease);
+}
+.slide.visible .perf-fill { transform: scaleX(1); }
+
+/* === CONTENT EXAMPLE CARDS === */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.75rem,1.5vw,1.25rem);
+}
+.content-card {
+  background: var(--cream-light);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.content-thumb {
+  height: clamp(70px,11vh,115px);
+  overflow: hidden;
+  position: relative;
+}
+.content-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+.content-body { padding: clamp(0.6rem,1.2vw,1rem); }
+.content-type  { font-size: var(--label-size); font-weight: 700; color: var(--forest-mid); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.3rem; }
+.content-title { font-size: clamp(0.72rem,1.1vw,0.9rem); font-weight: 500; color: var(--dark); line-height: 1.4; font-family: var(--serif); }
+.content-result{ font-size: var(--label-size); color: var(--text-muted); margin-top: 0.3rem; }
+
+/* === WHY IT WORKS LIST === */
+.why-list { display: flex; flex-direction: column; gap: clamp(0.8rem,1.6vh,1.3rem); }
+.why-item { display: flex; gap: clamp(0.75rem,1.5vw,1.25rem); align-items: flex-start; }
+.why-icon {
+  width: clamp(44px,5vw,58px);
+  height: clamp(44px,5vw,58px);
+  min-width: clamp(44px,5vw,58px);
+  border-radius: 14px;
+  background: rgba(255,255,255,0.13);
+  border: 1.5px solid rgba(255,255,255,0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(8px,1vw,12px);
+  flex-shrink: 0;
+}
+.why-icon svg { width: 100%; height: 100%; display: block; }
+.why-text h4 { font-family: var(--serif); font-size: clamp(0.82rem,1.3vw,1rem); font-weight: 600; color: var(--warm-white); margin-bottom: 0.2rem; }
+.why-text p  { font-size: var(--small-size); color: var(--text-light); line-height: 1.55; }
+
+/* === NICHE GRID === */
+.niche-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.6rem,1.2vw,1rem);
+}
+.niche-card {
+  border-radius: 20px;
+  padding: clamp(1rem,2vh,1.6rem) clamp(0.9rem,1.8vw,1.4rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s;
+  cursor: none;
+}
+.niche-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,46,40,0.12); }
+.niche-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.75rem,1.5vh,1.2rem) 0;
+}
+.niche-icon svg { width: clamp(36px,4.5vw,54px); height: clamp(36px,4.5vw,54px); display: block; }
+.niche-name { font-family: var(--serif); font-size: clamp(0.78rem,1.2vw,0.95rem); font-weight: 600; color: var(--forest-dark); }
+.niche-why  { font-size: var(--label-size); color: rgba(26,46,40,0.58); line-height: 1.45; }
+
+/* Pastel per-niche backgrounds */
+.niche-sage   { background: #C8E6D8; }
+.niche-salmon { background: #F5C9B8; }
+.niche-sky    { background: #C5D8F0; }
+.niche-butter { background: #F5E8BE; }
+.niche-lavender { background: #D8CCED; }
+
+/* === STRATEGY TABLE === */
+.strategy-list { display: flex; flex-direction: column; gap: clamp(0.5rem,1vh,0.8rem); }
+.strategy-row {
+  background: var(--cream-light);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: clamp(0.6rem,1.2vh,1rem) clamp(0.75rem,1.5vw,1.25rem);
+  display: grid;
+  grid-template-columns: 1.4fr 2fr 2fr;
+  align-items: center;
+  gap: clamp(0.5rem,1vw,1rem);
+}
+.s-niche   { display: flex; align-items: center; gap: 0.55rem; font-size: clamp(0.68rem,1.05vw,0.86rem); font-weight: 600; color: var(--forest-dark); font-family: var(--serif); }
+.s-niche img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; object-position: top center; flex-shrink: 0; border: 1.5px solid var(--border); }
+.s-approach{ font-size: var(--label-size); color: var(--text-muted); line-height: 1.4; }
+.s-hook    { font-size: var(--label-size); color: var(--forest-mid); font-weight: 500; font-style: italic; line-height: 1.4; }
+
+/* === GROWTH PROJECTIONS === */
+.proj-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(0.75rem,1.5vw,1.25rem);
+}
+.proj-card {
+  background: var(--cream-light);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: clamp(1rem,2vh,1.75rem) clamp(1rem,2vw,1.6rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.proj-label { font-size: var(--label-size); font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }
+.proj-value { font-family: var(--serif); font-size: clamp(1.75rem,3.5vw,3rem); font-weight: 700; color: var(--forest); line-height: 1; }
+.proj-tbd   { font-family: var(--serif); font-size: clamp(1.75rem,3.5vw,3rem); font-weight: 700; color: var(--coral); line-height: 1; }
+.proj-note  { font-size: var(--label-size); color: var(--text-muted); line-height: 1.45; margin-top: 0.2rem; }
+
+/* === NEXT STEPS === */
+.steps-list { display: flex; flex-direction: column; gap: clamp(0.6rem,1.2vh,1rem); }
+.step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(0.75rem,1.5vw,1.25rem);
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 14px;
+  padding: clamp(0.9rem,1.8vh,1.4rem) clamp(1.2rem,2.4vw,2rem);
+}
+.step-num  { font-family: var(--serif); font-size: clamp(1.25rem,2.5vw,2rem); font-weight: 700; color: rgba(255,255,255,0.9); line-height: 1; min-width: 2ch; }
+.step-text h4 { font-family: var(--serif); font-size: clamp(0.82rem,1.3vw,1.02rem); font-weight: 600; color: var(--warm-white); margin-bottom: 0.25rem; }
+.step-text p  { font-size: var(--small-size); color: var(--text-light); line-height: 1.5; }
+
+/* === REVEAL ANIMATIONS === */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.slide.visible .reveal { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: 0.08s; }
+.d2 { transition-delay: 0.18s; }
+.d3 { transition-delay: 0.28s; }
+.d4 { transition-delay: 0.38s; }
+.d5 { transition-delay: 0.48s; }
+.d6 { transition-delay: 0.58s; }
+
+.reveal-scale {
+  opacity: 0; transform: scale(0.95);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.slide.visible .reveal-scale { opacity: 1; transform: scale(1); }
+
+/* === PROGRESS BAR === */
+.progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--forest), var(--forest-mid), var(--sage));
+  z-index: 1000;
+  transition: width 0.35s ease;
+  border-radius: 0 2px 2px 0;
+}
+
+/* === NAV DOTS === */
+.nav-dots {
+  position: fixed;
+  right: clamp(0.75rem,1.5vw,1.25rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  z-index: 1000;
+}
+.nav-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(28,94,82,0.22);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  border: none;
+}
+.nav-dot.active { background: var(--forest); transform: scale(1.45); }
+
+/* === TALKSPACE T-CURSOR === */
+.niche-card, .stat-block, .content-card, .proj-card { cursor: none; }
+
+#ts-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+.ts-cursor-box {
+  width: 0;
+  height: 0;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width 0.22s var(--ease), height 0.22s var(--ease), border-color 0.22s;
+  overflow: hidden;
+}
+.ts-cursor-t {
+  font-family: var(--serif);
+  font-size: 0;
+  font-weight: 700;
+  color: var(--forest);
+  line-height: 1;
+  transition: font-size 0.22s var(--ease), opacity 0.18s;
+  opacity: 0;
+  user-select: none;
+}
+#ts-cursor.active .ts-cursor-box {
+  width: 40px;
+  height: 40px;
+  border-color: var(--forest);
+}
+#ts-cursor.active .ts-cursor-t {
+  font-size: 20px;
+  opacity: 1;
+}
+
+/* === INLINE EDITING === */
+.edit-hotzone {
+  position: fixed;
+  top: 0; left: 0;
+  width: 80px; height: 80px;
+  z-index: 9999;
+  cursor: pointer;
+}
+.edit-toggle {
+  position: fixed;
+  top: 1rem; left: 1rem;
+  z-index: 10000;
+  background: var(--forest-dark);
+  color: var(--warm-white);
+  border: none;
+  border-radius: 8px;
+  padding: 0.5em 0.9em;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+.edit-toggle.show, .edit-toggle.active { opacity: 1; pointer-events: auto; }
+.edit-toggle.active { background: var(--forest-mid); }
+
+.edit-banner {
+  position: fixed;
+  bottom: 1.5rem; left: 50%;
+  transform: translateX(-50%);
+  background: var(--forest-dark);
+  color: var(--warm-white);
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.55em 1.25em;
+  border-radius: 100px;
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+  white-space: nowrap;
+}
+.edit-banner.active { opacity: 1; pointer-events: auto; }
+
+body.edit-active [contenteditable] {
+  outline: 2px dashed rgba(28,94,82,0.45);
+  outline-offset: 2px;
+  border-radius: 3px;
+  cursor: text;
+}
+
+/* === RESPONSIVE === */
+@media (max-height: 700px) {
+  :root {
+    --pad: clamp(0.75rem,3vw,2.5rem);
+    --gap: clamp(0.5rem,1.5vw,1.25rem);
+    --title-size: clamp(1.6rem,4.5vw,3rem);
+    --h2-size: clamp(1.3rem,3.5vw,2.2rem);
+  }
+}
+@media (max-height: 600px) {
+  :root {
+    --pad: clamp(0.5rem,2.5vw,1.5rem);
+    --title-size: clamp(1.3rem,4vw,2.2rem);
+    --body-size: clamp(0.65rem,1.1vw,0.88rem);
+  }
+  .nav-dots, .s-footer { display: none; }
+}
+@media (max-height: 500px) {
+  :root { --pad: clamp(0.4rem,2vw,1rem); --h2-size: clamp(1rem,2.8vw,1.5rem); }
+}
+@media (max-width: 700px) {
+  .two-col { flex-direction: column; }
+  .stat-grid, .content-grid, .niche-grid, .proj-grid { grid-template-columns: 1fr 1fr; }
+  .strategy-row { grid-template-columns: 1fr; gap: 0.2rem; }
+  .forest-panel { min-height: 38vh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* ============================================
+   SLIDE 05 v2 — PREMIUM EDITORIAL NICHE PLAYBOOK
+   Rebuilt for luxury editorial feel.
+   Card is the hero. Tabs are real folders.
+   ============================================ */
+
+/* Smooth background wash on niche switch */
+#slide-5 { transition: background-color 0.4s ease; }
+
+/* Pin header to exact 72px and use 64px side padding */
+#slide-5 .s-header {
+  height: 72px;
+  padding: 0 64px;
+}
+
+/* ---- MAIN TWO-ZONE LAYOUT ---- */
+.s7-main {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  padding-top: 72px;   /* clear header */
+  padding-bottom: 44px; /* clear footer */
+}
+
+/* ---- LEFT: editorial copy ---- */
+.s7-copy {
+  width: 28%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 64px;
+  padding-right: 40px;
+}
+
+.s7-eyebrow {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--forest);
+  margin-bottom: 28px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+#slide-5.visible .s7-eyebrow { opacity: 1; transform: translateY(0); transition-delay: 0.05s; }
+
+.s7-headline-wrap {
+  font-family: var(--serif);
+  color: var(--forest-dark);
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+#slide-5.visible .s7-headline-wrap { opacity: 1; transform: translateY(0); transition-delay: 0.14s; }
+
+.s7-hl-line1 {
+  display: block;
+  font-size: clamp(38px, 5.6vw, 80px);
+  line-height: 0.95;
+}
+.s7-hl-line2 {
+  display: block;
+  font-style: italic;
+  font-size: clamp(38px, 5.6vw, 80px);
+  line-height: 0.92;
+  color: rgba(26,46,40,0.45);
+  margin-top: 4px;
+}
+
+.s7-body {
+  font-family: var(--sans);
+  font-size: clamp(13px, 1.2vw, 18px);
+  line-height: 1.7;
+  color: rgba(26,46,40,0.58);
+  max-width: 340px;
+  margin-top: 40px;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+#slide-5.visible .s7-body { opacity: 1; transform: translateY(0); transition-delay: 0.24s; }
+
+/* ---- RIGHT: interactive showcase ---- */
+.s7-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0 clamp(20px, 3.5vw, 56px);
+}
+
+/* ---- FOLDER TABS ---- */
+/*
+  Each tab: border on 3 sides (top/left/right), none on bottom.
+  Tabs share a common border-bottom on the container = the "shelf" line.
+  Active tab is taller and rises above the rest — classic folder illusion.
+*/
+.s7-tabs {
+  display: flex;
+  align-items: flex-end;
+  border-bottom: 2px solid rgba(26,46,40,0.13);
+  flex-shrink: 0;
+  padding-top: clamp(14px, 2.2vh, 24px);
+  position: relative;
+  z-index: 2;
+}
+
+.s7-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(5px, 0.5vw, 8px);
+  /* inactive height */
+  height: clamp(46px, 4.8vw, 66px);
+  border-radius: 12px 12px 0 0;
+  font-family: var(--sans);
+  font-size: clamp(11px, 0.95vw, 14px);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  /* 3-sided border — no bottom */
+  border: 1.5px solid rgba(26,46,40,0.12);
+  border-bottom: none;
+  /* overlap adjacent borders so they appear shared */
+  margin-left: -1.5px;
+  color: rgba(26,46,40,0.52);
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 clamp(8px, 0.9vw, 14px);
+  position: relative;
+  z-index: 1;
+  transition: height 0.22s var(--ease), color 0.15s, box-shadow 0.22s var(--ease);
+}
+.s7-tab:first-child { margin-left: 0; border-radius: 12px 12px 0 0; }
+
+.s7-tab svg {
+  width: clamp(13px, 1.2vw, 18px);
+  height: clamp(13px, 1.2vw, 18px);
+  opacity: 0.45;
+  flex-shrink: 0;
+}
+
+/* Hover: slightly taller, more visible */
+.s7-tab:hover {
+  height: clamp(50px, 5.2vw, 70px);
+  color: rgba(26,46,40,0.75);
+  z-index: 2;
+}
+.s7-tab:hover svg { opacity: 0.7; }
+
+/* Active: tallest, full color, shadow to lift it */
+.s7-tab.active {
+  height: clamp(56px, 5.8vw, 80px);
+  color: var(--forest-dark);
+  z-index: 3;
+  box-shadow:
+    -4px -6px 18px rgba(26,46,40,0.08),
+     4px -6px 18px rgba(26,46,40,0.06),
+     0   -2px  8px rgba(26,46,40,0.04);
+}
+.s7-tab.active svg { opacity: 1; }
+
+/* ---- CAROUSEL AREA (fills remaining right space) ---- */
+.s7-carousel-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: clamp(12px, 2vh, 28px) 0;
+}
+
+/* Arrows + card-stack horizontally centered */
+.s7-carousel-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3.3vw, 48px);
+}
+
+/* ---- ARROWS ---- */
+.s7-arrow {
+  width: clamp(44px, 4.4vw, 64px);
+  height: clamp(44px, 4.4vw, 64px);
+  border-radius: 50%;
+  border: 1.5px solid rgba(26,46,40,0.15);
+  background: rgba(255,255,255,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.15s var(--ease), background 0.15s, box-shadow 0.15s, opacity 0.15s;
+  color: var(--forest-dark);
+}
+.s7-arrow:hover {
+  transform: scale(1.1);
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 4px 18px rgba(26,46,40,0.12);
+}
+.s7-arrow svg { width: clamp(12px, 1.1vw, 16px); height: clamp(12px, 1.1vw, 16px); display: block; }
+
+/* ---- CARD STACK (card + dots, vertically stacked) ---- */
+.s7-card-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  flex-shrink: 0;
+}
+
+/* ---- THE HERO CARD ---- */
+/* Width drives height via aspect ratio — card scales with viewport width */
+.s7-card {
+  width: clamp(220px, 27vw, 390px);
+  height: clamp(308px, calc(100vh - 300px), 560px);
+  border-radius: 24px;
+  border: 1.5px solid rgba(26,46,40,0.1);
+  box-shadow:
+    0 20px 60px rgba(26,46,40,0.13),
+    0  6px 20px rgba(26,46,40,0.07),
+    0  1px  4px rgba(26,46,40,0.04);
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  cursor: none;
+  transition: opacity 0.32s ease, transform 0.32s ease;
+}
+/* Directional fade — slides from right on next, from left on prev (JS toggles class) */
+.s7-card.fading { opacity: 0; transform: translateX(18px) scale(0.982); }
+
+/* Image portion (fills upper ~65% of card) */
+.s7-card-img {
+  flex: 1;
+  background-size: cover;
+  background-position: top center;
+  position: relative;
+  min-height: 0;
+  border-radius: inherit;
+}
+.s7-card-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 52%);
+  pointer-events: none;
+}
+
+/* Card body (white footer area) */
+.s7-card-body {
+  flex-shrink: 0;
+  padding: clamp(12px, 1.6vh, 20px) clamp(14px, 1.5vw, 22px) clamp(10px, 1.4vh, 18px);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3px, 0.45vh, 6px);
+}
+.s7-card-logo {
+  font-family: var(--serif);
+  font-size: clamp(9px, 0.85vw, 13px);
+  font-weight: 700;
+  color: var(--forest-dark);
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  margin-bottom: clamp(2px, 0.35vh, 5px);
+}
+.s7-card-logo-bracket {
+  display: inline-block;
+  border: 1.5px solid var(--forest-dark);
+  border-radius: 3px;
+  padding: 0 0.22em;
+  line-height: 1.2;
+  font-size: 0.88em;
+}
+.s7-card-headline {
+  font-family: var(--serif);
+  font-size: clamp(15px, 1.7vw, 24px);
+  font-weight: 700;
+  color: var(--forest-dark);
+  line-height: 1.18;
+}
+.s7-card-sub {
+  font-family: var(--sans);
+  font-size: clamp(10px, 0.95vw, 14px);
+  color: rgba(26,46,40,0.5);
+  line-height: 1.5;
+}
+.s7-card-cta {
+  margin-top: clamp(3px, 0.5vh, 7px);
+  font-family: var(--sans);
+  font-size: clamp(9px, 0.82vw, 13px);
+  font-weight: 600;
+  color: var(--forest-dark);
+  border: 1.5px solid rgba(26,46,40,0.2);
+  border-radius: 100px;
+  padding: 0.3em 0.85em;
+  width: fit-content;
+  transition: background 0.15s;
+}
+
+/* ---- CAROUSEL DOTS ---- */
+/* Centered under card via s7-card-stack flex alignment */
+.s7-dots {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+.s7-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(26,46,40,0.18);
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+.s7-dot:hover { transform: scale(1.3); background: rgba(26,46,40,0.35); }
+.s7-dot.active { background: var(--forest); transform: scale(1.2); }
+
+/* ---- RESPONSIVE OVERRIDES ---- */
+@media (max-height: 700px) {
+  #slide-5 .s-header { height: 60px; }
+  .s7-main { padding-top: 60px; padding-bottom: 38px; }
+  .s7-copy { padding-left: 40px; }
+  .s7-eyebrow { font-size: 12px; margin-bottom: 18px; }
+  .s7-body { margin-top: 24px; }
+  .s7-tabs { padding-top: 10px; }
+  .s7-card-stack { gap: 18px; }
+}
+@media (max-width: 900px) {
+  .s7-copy { width: 32%; padding-left: 40px; }
+}
+
+/* ============================================
+   SLIDE 01 v2 — INTERACTIVE CAMPAIGN MOLECULE
+   Left 44%: editorial copy.
+   Right 56%: SVG T-shape + metric bubbles.
+   ============================================ */
+
+/* =============================================
+   SLIDE 01 — MILLIONS REACHED
+   Edit: S1_CONFIG in JS · assets/ for images
+   ============================================= */
+
+#slide-1 {
+  background: #FDFAF4;
+  overflow: hidden;
+}
+#slide-1 .s-header,
+#slide-1 .s-footer { display: none; }
+
+/* ── BRAND BAR ── */
+.s1-brand-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1.1vw, 16px);
+  padding: clamp(18px, 2.4vh, 32px) clamp(32px, 4.2vw, 64px);
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.6s ease 0.05s, transform 0.6s var(--ease) 0.05s;
+}
+#slide-1.visible .s1-brand-bar { opacity: 1; transform: translateY(0); }
+.s1-ts-word {
+  font-family: var(--serif);
+  font-size: clamp(14px, 1.3vw, 20px);
+  font-weight: 700;
+  color: var(--forest);
+  letter-spacing: -0.02em;
+}
+.s1-x-div {
+  font-size: clamp(11px, 0.95vw, 15px);
+  color: rgba(26,46,40,0.3);
+  font-weight: 300;
+  font-family: var(--sans);
+}
+.s1-pd-word {
+  font-family: var(--sans);
+  font-size: clamp(8px, 0.68vw, 10.5px);
+  font-weight: 600;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  color: rgba(26,46,40,0.44);
+  line-height: 1.35;
+}
+
+/* ── TWO-COL LAYOUT ── */
+.s1-two-col {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ── LEFT ── */
+.s1-left {
+  width: 42%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(70px,9vh,110px) clamp(28px,3.2vw,52px) clamp(44px,6vh,72px) clamp(36px,4.5vw,72px);
+  position: relative;
+  z-index: 2;
+}
+.s1-main-headline {
+  font-family: var(--serif);
+  font-weight: 700;
+  line-height: 1.0;
+  margin-bottom: clamp(14px, 2.2vh, 26px);
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.8s var(--ease) 0.12s, transform 0.8s var(--ease) 0.12s;
+}
+#slide-1.visible .s1-main-headline { opacity: 1; transform: translateY(0); }
+.s1-h-line1 {
+  display: block;
+  font-size: clamp(44px, 5.6vw, 88px);
+  color: #1A2E28;
+}
+.s1-h-line2 {
+  display: block;
+  font-size: clamp(42px, 5.3vw, 84px);
+  color: var(--forest-mid);
+}
+.s1-subhead {
+  font-family: var(--sans);
+  font-size: clamp(12px, 1.05vw, 16px);
+  line-height: 1.68;
+  color: rgba(26,46,40,0.50);
+  max-width: 40ch;
+  margin-bottom: clamp(26px, 4.4vh, 50px);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s var(--ease) 0.24s, transform 0.7s var(--ease) 0.24s;
+}
+#slide-1.visible .s1-subhead { opacity: 1; transform: translateY(0); }
+
+/* Stats row */
+.s1-stats-row {
+  display: flex;
+  align-items: flex-start;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.7s var(--ease) 0.38s, transform 0.7s var(--ease) 0.38s;
+}
+#slide-1.visible .s1-stats-row { opacity: 1; transform: translateY(0); }
+.s1-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  padding-right: clamp(16px, 2.3vw, 34px);
+}
+.s1-stat-item + .s1-stat-item {
+  padding-left: clamp(16px, 2.3vw, 34px);
+  border-left: 1px solid rgba(26,46,40,0.14);
+}
+.s1-stat-num {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.2vw, 34px);
+  font-weight: 700;
+  color: var(--forest-dark);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.s1-stat-lbl {
+  font-family: var(--sans);
+  font-size: clamp(8px, 0.68vw, 10.5px);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(26,46,40,0.40);
+}
+
+/* ── RIGHT — ORBIT ── */
+.s1-right {
+  flex: 1;
+  position: relative;
+  overflow: visible;
+}
+.s1-right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 46%, rgba(164,212,190,0.17) 0%, transparent 65%),
+              radial-gradient(ellipse at 72% 22%, rgba(200,221,216,0.13) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Orbit container — absolute so the centre-point can be shifted
+   8 vw leftward: fills the screen without overflowing the right edge,
+   and outer items approach (but never cross) the left-panel text. */
+.s1-orbit {
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 8vw);
+  transform: translate(-50%, -50%);
+  width: clamp(600px, 74vw, 980px);
+  height: clamp(600px, 74vw, 980px);
+  perspective: 1600px;
+  perspective-origin: 56% 46%;
+  transform-style: preserve-3d;
+}
+
+/* Orbit rings */
+.s1-orbit-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+#slide-1.visible .s1-orbit-ring { opacity: 1; }
+.s1-orbit-ring:nth-child(1) { width: 34%; height: 34%; border: 1px solid rgba(28,94,82,0.15); transition-delay: 0.20s; }
+.s1-orbit-ring:nth-child(2) { width: 58%; height: 58%; border: 1px solid rgba(28,94,82,0.12); transition-delay: 0.32s; }
+.s1-orbit-ring:nth-child(3) { width: 84%; height: 84%; border: 1px solid rgba(28,94,82,0.10); transition-delay: 0.44s; }
+
+/* Hub — 3D floating circular badge */
+.s1-hub {
+  position: absolute;
+  top: 50%; left: calc(50% - 8vw);
+  background: rgba(255,255,255,0.96);
+  border-radius: 50%;
+  width: clamp(140px, 15.5vw, 220px);
+  height: clamp(140px, 15.5vw, 220px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  z-index: 30;
+  opacity: 0;
+  transition: opacity 0.7s ease 0.45s;
+  transform-style: preserve-3d;
+  transform:
+    translate(-50%, -50%)
+    perspective(1200px)
+    rotateX(8deg)
+    rotateY(-12deg)
+    rotateZ(-2deg)
+    translateZ(60px);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.95),
+    0 45px 90px rgba(20,70,55,0.24),
+    0 14px 32px rgba(20,70,55,0.16),
+    0 3px 8px rgba(0,0,0,0.08);
+  filter: drop-shadow(0 24px 44px rgba(20,70,55,0.22));
+}
+#slide-1.visible .s1-hub { opacity: 1; }
+/* Soft radial glow behind the hub card */
+.s1-hub::before {
+  content: '';
+  position: absolute;
+  inset: -80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(126,221,181,0.35) 0%, transparent 65%);
+  z-index: -1;
+  pointer-events: none;
+}
+.s1-hub-logo {
+  font-family: var(--serif);
+  font-size: clamp(15px, 1.6vw, 24px);
+  font-weight: 700;
+  color: var(--forest);
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+.s1-hub-img { max-width: 60%; max-height: 44%; object-fit: contain; position: relative; z-index: 1; }
+
+/* Orbit items */
+.s1-oi {
+  position: absolute;
+  top: 50%; left: 50%;
+  will-change: transform, box-shadow;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  transform-style: preserve-3d;
+}
+#slide-1.visible .s1-oi { opacity: 1; }
+#slide-1.visible #s1-oi-1  { transition-delay: 0.30s; }
+#slide-1.visible #s1-oi-2  { transition-delay: 0.42s; }
+#slide-1.visible #s1-oi-3  { transition-delay: 0.52s; }
+#slide-1.visible #s1-oi-4  { transition-delay: 0.60s; }
+#slide-1.visible #s1-oi-5  { transition-delay: 0.68s; }
+#slide-1.visible #s1-oi-6  { transition-delay: 0.76s; }
+#slide-1.visible #s1-oi-7  { transition-delay: 0.84s; }
+#slide-1.visible #s1-oi-8  { transition-delay: 0.90s; }
+#slide-1.visible #s1-oi-9  { transition-delay: 0.96s; }
+#slide-1.visible #s1-oi-10 { transition-delay: 1.02s; }
+#slide-1.visible #s1-oi-11 { transition-delay: 1.08s; }
+
+/* Portrait cards */
+.s1-oi-portrait {
+  border-radius: clamp(10px, 1vw, 14px);
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.16), 0 2px 8px rgba(0,0,0,0.09);
+  background: #B8D0C8;
+  position: relative;
+}
+.s1-oi-portrait img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  display: block;
+}
+.s1-oi-portrait .s1-oi-cap {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: clamp(6px,0.7vw,10px);
+  background: linear-gradient(to top, rgba(0,0,0,0.62) 0%, transparent 100%);
+}
+.s1-oi-portrait .s1-oi-cap p {
+  font-family: var(--serif);
+  font-size: clamp(9px,0.78vw,12px);
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.3;
+}
+.s1-oi-portrait .s1-oi-views-pill {
+  font-family: var(--sans);
+  font-size: clamp(7px,0.6vw,9px);
+  color: rgba(255,255,255,0.75);
+  margin-top: 0;
+}
+
+/* Text cards */
+.s1-oi-text {
+  background: #fff;
+  border-radius: clamp(10px,1vw,14px);
+  padding: clamp(10px,1.1vw,16px) clamp(12px,1.3vw,18px);
+  box-shadow: 0 5px 22px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.05);
+  min-width: clamp(90px,9.5vw,136px);
+  max-width: clamp(118px,12.2vw,170px);
+}
+.s1-oi-text .s1-tc-tag {
+  font-family: var(--sans);
+  font-size: clamp(7.5px,0.62vw,9.5px);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--forest-mid);
+  margin-bottom: 4px;
+}
+.s1-oi-text .s1-tc-head {
+  font-family: var(--serif);
+  font-size: clamp(11px,0.96vw,14.5px);
+  font-weight: 600;
+  color: #1A2E28;
+  line-height: 1.3;
+  margin-bottom: 3px;
+}
+.s1-oi-text .s1-tc-sub {
+  font-family: var(--sans);
+  font-size: clamp(8.5px,0.7vw,10.5px);
+  color: rgba(26,46,40,0.48);
+  line-height: 1.45;
+}
+.s1-oi-text .s1-tc-views {
+  font-family: var(--sans);
+  font-size: clamp(7.5px,0.6vw,9.5px);
+  font-weight: 600;
+  color: var(--forest-mid);
+  margin-top: 6px;
+}
+
+/* Avatar circles */
+.s1-oi-avatar {
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2.5px solid #fff;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.13);
+  background: #B8D0C8;
+}
+.s1-oi-avatar img { width:100%; height:100%; object-fit:cover; display:block; }
+
+/* Icon bubbles */
+.s1-oi-icon {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.11);
+}
+.s1-icon-tiktok { background: #010101; }
+.s1-icon-heart  { background: #fff; }
+.s1-icon-play   { background: var(--forest); }
+/* Orbit atmospheric glow behind hub */
+.s1-orbit-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 38%; height: 38%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(126,221,181,0.28) 0%, transparent 62%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Portrait card — glass sheen */
+.s1-oi-portrait::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 42%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.16) 0%, transparent 100%);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Text card — subtle gradient lift */
+.s1-oi-text {
+  background: linear-gradient(140deg, #ffffff 0%, #f6f9f8 100%);
+}
+
+/* Star icon bubble */
+.s1-icon-star { background: var(--forest-mid); }
+
+/* Stat icons */
+.s1-stat-icon {
+  width: clamp(13px, 1.2vw, 18px);
+  height: clamp(13px, 1.2vw, 18px);
+  color: var(--forest-mid);
+  opacity: 0.68;
+  flex-shrink: 0;
+}
+
+/* Scroll indicator */
+.s1-scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin-top: clamp(18px, 3vh, 36px);
+  opacity: 0;
+  transition: opacity 0.7s var(--ease) 0.58s;
+}
+#slide-1.visible .s1-scroll-indicator { opacity: 1; }
+.s1-scroll-indicator span {
+  font-family: var(--sans);
+  font-size: clamp(7px, 0.58vw, 9px);
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--forest-mid);
+}
+.s1-scroll-arrow {
+  width: clamp(13px, 1.2vw, 18px);
+  height: clamp(13px, 1.2vw, 18px);
+  color: var(--forest-mid);
+  animation: s1BounceDown 1.7s ease-in-out infinite;
+}
+@keyframes s1BounceDown {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(5px); }
+}
+
+/* CSS transition delays for new orbit items 12–17 */
+#slide-1.visible #s1-oi-12 { transition-delay: 1.14s; }
+#slide-1.visible #s1-oi-13 { transition-delay: 1.20s; }
+#slide-1.visible #s1-oi-14 { transition-delay: 1.26s; }
+#slide-1.visible #s1-oi-15 { transition-delay: 1.32s; }
+#slide-1.visible #s1-oi-16 { transition-delay: 1.38s; }
+#slide-1.visible #s1-oi-17 { transition-delay: 1.44s; }
+#slide-1.visible #s1-oi-18 { transition-delay: 1.50s; }
+#slide-1.visible #s1-oi-19 { transition-delay: 1.56s; }
+#slide-1.visible #s1-oi-20 { transition-delay: 1.62s; }
+
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<nav class="nav-dots" id="navDots" aria-label="Slide navigation"></nav>
+
+<!-- T cursor element -->
+<div id="ts-cursor" aria-hidden="true">
+  <div class="ts-cursor-box"><span class="ts-cursor-t">T</span></div>
+</div>
+<div class="edit-hotzone" id="editHotzone"></div>
+<button class="edit-toggle" id="editToggle" title="Toggle edit mode (E)">✏ Edit</button>
+<div class="edit-banner" id="editBanner">Edit mode — click any text &nbsp;·&nbsp; <strong>Ctrl+S</strong> to save &nbsp;·&nbsp; <strong>E</strong> to exit</div>
+
+
+<!-- =============================================
+     SLIDE 01 · MILLIONS REACHED
+     ============================================= -->
+<section class="slide" id="slide-1" aria-label="Millions Reached">
+
+  <!-- Hidden header/footer kept for nav consistency; visually suppressed via CSS -->
+  <div class="s-header" style="display:none"><div class="s-brand">Campaign Deck</div><div class="s-tag">Talkspace × Parallel Distribution</div></div>
+
+  <!-- ── BRAND BAR ── -->
+  <div class="s1-brand-bar">
+    <span class="s1-ts-word">talkspace</span>
+    <span class="s1-x-div">×</span>
+    <span class="s1-pd-word">Parallel<br>Distribution</span>
+  </div>
+
+  <!-- ── TWO-COLUMN LAYOUT ── -->
+  <div class="s1-two-col">
+
+    <!-- LEFT: editorial copy + stats -->
+    <div class="s1-left">
+
+      <!-- EDITABLE: main headline -->
+      <h1 class="s1-main-headline">
+        <span class="s1-h-line1">Millions Reached.</span>
+        <span class="s1-h-line2">Millions More Ahead.</span>
+      </h1>
+
+      <!-- EDITABLE: subhead -->
+      <p class="s1-subhead">Turning everyday scrolling into opportunities for awareness and action.</p>
+
+      <!-- EDITABLE: stats — change numbers and labels here -->
+      <div class="s1-stats-row">
+        <div class="s1-stat-item">
+          <svg class="s1-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          <div class="s1-stat-num">265</div>
+          <div class="s1-stat-lbl">Active Accounts</div>
+        </div>
+        <div class="s1-stat-item">
+          <svg class="s1-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <div class="s1-stat-num">34.4M+</div>
+          <div class="s1-stat-lbl">Views</div>
+        </div>
+        <div class="s1-stat-item">
+          <svg class="s1-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <div class="s1-stat-num">2.2M+</div>
+          <div class="s1-stat-lbl">Engagements</div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="s1-scroll-indicator" aria-hidden="true">
+        <svg class="s1-scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+        <span>Scroll to Explore</span>
+      </div>
+
+    </div><!-- /s1-left -->
+
+    <!-- RIGHT: orbit visualization (populated by JS from S1_CONFIG) -->
+    <div class="s1-right">
+      <div class="s1-orbit" id="s1Orbit">
+
+        <!-- Atmospheric glow behind hub -->
+        <div class="s1-orbit-glow"></div>
+
+        <!-- Decorative rings -->
+        <div class="s1-orbit-ring"></div>
+        <div class="s1-orbit-ring"></div>
+        <div class="s1-orbit-ring"></div>
+
+        <!-- Orbit items are injected by initOrbit() from S1_CONFIG below -->
+
+      </div><!-- /s1-orbit -->
+
+      <!-- Hub is a sibling of the orbit, NOT inside it.
+           This keeps it out of the preserve-3d context so orbit items
+           with high translateZ can never paint over it. -->
+      <div class="s1-hub" id="s1Hub">
+        <img class="s1-hub-img" src="Talkspace-alternatives.png" alt="Talkspace">
+      </div>
+    </div><!-- /s1-right -->
+
+  </div><!-- /s1-two-col -->
+
+  <div class="s-footer" style="display:none"><span class="fn">01 / 07</span></div>
+</section>
+
+
+<!-- =============================================
+     SLIDE 02 · THE RESULTS
+     ============================================= -->
+<section class="slide" id="slide-2" aria-label="Statistics">
+
+  <div class="blob blob-sage" style="width:min(44vw,500px);height:min(44vw,500px);bottom:-12%;right:-6%;opacity:0.35;"></div>
+
+  <div class="s-header">
+    <div class="s-brand">Statistics</div>
+    <div class="s-tag">Campaign Performance</div>
+  </div>
+
+  <!-- Carousel body: panels fill the space between header and footer -->
+  <div class="s2-body">
+
+    <div class="s2-panels-wrap" id="s2Wrap">
+
+      <!-- Panel 1 — Live Views Counter -->
+      <div class="s2-panel s2-active" id="s2-p1">
+        <div class="s2-hero-split">
+          <div class="s2-hero-left">
+            <div class="s2-hero-slide-num">01</div>
+            <h2 class="s2-hero-headline">What<br>34.4 Million Views<br>Actually Means.</h2>
+            <p class="s2-hero-sub">More than a number.<br>A movement toward better mental health.</p>
+          </div>
+          <div class="s2-hero-right">
+            <div class="s2-counter-num" id="s2Counter">34,350,000</div>
+            <div class="s2-views-label">V I E W S</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2 — Interactive 3D Galaxy (Three.js) -->
+      <div class="s2-panel s2-galaxy-panel" id="s2-p2">
+        <!-- Three.js renders into this container -->
+        <div class="s2-galaxy-canvas" id="s2GalaxyContainer"></div>
+        <!-- Fixed text overlay — editable in HTML -->
+        <div class="s2-galaxy-overlay">
+          <div class="s2-galaxy-section-num">02</div>
+          <h2 class="s2-galaxy-headline">This is what<br>scale looks like.</h2>
+          <p class="s2-galaxy-sub">Every dot represents<br>340 people reached.</p>
+          <div class="s2-galaxy-metric">
+            <svg class="s2-galaxy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+              <path d="M16 3.13a4 4 0 010 7.75"/>
+            </svg>
+            <div>
+              <div class="s2-galaxy-reach-num">34,373,398</div>
+              <div class="s2-galaxy-reach-lbl">People Reached</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3 — Saves -->
+      <div class="s2-panel" id="s2-p3">
+        <div class="s2-stat-wrap">
+          <div class="s2-counter-eyebrow">Saves</div>
+          <div class="s2-big-num">199K</div>
+          <div class="s2-stat-context">People don't bookmark content they scroll past — they save what matters. 199K saves signals genuine intent to act.</div>
+          <div class="s2-stat-tag">High purchase intent signal</div>
+        </div>
+      </div>
+
+      <!-- Panel 4 — Audience Demographics -->
+      <div class="s2-panel" id="s2-p4">
+        <div class="s2-stat-wrap">
+          <div class="s2-counter-eyebrow">Your Audience</div>
+          <div class="s2-audience-split">
+            <div class="s2-audience-stat">
+              <div class="s2-audience-num">95%</div>
+              <div class="s2-stat-title">United States</div>
+            </div>
+            <div class="s2-audience-divider"></div>
+            <div class="s2-audience-stat">
+              <div class="s2-audience-num">83%</div>
+              <div class="s2-stat-title">Female 18–34</div>
+            </div>
+          </div>
+          <div class="s2-stat-context">Exact match to Talkspace's core user profile — this audience isn't adjacent to your customer, it is your customer.</div>
+        </div>
+      </div>
+
+      <!-- Panel 5 — Velocity -->
+      <div class="s2-panel" id="s2-p5">
+        <div class="s2-stat-wrap">
+          <div class="s2-counter-eyebrow">Weekly Momentum</div>
+          <div class="s2-big-num">2.1M</div>
+          <div class="s2-stat-title">Views in the last 7 days</div>
+          <div class="s2-stat-context">The campaign isn't slowing down — it's compounding. At the current trajectory we're projecting ~8.9M views per month.</div>
+          <div class="s2-stat-tag">Not plateauing — accelerating</div>
+        </div>
+      </div>
+
+    </div><!-- /s2-panels-wrap -->
+
+    <!-- Prev arrow -->
+    <button class="s2-nav-btn s2-prev" id="s2Prev" aria-label="Previous stat" disabled>
+      <svg viewBox="0 0 20 20" fill="none"><path d="M13 4L7 10l6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <!-- Next arrow -->
+    <button class="s2-nav-btn s2-next" id="s2Next" aria-label="Next stat">
+      <svg viewBox="0 0 20 20" fill="none"><path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <!-- Dots -->
+    <div class="s2-dots-row"><div id="s2Dots" class="s2-dots" role="tablist"></div></div>
+
+  </div><!-- /s2-body -->
+
+  <div class="s-footer">
+    <span class="fn">Confidential — For Talkspace Internal Review</span>
+    <span class="fn">02 / 07</span>
+  </div>
+</section>
+
+
+
+
+<!-- =============================================
+     SLIDE 03 · EXAMPLE CONTENT
+     ============================================= -->
+<section class="slide" id="slide-3" aria-label="Content Showcase">
+
+  <div class="s-header">
+    <div class="s-brand">The Work</div>
+    <div class="s-tag">Content Showcase</div>
+  </div>
+
+  <!-- Body sits between absolute header and footer -->
+  <div class="s3-body">
+
+    <div class="s3-intro">
+      <div>
+        <div class="s3-eyebrow">Live Campaign &nbsp;&middot;&nbsp; Real Creator Content</div>
+        <h2 class="s3-title">The content that<br>drove the results.</h2>
+      </div>
+      <p class="s3-tagline">Flip through the carousel posts that generated millions of views.</p>
+    </div>
+
+    <!-- Two card stacks populated by JS from S3_CONFIG -->
+    <div class="s3-gallery" id="s3Gallery"></div>
+
+  </div>
+
+  <div class="s-footer">
+    <span class="fn">Confidential &mdash; For Talkspace Internal Review</span>
+    <span class="fn">03 / 07</span>
+  </div>
+</section>
+
+
+
+<!-- =============================================
+     SLIDE 03 · THE 5 NICHES
+     ============================================= -->
+<section class="slide" id="slide-4" aria-label="Niche Opportunity">
+
+  <div class="s-header">
+    <div class="s-brand">The Opportunity</div>
+    <div class="s-tag">Niche Expansion</div>
+  </div>
+
+  <div class="slide-inner" style="padding-top:clamp(4rem,8vh,6rem); padding-bottom:clamp(3rem,6vh,5rem);">
+
+    <div class="reveal d1">
+      <div class="eyebrow" style="margin-bottom:0.5rem;">Where We Scale Next</div>
+      <h2>5 high-signal niches<br>ready for Talkspace.</h2>
+    </div>
+
+    <div class="niche-grid reveal d2">
+
+      <!-- POSTPARTUM — sage green -->
+      <div class="niche-card niche-sage">
+        <div class="niche-icon">
+          <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Hands cradling a heart -->
+            <path d="M27 34s-12-7-12-16a8 8 0 0116 0 8 8 0 0116 0c0 9-20 16-20 16z" stroke="#1C5E52" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 36c-3 1.5-6 3-9 3.5" stroke="#1C5E52" stroke-width="2" stroke-linecap="round"/>
+            <path d="M44 36c3 1.5 6 3 9 3.5" stroke="#1C5E52" stroke-width="2" stroke-linecap="round"/>
+            <path d="M6 30c-1.5 1.5-4 4-5 7" stroke="#1C5E52" stroke-width="2" stroke-linecap="round"/>
+            <path d="M48 30c1.5 1.5 4 4 5 7" stroke="#1C5E52" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="niche-name">Postpartum / New Mother</div>
+        <div class="niche-why">Hormonal changes, postpartum anxiety, and the quiet loss of identity, a deeply personal chapter Talkspace understands intimately.</div>
+      </div>
+
+      <!-- COUPLES — salmon -->
+      <div class="niche-card niche-salmon">
+        <div class="niche-icon">
+          <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Two overlapping speech bubbles -->
+            <path d="M4 6h22c1.1 0 2 .9 2 2v13c0 1.1-.9 2-2 2H10l-6 5V23H4c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2z" stroke="#1C5E52" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="11" cy="13" r="1.8" fill="#1C5E52"/>
+            <circle cx="18" cy="13" r="1.8" fill="#1C5E52"/>
+            <path d="M28 18h22c1.1 0 2 .9 2 2v13c0 1.1-.9 2-2 2H36l-4 1 3 4-6-5h-1c-1.1 0-2-.9-2-2V20c0-1.1.9-2 2-2z" stroke="#1C5E52" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="36" cy="25" r="1.8" fill="#1C5E52"/>
+            <circle cx="43" cy="25" r="1.8" fill="#1C5E52"/>
+          </svg>
+        </div>
+        <div class="niche-name">Couples in Relational Distress</div>
+        <div class="niche-why">A distinct Talkspace offering focused on relationship dynamics, communication breakdowns, conflict patterns, and emotional repair.</div>
+      </div>
+
+      <!-- VETERANS — sky blue -->
+      <div class="niche-card niche-sky">
+        <div class="niche-icon">
+          <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Shield with star -->
+            <path d="M27 4L5 14v16c0 12 10 20 22 22 12-2 22-10 22-22V14L27 4z" stroke="#1C5E52" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <polygon points="27,16 29.5,23.5 37.5,23.5 31,28 33.5,36 27,31 20.5,36 23,28 16.5,23.5 24.5,23.5" stroke="#1C5E52" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="niche-name">Veterans</div>
+        <div class="niche-why">Service trauma, loss of purpose, and the transition to civilian life. A Talkspace audience that requires expert psychiatric care.</div>
+      </div>
+
+      <!-- OVERWHELMED PARENT — butter yellow -->
+      <div class="niche-card niche-butter">
+        <div class="niche-icon">
+          <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Adult + child figures -->
+            <circle cx="20" cy="11" r="7" stroke="#1C5E52" stroke-width="2.2"/>
+            <path d="M8 48V36c0-6.5 5-11 12-11s12 4.5 12 11v12" stroke="#1C5E52" stroke-width="2.2" stroke-linecap="round"/>
+            <circle cx="39" cy="20" r="4.5" stroke="#1C5E52" stroke-width="2"/>
+            <path d="M33 48V38c0-4 2.5-6.5 6-6.5s6 2.5 6 6.5v10" stroke="#1C5E52" stroke-width="2" stroke-linecap="round"/>
+            <path d="M20 25v8" stroke="#1C5E52" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="niche-name">Overwhelmed Parent</div>
+        <div class="niche-why">Ongoing parenting stress, emotional reactivity, and the work of breaking generational cycles. Content centered on the evolving parent-child relationship.</div>
+      </div>
+
+      <!-- COST-CONSCIOUS ADULT — lavender, centred in grid -->
+      <div class="niche-card niche-lavender" style="grid-column:2;">
+        <div class="niche-icon">
+          <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Unlocking access: open padlock + path -->
+            <path d="M19 24V17a8 8 0 0116 4" stroke="#1C5E52" stroke-width="2.2" stroke-linecap="round"/>
+            <rect x="12" y="24" width="30" height="22" rx="4" stroke="#1C5E52" stroke-width="2.2" stroke-linecap="round"/>
+            <circle cx="27" cy="35" r="4" stroke="#1C5E52" stroke-width="2.2"/>
+            <line x1="27" y1="39" x2="27" y2="43" stroke="#1C5E52" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="niche-name">Cost-Conscious Anxious / Burnt-Out Adult</div>
+        <div class="niche-why">The emotional exhaustion of modern life, anxiety, depression, and burnout met with care that feels accessible for the first time.</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="s-footer">
+    <span class="fn">Confidential — For Talkspace Internal Review</span>
+    <span class="fn">04 / 07</span>
+  </div>
+</section>
+
+
+<!-- =============================================
+     SLIDE 05 · NICHE STRATEGY — INTERACTIVE PLAYBOOK
+     Rebuilt v2: premium editorial layout.
+     Left: large-type copy. Right: folder tabs + hero card.
+     ============================================= -->
+<section class="slide" id="slide-5" aria-label="Niche Strategy">
+
+  <!-- Header: 72px, 64px side padding -->
+  <div class="s-header dark-header">
+    <div class="s-brand">Strategy</div>
+    <div class="s-tag">Niche Playbook</div>
+  </div>
+
+  <div class="s7-main">
+
+    <!-- LEFT: editorial copy block -->
+    <div class="s7-copy">
+      <div class="s7-eyebrow">The Playbook</div>
+      <div class="s7-headline-wrap">
+        <span class="s7-hl-line1">One strategy,</span>
+        <span class="s7-hl-line2">five demographics.</span>
+      </div>
+      <p class="s7-body">Same proven formula rooted in platform native storytelling and high frequency publishing, tailored to each niche with precision.</p>
+    </div>
+
+    <!-- RIGHT: folder tabs + carousel (tabs built by JS) -->
+    <div class="s7-right" id="s7Right">
+
+      <!-- Folder tabs — built by JS, aligned to bottom (shelf line) -->
+      <div class="s7-tabs" id="s7Tabs" role="tablist" aria-label="Niche selector"></div>
+
+      <!-- Carousel area: flex-centered -->
+      <div class="s7-carousel-area">
+        <div class="s7-carousel-row">
+
+          <!-- Prev arrow -->
+          <button class="s7-arrow" id="s7Prev" aria-label="Previous slide">
+            <svg viewBox="0 0 20 20" fill="none">
+              <path d="M13 4L7 10l6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <!-- Card + dots stacked together so dots are UNDER card, not under page -->
+          <div class="s7-card-stack">
+            <div class="s7-card" id="s7Card" role="img" aria-label="Sample content card"></div>
+            <div class="s7-dots" id="s7Dots" role="tablist" aria-label="Carousel position"></div>
+          </div>
+
+          <!-- Next arrow -->
+          <button class="s7-arrow" id="s7Next" aria-label="Next slide">
+            <svg viewBox="0 0 20 20" fill="none">
+              <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="s-footer dark-footer">
+    <span class="fn">Confidential — For Talkspace Internal Review</span>
+    <span class="fn">05 / 07</span>
+  </div>
+</section>
+
+
+<!-- =============================================
+     SLIDE 03 · GROWTH PROJECTIONS
+     ============================================= -->
+<section class="slide" id="slide-6" aria-label="Growth Projections">
+
+  <div class="s-header">
+    <div class="s-brand">Growth Projections</div>
+    <div class="s-tag">What Scaling Looks Like</div>
+  </div>
+
+  <div class="s-footer">
+    <span class="fn">Confidential — For Talkspace Internal Review</span>
+    <span class="fn">06 / 07</span>
+  </div>
+</section>
+
+
+<!-- =============================================
+     SLIDE 05 · RECOMMENDATION
+     ============================================= -->
+<section class="slide" id="slide-7" aria-label="Scale">
+
+  <div class="s-header">
+    <div class="s-brand">Scale</div>
+    <div class="s-tag"></div>
+  </div>
+
+  <div class="s-footer">
+    <span class="fn">Confidential &mdash; For Talkspace Internal Review</span>
+    <span class="fn">07 / 07</span>
+  </div>
+</section>
+
+
+<!-- ===========================================
+     JAVASCRIPT — PRESENTATION CONTROLLER
+     =========================================== -->
+<script>
+class SlidePresentation {
+  constructor() {
+    this.slides       = Array.from(document.querySelectorAll('.slide'));
+    this.total        = this.slides.length;
+    this.current      = 0;
+    this.isScrolling  = false;
+
+    this.progressBar  = document.getElementById('progressBar');
+    this.navContainer = document.getElementById('navDots');
+
+    this.setupObserver();
+    this.setupKeys();
+    this.setupTouch();
+    this.setupWheel();
+    this.buildDots();
+    this.updateProgress(0);
+
+    // Trigger first slide immediately
+    setTimeout(() => this.slides[0]?.classList.add('visible'), 80);
+  }
+
+  /* Intersection Observer — adds .visible to trigger CSS animations */
+  setupObserver() {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('visible');
+        const i = this.slides.indexOf(e.target);
+        if (i < 0) return;
+        this.current = i;
+        this.updateProgress(i);
+        this.updateDots(i);
+      });
+    }, { threshold: 0.5 });
+
+    this.slides.forEach(s => obs.observe(s));
+  }
+
+  /* Keyboard: arrows, space, page keys */
+  setupKeys() {
+    document.addEventListener('keydown', e => {
+      const inEdit = document.body.classList.contains('edit-active') &&
+                     document.activeElement?.getAttribute('contenteditable');
+      if (inEdit) return;
+
+      const map = {
+        ArrowDown: 1, ArrowRight: 1, ' ': 1, PageDown: 1,
+        ArrowUp: -1, ArrowLeft: -1, PageUp: -1,
+      };
+      if (e.key in map) { e.preventDefault(); this.go(this.current + map[e.key]); }
+      if (e.key === 'Home') { e.preventDefault(); this.go(0); }
+      if (e.key === 'End')  { e.preventDefault(); this.go(this.total - 1); }
+    });
+  }
+
+  /* Touch swipe */
+  setupTouch() {
+    let sy = 0, sx = 0;
+    document.addEventListener('touchstart', e => { sy = e.touches[0].clientY; sx = e.touches[0].clientX; }, { passive: true });
+    document.addEventListener('touchend', e => {
+      const dy = sy - e.changedTouches[0].clientY;
+      const dx = sx - e.changedTouches[0].clientX;
+      if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 50) this.go(this.current + (dy > 0 ? 1 : -1));
+    }, { passive: true });
+  }
+
+  /* Mouse wheel (debounced) */
+  setupWheel() {
+    document.addEventListener('wheel', e => {
+      if (this.isScrolling) return;
+      this.isScrolling = true;
+      this.go(this.current + (e.deltaY > 0 ? 1 : -1));
+      setTimeout(() => { this.isScrolling = false; }, 820);
+    }, { passive: true });
+  }
+
+  go(i) {
+    const idx = Math.max(0, Math.min(i, this.total - 1));
+    this.slides[idx]?.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  updateProgress(i) {
+    this.progressBar.style.width = (this.total > 1 ? (i / (this.total - 1)) * 100 : 100) + '%';
+  }
+
+  buildDots() {
+    this.navContainer.innerHTML = '';
+    this.slides.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'nav-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', `Slide ${i + 1}`);
+      d.addEventListener('click', () => this.go(i));
+      this.navContainer.appendChild(d);
+    });
+  }
+
+  updateDots(active) {
+    this.navContainer.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('active', i === active));
+  }
+}
+
+/* ===========================================
+   INLINE EDITOR
+   =========================================== */
+class InlineEditor {
+  constructor() {
+    this.isActive    = false;
+    this.toggle      = document.getElementById('editToggle');
+    this.banner      = document.getElementById('editBanner');
+    this.hotzone     = document.getElementById('editHotzone');
+    this.hideTimeout = null;
+
+    this.setupHotzone();
+    this.setupKeys();
+  }
+
+  /* JS hover (CSS ~ selector fails with pointer-events:none) */
+  setupHotzone() {
+    const { hotzone, toggle } = this;
+
+    const show = () => { clearTimeout(this.hideTimeout); toggle.classList.add('show'); };
+    const hide = () => {
+      this.hideTimeout = setTimeout(() => { if (!this.isActive) toggle.classList.remove('show'); }, 400);
+    };
+
+    hotzone.addEventListener('mouseenter', show);
+    hotzone.addEventListener('mouseleave', hide);
+    toggle.addEventListener('mouseenter',  show);
+    toggle.addEventListener('mouseleave',  hide);
+    hotzone.addEventListener('click', () => this.toggle_());
+    toggle.addEventListener('click',  () => this.toggle_());
+  }
+
+  setupKeys() {
+    document.addEventListener('keydown', e => {
+      if ((e.key === 'e' || e.key === 'E') && !e.target.getAttribute('contenteditable')) this.toggle_();
+      if (e.ctrlKey && e.key === 's' && this.isActive) { e.preventDefault(); this.export(); }
+    });
+  }
+
+  toggle_() {
+    this.isActive = !this.isActive;
+    const { toggle, banner } = this;
+
+    if (this.isActive) {
+      document.body.classList.add('edit-active');
+      toggle.classList.add('active');
+      banner.classList.add('active');
+      toggle.textContent = '✓ Done';
+      const sel = 'h1,h2,h3,h4,p,.eyebrow,.eyebrow-light,.metric-num,.metric-label,.stat-num,.stat-label,.stat-note,.perf-name,.perf-pct,.content-type,.content-title,.content-result,.niche-name,.niche-why,.s-niche,.s-approach,.s-hook,.proj-label,.proj-value,.proj-tbd,.proj-note,.step-text h4,.step-text p,.fn,.s-brand,.s-tag,.why-text h4,.why-text p,.slide-sub';
+      document.querySelectorAll(sel).forEach(el => el.setAttribute('contenteditable', 'true'));
+    } else {
+      document.body.classList.remove('edit-active');
+      toggle.classList.remove('active', 'show');
+      banner.classList.remove('active');
+      toggle.textContent = '✏ Edit';
+      document.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+    }
+  }
+
+  export() {
+    /* Strip edit state so saved file opens cleanly */
+    const els = Array.from(document.querySelectorAll('[contenteditable]'));
+    els.forEach(el => el.removeAttribute('contenteditable'));
+    document.body.classList.remove('edit-active');
+    this.toggle.classList.remove('active', 'show');
+    this.banner.classList.remove('active');
+
+    const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+    /* Restore for continued editing */
+    document.body.classList.add('edit-active');
+    els.forEach(el => el.setAttribute('contenteditable', 'true'));
+    this.toggle.classList.add('active');
+    this.banner.classList.add('active');
+
+    const a = Object.assign(document.createElement('a'), {
+      href: URL.createObjectURL(new Blob([html], { type: 'text/html' })),
+      download: 'talkspace-campaign-pitch.html',
+    });
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+}
+
+/* ============================================
+   NICHE PLAYBOOK — Slide 7 interactive logic.
+   Tab clicks update background + carousel content.
+   Arrows + dots control carousel per niche.
+   ============================================ */
+function initNichePlaybook() {
+  const slide7 = document.getElementById('slide-5');
+  if (!slide7) return;
+
+  const CDN = 'https://cdn.prod.website-files.com/5f1b10a955e49d279bdc2192/';
+
+  /* ---- Data ---- */
+  const niches = [
+    {
+      name: 'Postpartum',
+      tabColor: '#C8E6D8',
+      slideBg: '#EEF6F1',
+      slides: [
+        { img: '1x/page 1 postpartum.png', grad: 'linear-gradient(160deg,#C8E6D8,#8CB5A7)', headline: "Postpartum isn't\njust tired.", sub: "It's a mental load no one\ntalks about.", cta: "You're not alone." },
+        { grad: 'linear-gradient(160deg,#B0D4BE,#6FA888)', headline: "Nobody warned me\nabout this part.", sub: "New motherhood can feel\nlike losing yourself.", cta: "Start talking." },
+        { img: CDN+'695d5179162245c581a3ec76_c4ac7a056a2c534f5e96398b3e8f6d08_Darianny.png', grad: 'linear-gradient(160deg,#C8E6D8,#8CB5A7)', headline: "Postpartum anxiety\nis real.", sub: "More common than you think —\nand very treatable.", cta: "Learn more." },
+        { grad: 'linear-gradient(160deg,#D2EADE,#90C4A2)', headline: "I thought it would\nget easier.", sub: "Therapy helped me find\nmyself again.", cta: "Try Talkspace." },
+        { grad: 'linear-gradient(160deg,#B8DCC8,#78AE8E)', headline: "Your feelings matter\ntoo, mama.", sub: "Support made for the\nseason you're in.", cta: "Get started." },
+      ]
+    },
+    {
+      name: 'Couples',
+      tabColor: '#F5C9B8',
+      slideBg: '#FDF2EC',
+      slides: [
+        { img: '1x/slide 1 couples.png', grad: 'linear-gradient(160deg,#F5C9B8,#D87060)', headline: "The argument is\nnot the problem.", sub: "It's the pattern\nunderneath it.", cta: "Couples therapy, online." },
+        { grad: 'linear-gradient(160deg,#F0C0A8,#CC7050)', headline: "We kept having\nthe same fight.", sub: "Until we finally\nlearned why.", cta: "Start together." },
+        { img: CDN+'695d5179162245c581a3ec82_874066c797a6b4f689060b3242a5dc57_Meghan.png', grad: 'linear-gradient(160deg,#F5C9B8,#D87060)', headline: "Communication is\na practice.", sub: "Not a skill you either\nhave or don't.", cta: "Begin now." },
+        { grad: 'linear-gradient(160deg,#F8D0BC,#E08870)', headline: "Repair is possible.", sub: "Even after the\nhardest conversations.", cta: "Talk to us." },
+        { grad: 'linear-gradient(160deg,#F0BCAC,#C86858)', headline: "This isn't\nabout blame.", sub: "It's about building\nsomething better.", cta: "Learn how." },
+      ]
+    },
+    {
+      name: 'Veterans',
+      tabColor: '#C5D8F0',
+      slideBg: '#EBF2FA',
+      slides: [
+        { img: CDN+'695d5179162245c581a3ec85_da7ea0d5dea193a28bf7a95cb667fbda_Sal.png', grad: 'linear-gradient(160deg,#C5D8F0,#6898CC)', headline: "Coming home is\nits own transition.", sub: "We're here for that\npart too.", cta: "Veteran support." },
+        { grad: 'linear-gradient(160deg,#B8CCE8,#5888BA)', headline: "What I wish I'd\nhad when I got home.", sub: "Confidential. Accessible.\nOn your terms.", cta: "Start now." },
+        { grad: 'linear-gradient(160deg,#C8D8F0,#7090C4)', headline: "Service changes you.", sub: "Processing it doesn't\nmake you weak.", cta: "Talk to someone." },
+        { grad: 'linear-gradient(160deg,#AABEDD,#5070B8)', headline: "Mission: mental health.", sub: "For those who gave\neverything.", cta: "Get started." },
+        { grad: 'linear-gradient(160deg,#C5D8F0,#6898CC)', headline: "You served.\nNow let us support you.", sub: "Talkspace for veterans —\nnew start, same strength.", cta: "Learn more." },
+      ]
+    },
+    {
+      name: 'Parents',
+      tabColor: '#F5E8BE',
+      slideBg: '#FAF4E0',
+      slides: [
+        { img: CDN+'695d5179162245c581a3ec79_acc25f9cd604b044fb5f9e49d11dfeb3_Julie.png', grad: 'linear-gradient(160deg,#F5E8BE,#C8A450)', headline: "I caught myself\nyelling again.", sub: "And finally did\nsomething about it.", cta: "Break the cycle." },
+        { grad: 'linear-gradient(160deg,#F0E0A8,#C09040)', headline: "I don't want to parent\nlike I was parented.", sub: "Talkspace helps you\nchange the pattern.", cta: "Start talking." },
+        { grad: 'linear-gradient(160deg,#F5E4C0,#CCA858)', headline: "Parenting is hard.\nBeing triggered is harder.", sub: "Support for the moments\nthat matter most.", cta: "Get started." },
+        { grad: 'linear-gradient(160deg,#ECD8A8,#BC9838)', headline: "My kids deserve\nmy best self.", sub: "So do I.", cta: "Begin today." },
+        { grad: 'linear-gradient(160deg,#F5E8BE,#C8A450)', headline: "Reactivity isn't\nwho you are.", sub: "It's what you learned.\nYou can unlearn it.", cta: "Learn more." },
+      ]
+    },
+    {
+      name: 'Burnt-Out Adult',
+      tabColor: '#D8CCED',
+      slideBg: '#F0EBF7',
+      slides: [
+        { img: CDN+'69779e15cb30adf1f55864f3_Individual.avif', grad: 'linear-gradient(160deg,#D8CCED,#8878B8)', headline: "I finally started\ntherapy.", sub: "Here's what stopped\nme before.", cta: "Try Talkspace." },
+        { grad: 'linear-gradient(160deg,#CCB8E8,#7868A8)', headline: "Burnout isn't just\nbeing tired.", sub: "It's your whole system\nshutting down.", cta: "Get support." },
+        { img: CDN+'695d5179162245c581a3ec73_bbff073fb101da4590f8e53cd8949b77_Sidney.png', grad: 'linear-gradient(160deg,#D8CCED,#8878B8)', headline: "Therapy used to feel\nout of reach.", sub: "Talkspace starts\nat $69/week.", cta: "See plans." },
+        { grad: 'linear-gradient(160deg,#C8B8E0,#7868A8)', headline: "Anxiety doesn't\nhave to run your life.", sub: "Online therapy.\nNo waitlist.", cta: "Start today." },
+        { grad: 'linear-gradient(160deg,#D8CCED,#A898CC)', headline: "One session changed\neverything.", sub: "Real people.\nReal results.", cta: "Begin now." },
+      ]
+    },
+  ];
+
+  /* ---- State ---- */
+  let activeNiche = 0;
+  let activeSlide = 0;
+  let isTransitioning = false;
+
+  /* ---- Refs ---- */
+  const tabsEl = document.getElementById('s7Tabs');
+  const cardEl = document.getElementById('s7Card');
+  const dotsEl = document.getElementById('s7Dots');
+  const prevBtn = document.getElementById('s7Prev');
+  const nextBtn = document.getElementById('s7Next');
+
+  /* ---- Per-niche icons — same SVG paths used in slide 6 niche cards ---- */
+  const nicheIcons = [
+    /* Postpartum — hands cradling a heart */
+    `<svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M27 34s-12-7-12-16a8 8 0 0116 0 8 8 0 0116 0c0 9-20 16-20 16z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M10 36c-3 1.5-6 3-9 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M44 36c3 1.5 6 3 9 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M6 30c-1.5 1.5-4 4-5 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M48 30c1.5 1.5 4 4 5 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>`,
+    /* Couples — two overlapping speech bubbles */
+    `<svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 6h22c1.1 0 2 .9 2 2v13c0 1.1-.9 2-2 2H10l-6 5V23H4c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="11" cy="13" r="1.8" fill="currentColor"/>
+      <circle cx="18" cy="13" r="1.8" fill="currentColor"/>
+      <path d="M28 18h22c1.1 0 2 .9 2 2v13c0 1.1-.9 2-2 2H36l-4 1 3 4-6-5h-1c-1.1 0-2-.9-2-2V20c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="36" cy="25" r="1.8" fill="currentColor"/>
+      <circle cx="43" cy="25" r="1.8" fill="currentColor"/>
+    </svg>`,
+    /* Veterans — shield with star */
+    `<svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M27 4L5 14v16c0 12 10 20 22 22 12-2 22-10 22-22V14L27 4z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <polygon points="27,16 29.5,23.5 37.5,23.5 31,28 33.5,36 27,31 20.5,36 23,28 16.5,23.5 24.5,23.5" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+    </svg>`,
+    /* Parents — adult + child figures */
+    `<svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/>
+      <path d="M8 48V36c0-6.5 5-11 12-11s12 4.5 12 11v12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="39" cy="20" r="4.5" stroke="currentColor" stroke-width="2"/>
+      <path d="M33 48V38c0-4 2.5-6.5 6-6.5s6 2.5 6 6.5v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M20 25v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>`,
+    /* Burnt-Out Adult — open padlock */
+    `<svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M19 24V17a8 8 0 0116 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      <rect x="12" y="24" width="30" height="22" rx="4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="27" cy="35" r="4" stroke="currentColor" stroke-width="2.2"/>
+      <line x1="27" y1="39" x2="27" y2="43" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>`,
+  ];
+
+  /* ---- Build tabs (once) ---- */
+  function buildTabs() {
+    tabsEl.innerHTML = '';
+    niches.forEach((n, i) => {
+      const btn = document.createElement('button');
+      btn.className = 's7-tab' + (i === 0 ? ' active' : '');
+      btn.style.background = n.tabColor;
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      btn.innerHTML = nicheIcons[i] + `<span class="s7-tab-label">${n.name}</span>`;
+      btn.addEventListener('click', () => {
+        if (i === activeNiche || isTransitioning) return;
+        activeNiche = i;
+        activeSlide = 0;
+        updateAll();
+      });
+      tabsEl.appendChild(btn);
+    });
+  }
+
+  /* ---- Build/rebuild dots for current niche ---- */
+  function buildDots() {
+    dotsEl.innerHTML = '';
+    niches[activeNiche].slides.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 's7-dot' + (i === activeSlide ? ' active' : '');
+      d.setAttribute('aria-label', `Slide ${i + 1}`);
+      d.addEventListener('click', () => {
+        if (i === activeSlide || isTransitioning) return;
+        const dir = i > activeSlide ? 1 : -1;
+        activeSlide = i;
+        updateCard(dir);
+        syncDots();
+      });
+      dotsEl.appendChild(d);
+    });
+  }
+
+  function syncDots() {
+    dotsEl.querySelectorAll('.s7-dot').forEach((d, i) => d.classList.toggle('active', i === activeSlide));
+  }
+
+  function syncTabs() {
+    tabsEl.querySelectorAll('.s7-tab').forEach((t, i) => {
+      t.classList.toggle('active', i === activeNiche);
+      t.setAttribute('aria-selected', i === activeNiche ? 'true' : 'false');
+    });
+  }
+
+  /* ---- Render the card HTML ---- */
+  function renderCard() {
+    const s = niches[activeNiche].slides[activeSlide];
+    const imgStyle = s.img
+      ? `background-image: url('${s.img}'), ${s.grad}; background-size: cover; background-position: top center;`
+      : `background: ${s.grad};`;
+    const lines = s.headline.split('\n');
+    const subLines = s.sub.split('\n');
+    cardEl.innerHTML = `
+      <div class="s7-card-img" style="${imgStyle}">
+        <div class="s7-card-img-overlay"></div>
+      </div>`;
+  }
+
+  /* ---- Update card with fade + horizontal slide ---- */
+  function updateCard(dir) {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    /* dir: 1 = next (slides from right), -1 = prev (slides from left) */
+    cardEl.style.transition = 'none';
+    cardEl.classList.add('fading');
+    /* On next tick, let transition run */
+    setTimeout(() => {
+      renderCard();
+      /* reverse entry direction */
+      cardEl.style.transform = `translateX(${dir < 0 ? '18px' : '-18px'}) scale(0.982)`;
+      cardEl.style.opacity = '0';
+      cardEl.style.transition = '';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        cardEl.classList.remove('fading');
+        cardEl.style.transform = '';
+        cardEl.style.opacity = '';
+        isTransitioning = false;
+      }));
+    }, 320);
+  }
+
+  /* ---- Update slide 7 background ---- */
+  function updateBg() {
+    slide7.style.backgroundColor = niches[activeNiche].slideBg;
+  }
+
+  /* ---- Full update on tab switch ---- */
+  function updateAll() {
+    syncTabs();
+    updateBg();
+    buildDots();
+    updateCard(1); /* always enters from right when switching niches */
+  }
+
+  /* ---- Arrow clicks — stopPropagation prevents slide navigation ---- */
+  prevBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    const len = niches[activeNiche].slides.length;
+    activeSlide = (activeSlide - 1 + len) % len;
+    updateCard(-1);
+    syncDots();
+  });
+
+  nextBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    const len = niches[activeNiche].slides.length;
+    activeSlide = (activeSlide + 1) % len;
+    updateCard(1);
+    syncDots();
+  });
+
+  /* ---- Prevent wheel on slide-5 from triggering global slide navigation ----
+     The SlidePresentation wheel handler checks isScrolling flag, but wheel
+     events bubble from child elements. We intercept on the right panel only. */
+  document.getElementById('s7Right')?.addEventListener('wheel', e => {
+    e.stopPropagation();
+  }, { passive: true });
+
+  /* ---- Init ---- */
+  buildTabs();
+  buildDots();
+  renderCard();
+  updateBg();
+}
+
+/* ===========================================
+   SLIDE 01 — INTERACTIVE CAMPAIGN MOLECULE
+   Bubbles are clickable; insight pill updates
+   with context about the selected metric.
+   =========================================== */
+function initCampaignGraph() {
+  const insights = {
+    views:      'Consistent publishing is compounding into real reach — 34.4M views and accelerating.',
+    engagement: 'The audience isn\'t just watching — they\'re actively responding. 2× the industry average.',
+    saves:      '199K saves means people are returning to this content. High purchase intent signal.'
+  };
+
+  let activeMetric = 'views';
+  const pill = document.getElementById('s1Insight');
+
+  function setActive(metric) {
+    if (activeMetric === metric) return;
+    activeMetric = metric;
+    document.querySelectorAll('.s1-bubble-g').forEach(b => {
+      b.classList.toggle('active', b.dataset.metric === metric);
+    });
+    if (pill) {
+      pill.classList.remove('visible');
+      setTimeout(() => {
+        pill.textContent = insights[metric];
+        pill.classList.add('visible');
+      }, 200);
+    }
+  }
+
+  // Default active on first view
+  setTimeout(() => {
+    document.querySelectorAll('.s1-bubble-g').forEach(b => {
+      if (b.dataset.metric === 'views') b.classList.add('active');
+    });
+  }, 100);
+
+  // Show pill when slide enters viewport
+  const slide1 = document.getElementById('slide-1');
+  const pillObserver = new MutationObserver(() => {
+    if (slide1 && slide1.classList.contains('visible') && pill) {
+      setTimeout(() => pill.classList.add('visible'), 1200);
+      pillObserver.disconnect();
+    }
+  });
+  if (slide1) pillObserver.observe(slide1, { attributes: true, attributeFilter: ['class'] });
+
+  // Bubble click handlers
+  document.querySelectorAll('.s1-bubble-g').forEach(b => {
+    b.addEventListener('click', e => {
+      e.stopPropagation();
+      setActive(b.dataset.metric);
+    });
+  });
+}
+
+/* ===========================================
+   SLIDE 01 — WATERCOLOR ATMOSPHERE
+   Cursor moves over the graph → nearby atmospheric
+   blobs drift toward it with spring damping.
+
+   Spring model per blob:
+     vel = vel × damping + (target − pos) × stiffness
+     pos += vel
+   High damping (0.87–0.94) = slow, fluid, delayed.
+   Low stiffness (0.004–0.011) = soft, not snappy.
+
+   Only the 8 atmospheric blob groups move.
+   Core structure, rings, and metric bubbles are static.
+   =========================================== */
+/* =============================================
+   SLIDE 01 — ORBIT SYSTEM
+   ─────────────────────────────────────────────
+   EDITABLE CONTENT: Change S1_CONFIG to update
+   text, stats, card copy, images, and orbit
+   behaviour without touching layout code.
+   ============================================= */
+
+// ── CONTENT CONFIG (edit here) ──────────────────
+const S1_CONFIG = {
+  orbitItems: [
+    // ── FOREGROUND (scale 1.15–1.35) ─────────────────────────────────────
+    // Mid-tier ring (r 0.38–0.47) — well spread, 40°+ between same-tier items
+    {
+      id: 's1-oi-1', type: 'portrait',
+      img: '1x/new image 1 slide 1.png',
+      text: '',
+      views: '9K views',
+      r: 0.38, angle: -102, speed: 7, scale: 1.25, rotZ: -5
+    },
+    {
+      id: 's1-oi-5', type: 'portrait',
+      img: '1x/slide 1 image 2.png',
+      text: '',
+      views: '676K views',
+      r: 0.42, angle: 70, speed: 7, scale: 1.20, rotZ: 4
+    },
+    {
+      id: 's1-oi-2', type: 'text',
+      tag: 'Community',
+      head: "You're not alone.\nYou'll find your people.",
+      sub: '',
+      views: '↑ 1.4M views',
+      r: 0.44, angle: -45, speed: 7, scale: 1.18, rotZ: 3
+    },
+
+    // ── MID LAYER (scale 0.95–1.05) ──────────────────────────────────────
+    {
+      id: 's1-oi-3', type: 'text',
+      tag: 'Anxiety',
+      head: "It's more common\nthan you think.",
+      sub: '',
+      views: '↑ 890K views',
+      r: 0.47, angle: 15, speed: 5, scale: 1.00, rotZ: -6
+    },
+    {
+      id: 's1-oi-6', type: 'text',
+      tag: 'Identity',
+      head: "It's okay to take up\nspace in your story.",
+      sub: '',
+      views: '↑ 27K saves',
+      r: 0.46, angle: 130, speed: 7, scale: 0.98, rotZ: 7
+    },
+    {
+      id: 's1-oi-7', type: 'text',
+      tag: 'Dr. Ellie',
+      head: "Therapy isn't\njust for “crazy”.",
+      sub: '',
+      views: '↑ 540K views',
+      r: 0.40, angle: 175, speed: 7, scale: 1.02, rotZ: -4
+    },
+    {
+      id: 's1-oi-12', type: 'text',
+      tag: 'Mindfulness',
+      head: "Pause. Breathe.\nYou've got this.",
+      sub: '',
+      views: '↑ 312K views',
+      r: 0.44, angle: 218, speed: 6, scale: 0.96, rotZ: 5
+    },
+    // Inner-ring avatars & icons (r 0.24–0.34) — every ~60° in this tier
+    {
+      id: 's1-oi-8', type: 'avatar',
+      img: 'assets/avatars/avatar-03.jpg',
+      r: 0.33, angle: 195, speed: 5, scale: 1.00, rotZ: 0
+    },
+    {
+      id: 's1-oi-9', type: 'avatar',
+      img: 'assets/avatars/avatar-04.jpg',
+      r: 0.28, angle: 290, speed: 9, scale: 0.98, rotZ: 0
+    },
+    {
+      id: 's1-oi-4',  type: 'icon', icon: 'tiktok',
+      r: 0.30, angle: 30, speed: 7, scale: 1.00, rotZ: 0
+    },
+    {
+      id: 's1-oi-10', type: 'icon', icon: 'heart',
+      r: 0.24, angle: 155, speed: 7, scale: 0.97, rotZ: 0
+    },
+    {
+      id: 's1-oi-11', type: 'icon', icon: 'play',
+      r: 0.32, angle: 110, speed: 7, scale: 1.00, rotZ: 0
+    },
+
+    // ── BACKGROUND LAYER (scale 0.65–0.85) — outer ring (r 0.49–0.54) ───
+    // Every ~90° so they frame the orbit without crowding
+    {
+      id: 's1-oi-13', type: 'avatar',
+      img: 'assets/avatars/avatar-05.jpg',
+      r: 0.52, angle: 50, speed: 5, scale: 0.72, rotZ: 0
+    },
+    {
+      id: 's1-oi-14', type: 'avatar',
+      img: 'assets/avatars/avatar-06.jpg',
+      r: 0.49, angle: 145, speed: 6, scale: 0.68, rotZ: 0
+    },
+    {
+      id: 's1-oi-17', type: 'text',
+      tag: 'Growth',
+      head: "Progress,\nnot perfection.",
+      sub: '',
+      views: '↑ 188K views',
+      r: 0.53, angle: 230, speed: 5, scale: 0.78, rotZ: -8
+    },
+    {
+      id: 's1-oi-15', type: 'avatar',
+      img: 'assets/avatars/avatar-07.jpg',
+      r: 0.51, angle: 330, speed: 7, scale: 0.75, rotZ: 0
+    },
+    // Inner-ring background icons — fill gaps left by mid-tier
+    {
+      id: 's1-oi-16', type: 'icon', icon: 'star',
+      r: 0.28, angle: 250, speed: 8, scale: 0.75, rotZ: 15
+    },
+    // Three additional cards — fill largest remaining angular gaps
+    {
+      id: 's1-oi-18', type: 'text', tag: 'Healing',
+      head: "Healing looks\ndifferent for everyone.", views: '↑ 224K views',
+      r: 0.41, angle: 350, speed: 6, scale: 1.01, rotZ: 4
+    },
+    {
+      id: 's1-oi-19', type: 'text', tag: 'Growth',
+      head: "Your growth\nis real.", views: '↑ 96K saves',
+      r: 0.51, angle: 272, speed: 5, scale: 0.76, rotZ: -5
+    },
+    {
+      id: 's1-oi-20', type: 'avatar', img: 'assets/avatars/avatar-08.jpg',
+      r: 0.31, angle: 88, speed: 8, scale: 1.00, rotZ: 0
+    },
+  ]
+};
+
+// ── DEPTH HELPERS ────────────────────────────────
+// Thresholds: near >= 1.10, mid >= 0.90, far < 0.90
+function s1DepthOf(scale) {
+  if (scale >= 1.10) return 'near';
+  if (scale >= 0.90) return 'mid';
+  return 'far';
+}
+function s1Opacity(scale, hovered) {
+  if (hovered) return 1.0;
+  if (scale >= 1.10) return 1.00;
+  if (scale >= 0.90) return 0.93;
+  // Background: fade from 0.55 (scale=0.90) down to 0.35 (scale=0.65)
+  const t = Math.max(0, Math.min(1, (scale - 0.65) / 0.25));
+  return parseFloat((0.35 + t * 0.20).toFixed(2));
+}
+function s1Blur(scale, hovered) {
+  if (hovered || scale >= 0.90) return '';
+  const px = Math.min(Math.round((0.90 - scale) * 48), 12);
+  return 'blur(' + px + 'px)';
+}
+function s1TZ(scale, hovered) {
+  if (hovered) return 260;
+  if (scale >= 1.10) return 180;
+  if (scale >= 0.90) return 60;
+  return -160;
+}
+function s1Shadow(scale, hovered) {
+  if (hovered) return '0 35px 90px rgba(20,70,55,0.28), 0 10px 28px rgba(0,0,0,0.30)';
+  if (scale >= 1.10) return '0 25px 70px rgba(20,70,55,0.22), 0 8px 22px rgba(0,0,0,0.22)';
+  if (scale >= 0.90) return '0 10px 32px rgba(0,0,0,0.14), 0 3px 10px rgba(0,0,0,0.08)';
+  return '0 2px 8px rgba(0,0,0,0.04)';
+}
+
+// ── BUILD ITEM HTML ──────────────────────────────
+function s1BuildItem(cfg) {
+  const w = (sz) => `clamp(${sz[0]}px, ${sz[1]}vw, ${sz[2]}px)`;
+  const pW = w([76, 7.8, 112]), pH = w([104, 10.6, 155]);
+
+  if (cfg.type === 'portrait') {
+    const lines = cfg.text ? cfg.text.split('\n') : [];
+    const cap = (lines.length || cfg.views)
+      ? `<div class="s1-oi-cap">${lines.length ? `<p>${lines.join('<br>')}</p>` : ''}${cfg.views ? `<div class="s1-oi-views-pill">${cfg.views}</div>` : ''}</div>`
+      : '';
+    // Placeholder background if image missing
+    const img = cfg.img
+      ? `<img src="${cfg.img}" alt="" loading="lazy" onerror="this.style.display='none'">`
+      : '';
+    return `<div id="${cfg.id}" class="s1-oi s1-oi-portrait" data-r="${cfg.r}" data-angle="${cfg.angle}" data-speed="${cfg.speed}" data-scale="${cfg.scale}" style="width:${pW};height:${pH}">${img}${cap}</div>`;
+  }
+
+  if (cfg.type === 'text') {
+    const head = (cfg.head || '').replace(/\n/g, '<br>');
+    return `<div id="${cfg.id}" class="s1-oi s1-oi-text" data-r="${cfg.r}" data-angle="${cfg.angle}" data-speed="${cfg.speed}" data-scale="${cfg.scale}"><div class="s1-tc-tag">${cfg.tag || ''}</div><div class="s1-tc-head">${head}</div>${cfg.sub ? `<div class="s1-tc-sub">${cfg.sub}</div>` : ''}${cfg.views ? `<div class="s1-tc-views">${cfg.views}</div>` : ''}</div>`;
+  }
+
+  if (cfg.type === 'avatar') {
+    const sz = w([42, 4.4, 62]);
+    const img = cfg.img
+      ? `<img src="${cfg.img}" alt="" loading="lazy" onerror="this.style.display='none'">`
+      : '';
+    return `<div id="${cfg.id}" class="s1-oi s1-oi-avatar" data-r="${cfg.r}" data-angle="${cfg.angle}" data-speed="${cfg.speed}" data-scale="${cfg.scale}" style="width:${sz};height:${sz}">${img}</div>`;
+  }
+
+  if (cfg.type === 'icon') {
+    const sz = w([34, 3.6, 52]);
+    const iconSvg = {
+      tiktok: `<svg width="55%" viewBox="0 0 24 24" fill="#fff"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>`,
+      heart:  `<svg width="52%" viewBox="0 0 24 24" fill="#E07B5C"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`,
+      play:   `<svg width="48%" viewBox="0 0 24 24" fill="rgba(255,255,255,0.92)"><path d="M8 5v14l11-7z"/></svg>`,
+      star:   `<svg width="54%" viewBox="0 0 24 24" fill="rgba(255,255,255,0.90)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`
+    };
+    const cls = cfg.icon === 'tiktok' ? 's1-icon-tiktok'
+      : cfg.icon === 'heart' ? 's1-icon-heart'
+      : cfg.icon === 'star'  ? 's1-icon-star'
+      : 's1-icon-play';
+    return `<div id="${cfg.id}" class="s1-oi s1-oi-icon ${cls}" data-r="${cfg.r}" data-angle="${cfg.angle}" data-speed="${cfg.speed}" data-scale="${cfg.scale}" style="width:${sz};height:${sz}">${iconSvg[cfg.icon] || ''}</div>`;
+  }
+  return '';
+}
+
+function initOrbit() {
+  const orbitEl = document.getElementById('s1Orbit');
+  if (!orbitEl) return;
+  const slide1 = document.getElementById('slide-1');
+
+  // Inject items from config
+  S1_CONFIG.orbitItems.forEach(cfg => {
+    const existing = document.getElementById(cfg.id);
+    if (!existing) orbitEl.insertAdjacentHTML('beforeend', s1BuildItem(cfg));
+  });
+
+  // Gather live elements + per-item state
+  const items = S1_CONFIG.orbitItems.map(cfg => {
+    const el = document.getElementById(cfg.id);
+    return el ? {
+      el, cfg,
+      angle: cfg.angle,       // current angle (degrees)
+      hovered: false,
+      entered: false,
+    } : null;
+  }).filter(Boolean);
+
+  // Hover: pause orbit, pop forward, increase shadow
+  items.forEach(item => {
+    item.el.addEventListener('mouseenter', () => {
+      item.hovered = true;
+      item.el.style.zIndex     = '50';
+      item.el.style.filter     = '';
+      item.el.style.transition = 'box-shadow 0.25s ease, opacity 0.25s ease';
+      item.el.style.boxShadow  = s1Shadow(item.cfg.scale, true);
+    });
+    item.el.addEventListener('mouseleave', () => {
+      item.hovered = false;
+      item.el.style.zIndex     = '';
+      item.el.style.transition = '';
+    });
+  });
+
+  let lastTs = null;
+  let entranceDone = false;
+  // After all entrance transitions finish, apply depth opacity
+  setTimeout(() => { entranceDone = true; }, 1800);
+
+  function tick(ts) {
+    if (lastTs === null) lastTs = ts;
+    const dt = Math.min((ts - lastTs) / 1000, 0.05);
+    lastTs = ts;
+
+    const isVisible = slide1.classList.contains('visible');
+    const rect = orbitEl.getBoundingClientRect();
+    const halfSize = Math.min(rect.width, rect.height) / 2;
+
+    items.forEach(item => {
+      if (isVisible && !item.hovered) {
+        item.angle += item.cfg.speed * dt;
+      }
+
+      const rad    = item.angle * Math.PI / 180;
+      const r      = halfSize * item.cfg.r;
+      const x      = Math.cos(rad) * r;
+      const y      = Math.sin(rad) * r;
+      const scale  = item.hovered ? item.cfg.scale * 1.12 : item.cfg.scale;
+      const tz     = s1TZ(item.cfg.scale, item.hovered);
+
+      // Parallax tilt: cards lean as they orbit (like objects on a 3D sphere)
+      const tiltMag = item.hovered ? 0
+        : item.cfg.scale >= 1.10 ? 12
+        : item.cfg.scale >= 0.90 ? 5
+        : 2;
+      const rotX  = (-Math.sin(rad) * tiltMag).toFixed(1);
+      const rotY  = ( Math.cos(rad) * tiltMag).toFixed(1);
+      const rotZ  = item.hovered ? 0 : (item.cfg.rotZ || 0);
+
+      item.el.style.transform =
+        `translate(calc(-50% + ${x.toFixed(1)}px), calc(-50% + ${y.toFixed(1)}px)) ` +
+        `translateZ(${tz}px) ` +
+        `rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ}deg) ` +
+        `scale(${scale.toFixed(3)})`;
+
+      // z-index: foreground cards sit above background
+      item.el.style.zIndex = item.hovered ? '50'
+        : item.cfg.scale >= 1.10 ? '4'
+        : item.cfg.scale >= 0.90 ? '3'
+        : '1';
+
+      if (entranceDone) {
+        item.el.style.opacity    = String(s1Opacity(item.cfg.scale, item.hovered));
+        item.el.style.filter     = item.hovered ? '' : s1Blur(item.cfg.scale, false);
+        item.el.style.boxShadow  = s1Shadow(item.cfg.scale, item.hovered);
+      }
+    });
+
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+}
+
+/* =============================================
+   SLIDE 2 — STAT CAROUSEL + LIVE COUNTER
+   ============================================= */
+(function initS2() {
+  const slide2   = document.getElementById('slide-2');
+  if (!slide2) return;
+
+  const panels   = slide2.querySelectorAll('.s2-panel');
+  const prevBtn  = document.getElementById('s2Prev');
+  const nextBtn  = document.getElementById('s2Next');
+  const dotsEl   = document.getElementById('s2Dots');
+  const counterEl = document.getElementById('s2Counter');
+  const total    = panels.length;
+  let current    = 0;
+  let busy       = false;
+
+  /* ── Build dots ── */
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('button');
+    d.className = 's2-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('role', 'tab');
+    d.setAttribute('aria-label', 'Stat ' + (i + 1) + ' of ' + total);
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  }
+
+  function syncDots() {
+    dotsEl.querySelectorAll('.s2-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  function syncArrows() {
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1;
+  }
+
+  /* ── Slide transition ── */
+  function goTo(idx) {
+    if (idx === current || busy || idx < 0 || idx >= total) return;
+    busy = true;
+    const dir      = idx > current ? 1 : -1;
+    const fromPanel = panels[current];
+    const toPanel   = panels[idx];
+
+    /* Prep incoming panel just off-screen, invisible, no transition */
+    toPanel.style.cssText = `transition:none;opacity:0;transform:translateX(${dir > 0 ? 48 : -48}px);`;
+    toPanel.classList.add('s2-active');
+
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const t = 'opacity 0.38s ease, transform 0.38s ease';
+      fromPanel.style.cssText = `transition:${t};opacity:0;transform:translateX(${dir > 0 ? -48 : 48}px);pointer-events:none;`;
+      toPanel.style.cssText   = `transition:${t};opacity:1;transform:translateX(0);`;
+
+      setTimeout(() => {
+        fromPanel.classList.remove('s2-active');
+        fromPanel.style.cssText = '';
+        toPanel.style.cssText   = '';
+        busy = false;
+      }, 400);
+    }));
+
+    current = idx;
+    syncDots();
+    syncArrows();
+    /* Restart counter whenever navigating back to panel 1 while slide is visible */
+    if (idx === 0 && slide2.classList.contains('visible')) startCounter();
+  }
+
+  prevBtn.addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); });
+  nextBtn.addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); });
+
+  /* ── Live counter ── */
+  const COUNTER_START = 34350000;
+  const COUNTER_END   = 34373398;
+  let counterRaf = null; /* track in-flight animation frame so we can cancel */
+
+  function fmtNum(n) {
+    return n.toLocaleString('en-US');
+  }
+
+  function startCounter() {
+    /* Cancel any animation already running */
+    if (counterRaf !== null) {
+      cancelAnimationFrame(counterRaf);
+      counterRaf = null;
+    }
+    /* Reset display to start value */
+    if (counterEl) counterEl.textContent = fmtNum(COUNTER_START);
+
+    /* Animate from start to end over ~20 s (ease-out cubic) */
+    const START_TS = performance.now();
+    const DURATION = 20000;
+
+    function tick(now) {
+      const t     = Math.min((now - START_TS) / DURATION, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const val   = Math.round(COUNTER_START + eased * (COUNTER_END - COUNTER_START));
+      if (counterEl) counterEl.textContent = fmtNum(val);
+      if (t < 1) counterRaf = requestAnimationFrame(tick);
+      else counterRaf = null;
+    }
+    counterRaf = requestAnimationFrame(tick);
+  }
+
+  /* Restart every time slide 2 scrolls into view while on panel 1 */
+  const io = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && current === 0) startCounter();
+  }, { threshold: 0.5 });
+  io.observe(slide2);
+
+  syncArrows();
+})();
+
+/* =============================================
+   SLIDE 3 — CARD STACK SHOWCASE
+   ============================================= */
+
+/* ── Content config — edit cards/creators/paths freely ── */
+const S3_CONFIG = {
+  stacks: [
+    {
+      creator:     '@balanceandbreathe7',
+      format:      'Carousel Post',
+      tiktokUrl:   'https://www.tiktok.com/@balanceandbreathe7/photo/7596453061770431775',
+      placeholder: 'a',   /* 'a' = sage green, 'b' = warm cream */
+      cards: [
+        '1x copy/cover page.png',
+        '1x copy/Page 1.png',
+        '1x copy/Page 2.png',
+        '1x copy/Page 3.png',
+        '1x copy/Page 4.png',
+        '1x copy/Page 5.png',
+        '1x copy/Page 6.png',
+        '1x copy/Page 7.png',
+        '1x copy/Page 8.png',
+        '1x copy/Page 9.png',
+        '1x copy/Page 10.png',
+        '1x copy/Page 11.png',
+        '1x copy/page 12.png',
+        '1x copy/Page 13.png',
+        '1x copy/Page 14.png',
+        '1x copy/Page 15.png',
+        '1x copy/Page 16_1.png',
+      ],
+    },
+    {
+      creator:     '@pulsegarden7',
+      format:      'Carousel Post',
+      tiktokUrl:   'https://www.tiktok.com/@pulsegarden7/photo/7641558613089176846',
+      placeholder: 'b',
+      cards: [
+        '1x 2 copy/cover page 2.png',
+        '1x 2 copy/page 1.png',
+        '1x 2 copy/page 2.png',
+        '1x 2 copy/page 3.png',
+        '1x 2 copy/page 4.png',
+        '1x 2 copy/page 5.png',
+        '1x 2 copy/page 6.png',
+        '1x 2 copy/Page 7.png',
+        '1x 2 copy/page 8.png',
+      ],
+    },
+  ],
+};
+
+function initS3() {
+  const gallery = document.getElementById('s3Gallery');
+  if (!gallery) return;
+
+  const MAX_DEPTH = 3;   /* how many background layers show */
+  const SPRING    = 'cubic-bezier(0.34, 1.56, 0.64, 1)';  /* slight overshoot */
+  const EASE_OUT  = 'cubic-bezier(0.22, 1, 0.36, 1)';
+
+  S3_CONFIG.stacks.forEach((cfg, si) => {
+    /* ── Column wrapper ── */
+    const col = document.createElement('div');
+    col.className = 's3-stack-col';
+
+    /* Creator info */
+    const info = document.createElement('div');
+    info.className = 's3-stack-info';
+    info.innerHTML =
+      `<div class="s3-creator-handle">${cfg.creator}</div>` +
+      `<div class="s3-creator-format">${cfg.format}</div>`;
+    col.appendChild(info);
+
+    /* Card stack container */
+    const stackEl = document.createElement('div');
+    stackEl.className = 's3-stack';
+    stackEl.id = `s3Stack${si}`;
+
+    /* Build card elements */
+    const els = cfg.cards.map(path => {
+      const card = document.createElement('div');
+      card.className = `s3-card s3-ph-${cfg.placeholder}`;
+      card.style.backgroundImage = `url('${path}')`;
+      stackEl.appendChild(card);
+      return card;
+    });
+
+    /* State: order[0] is always the index of the current top card */
+    const state = { order: els.map((_, i) => i), busy: false };
+
+    /* ── Render all card positions ── */
+    function render(animated) {
+      state.order.forEach((cardIdx, pos) => {
+        const card = els[cardIdx];
+        const tr = animated
+          ? `transform ${0.52 + pos * 0.06}s ${SPRING}, opacity 0.42s ${EASE_OUT}, box-shadow 0.36s ease`
+          : 'none';
+        card.style.transition = tr;
+
+        if (pos >= MAX_DEPTH) {
+          /* Hidden cards sit at the deepest visible position, invisible */
+          card.style.opacity    = '0';
+          card.style.zIndex     = '0';
+          card.style.pointerEvents = 'none';
+          card.style.filter     = '';
+          card.style.transform  =
+            `translateX(${(MAX_DEPTH - 1) * 7}px) translateY(${(MAX_DEPTH - 1) * 12}px) ` +
+            `rotate(${(MAX_DEPTH - 1) * 2.6}deg) scale(${1 - (MAX_DEPTH - 1) * 0.042})`;
+          card.classList.remove('s3-card--top');
+        } else {
+          card.style.transform  =
+            `translateX(${pos * 7}px) translateY(${pos * 12}px) ` +
+            `rotate(${pos * 2.6}deg) scale(${1 - pos * 0.042})`;
+          card.style.opacity    = String(1 - pos * 0.13);
+          card.style.zIndex     = String(MAX_DEPTH - pos + 2);
+          card.style.pointerEvents = pos === 0 ? 'auto' : 'none';
+          card.style.filter     = pos > 0 ? `blur(${pos * 0.7}px)` : '';
+          card.style.boxShadow  = pos === 0
+            ? '0 2px 8px rgba(0,0,0,0.06), 0 10px 30px rgba(26,46,40,0.12), 0 24px 52px rgba(26,46,40,0.08)'
+            : '';
+          card.classList.toggle('s3-card--top', pos === 0);
+        }
+      });
+    }
+
+    /* ── Flip to next card ── */
+    function flipNext() {
+      if (state.busy) return;
+      state.busy = true;
+      const topIdx  = state.order[0];
+      const topCard = els[topIdx];
+
+      /* Exit: fly right with rotation */
+      topCard.style.transition = `transform 0.36s ${EASE_OUT}, opacity 0.24s ease`;
+      topCard.style.transform  = 'translateX(115%) rotate(20deg) scale(0.9)';
+      topCard.style.opacity    = '0';
+      topCard.style.zIndex     = '20';
+
+      setTimeout(() => {
+        /* Rotate queue: top goes to back */
+        state.order.push(state.order.shift());
+
+        /* Instantly park the recycled card at the back position, no transition */
+        const recycledCard = els[state.order[state.order.length - 1]];
+        recycledCard.style.transition = 'none';
+        recycledCard.style.transform  =
+          `translateX(${(MAX_DEPTH - 1) * 7}px) translateY(${(MAX_DEPTH - 1) * 12}px) ` +
+          `rotate(${(MAX_DEPTH - 1) * 2.6}deg) scale(${1 - (MAX_DEPTH - 1) * 0.042})`;
+        recycledCard.style.opacity = '0';
+
+        requestAnimationFrame(() => {
+          render(true);
+          updateCounter();
+          setTimeout(() => { state.busy = false; }, 580);
+        });
+      }, 270);
+    }
+
+    /* ── Flip to previous card ── */
+    function flipPrev() {
+      if (state.busy) return;
+      state.busy = true;
+
+      /* Move last card to front */
+      state.order.unshift(state.order.pop());
+      const newTopCard = els[state.order[0]];
+
+      /* Instantly position new top card off-screen left */
+      newTopCard.style.transition = 'none';
+      newTopCard.style.transform  = 'translateX(-115%) rotate(-20deg) scale(0.9)';
+      newTopCard.style.opacity    = '0';
+      newTopCard.style.zIndex     = '20';
+
+      /* Double rAF ensures the "instant" position registers before transition starts */
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        render(true);
+        updateCounter();
+        setTimeout(() => { state.busy = false; }, 600);
+      }));
+    }
+
+    col.appendChild(stackEl);
+
+    /* ── Navigation row ── */
+    const nav = document.createElement('div');
+    nav.className = 's3-nav';
+
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 's3-nav-btn';
+    prevBtn.setAttribute('aria-label', 'Previous card');
+    prevBtn.innerHTML = `<svg viewBox="0 0 20 20" fill="none"><path d="M13 4L7 10l6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+    const counter = document.createElement('div');
+    counter.className = 's3-card-counter';
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 's3-nav-btn';
+    nextBtn.setAttribute('aria-label', 'Next card');
+    nextBtn.innerHTML = `<svg viewBox="0 0 20 20" fill="none"><path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+    function updateCounter() {
+      const current = state.order[0] + 1;
+      const total   = cfg.cards.length;
+      counter.textContent =
+        String(current).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    }
+
+    prevBtn.addEventListener('click', e => { e.stopPropagation(); flipPrev(); });
+    nextBtn.addEventListener('click', e => { e.stopPropagation(); flipNext(); });
+
+    /* Click the top card itself to advance */
+    stackEl.addEventListener('click', () => { if (!state.busy) flipNext(); });
+
+    nav.appendChild(prevBtn);
+    nav.appendChild(counter);
+    nav.appendChild(nextBtn);
+    col.appendChild(nav);
+
+    /* Initial render */
+    render(false);
+    updateCounter();
+
+    gallery.appendChild(col);
+  });
+}
+
+initS3();
+initOrbit();
+initCampaignGraph();
+initNichePlaybook();
+new SlidePresentation();
+new InlineEditor();
+
+/* ===========================================
+   T-CURSOR — square morphs to outlined T on hover
+   Matches Talkspace.com's signature hover effect
+   =========================================== */
+(function() {
+  const cursor = document.getElementById('ts-cursor');
+  if (!cursor) return;
+
+  let mouseX = -200, mouseY = -200;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top  = mouseY + 'px';
+    cursor.style.display = 'block';
+  });
+
+  document.addEventListener('mouseleave', () => { cursor.style.display = 'none'; });
+
+  const hoverTargets = document.querySelectorAll(
+    '.niche-card, .stat-block, .content-card, .proj-card, .step-item, .why-item, .s7-card'
+  );
+
+  hoverTargets.forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+  });
+})();
+</script>
+
+<!-- =============================================
+     SLIDE 2 PANEL 2 — THREE.JS PARTICLE GALAXY
+     ES module; runs independently of the main script block.
+     ============================================= -->
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+/* ── Configurable parameters ── */
+const GALAXY = {
+  PARTICLE_COUNT:  85000,     // total dots
+  PEOPLE_PER_DOT:  340,       // label only (text overlay)
+  TOTAL_REACH:     34373398,  // label only (text overlay)
+  RADIUS:          115,       // max galaxy radius
+  CORE_RADIUS:     13,        // central dense sphere radius
+  THICKNESS:       7,         // y-axis disc thickness
+  RING_RADII:      [14, 26, 40, 56, 72, 90, 108], // concentric ring peaks
+  BG:        0x0D1F17,
+  C_CORE:    0xd0ffe8,   // bright mint-white
+  C_MID:     0x7eddb1,   // mid mint
+  C_OUTER:   0x3a8a60,   // dark sage
+};
+
+/* ── Build a radial glow canvas texture ── */
+function makeGlowTexture(size, stops) {
+  const canvas = document.createElement('canvas');
+  canvas.width = canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  const g = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+  stops.forEach(([pos, color]) => g.addColorStop(pos, color));
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, size, size);
+  return new THREE.CanvasTexture(canvas);
+}
+
+/* ── Main init — called once container has real dimensions ── */
+function initGalaxy() {
+  const container = document.getElementById('s2GalaxyContainer');
+  if (!container) return false;
+  const W = container.clientWidth;
+  const H = container.clientHeight;
+  if (W < 20 || H < 20) return false;   // not laid out yet
+
+  /* Scene */
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(GALAXY.BG);
+  scene.fog = new THREE.FogExp2(GALAXY.BG, 0.0028);
+
+  /* Camera — slightly above and back for a cinematic tilt */
+  const camera = new THREE.PerspectiveCamera(62, W / H, 0.5, 1400);
+  camera.position.set(0, 72, 188);
+
+  /* Renderer */
+  const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(W, H);
+  container.appendChild(renderer.domElement);
+
+  /* OrbitControls — drag to rotate, scroll to zoom */
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping    = true;
+  controls.dampingFactor    = 0.05;
+  controls.enablePan        = false;
+  controls.minDistance      = 45;
+  controls.maxDistance      = 420;
+  controls.autoRotate       = true;
+  controls.autoRotateSpeed  = 0.26;
+
+  /* Stop auto-rotate while dragging; resume 2 s after release */
+  let idleTimer;
+  renderer.domElement.addEventListener('pointerdown', () => {
+    controls.autoRotate = false;
+    clearTimeout(idleTimer);
+  });
+  renderer.domElement.addEventListener('pointerup', () => {
+    idleTimer = setTimeout(() => { controls.autoRotate = true; }, 2200);
+  });
+  /* Block scroll from bubbling up to the slide scroller */
+  renderer.domElement.addEventListener('wheel', e => e.stopPropagation(), { passive: false });
+
+  /* ── Particle sprite texture ── */
+  const particleSprite = makeGlowTexture(128, [
+    [0,    'rgba(255,255,255,1)'],
+    [0.15, 'rgba(195,255,228,0.92)'],
+    [0.42, 'rgba(112,215,168,0.46)'],
+    [0.72, 'rgba(56,152,104,0.13)'],
+    [1,    'rgba(0,0,0,0)'],
+  ]);
+
+  /* ── Build particle geometry ── */
+  const pos    = new Float32Array(GALAXY.PARTICLE_COUNT * 3);
+  const col    = new Float32Array(GALAXY.PARTICLE_COUNT * 3);
+  const cCore  = new THREE.Color(GALAXY.C_CORE);
+  const cMid   = new THREE.Color(GALAXY.C_MID);
+  const cOut   = new THREE.Color(GALAXY.C_OUTER);
+
+  for (let i = 0; i < GALAXY.PARTICLE_COUNT; i++) {
+    let x = 0, y = 0, z = 0;
+    const rng = Math.random();
+
+    if (rng < 0.13) {
+      /* Dense spherical core */
+      const r  = Math.pow(Math.random(), 2.2) * GALAXY.CORE_RADIUS;
+      const th = Math.random() * Math.PI * 2;
+      const ph = Math.acos(2 * Math.random() - 1);
+      x = r * Math.sin(ph) * Math.cos(th);
+      y = r * Math.sin(ph) * Math.sin(th) * 0.38;
+      z = r * Math.cos(ph);
+
+    } else if (rng < 0.88) {
+      /* Ringed disc — particles concentrate around the ring_radii peaks */
+      const ringIdx = Math.floor(Math.random() * GALAXY.RING_RADII.length);
+      const baseR   = GALAXY.RING_RADII[ringIdx];
+      const spread  = (Math.random() - 0.5) * baseR * 0.30;
+      const r       = Math.max(GALAXY.CORE_RADIUS * 1.1, baseR + spread);
+      /* Slight logarithmic spiral for an organic (not perfectly circular) look */
+      const angle   = Math.random() * Math.PI * 2;
+      const spiral  = Math.log(r / GALAXY.CORE_RADIUS + 1) * 0.38;
+      const a       = angle + spiral;
+      x = Math.cos(a) * r;
+      z = Math.sin(a) * r;
+      y = (Math.random() - 0.5) * GALAXY.THICKNESS * Math.exp(-r / GALAXY.RADIUS * 2.6);
+
+    } else {
+      /* Scattered halo — adds the out-of-plane "depth cloud" feel */
+      const r  = GALAXY.CORE_RADIUS + Math.random() * (GALAXY.RADIUS - GALAXY.CORE_RADIUS);
+      const th = Math.random() * Math.PI * 2;
+      const ph = Math.acos(2 * Math.random() - 1);
+      x = r * Math.sin(ph) * Math.cos(th);
+      y = r * Math.sin(ph) * Math.sin(th) * 0.22;
+      z = r * Math.cos(ph);
+    }
+
+    pos[i*3] = x;  pos[i*3+1] = y;  pos[i*3+2] = z;
+
+    /* Color: interpolate core→mid at 40%, mid→outer beyond */
+    const dist  = Math.sqrt(x*x + y*y + z*z);
+    const t     = Math.min(dist / GALAXY.RADIUS, 1);
+    const tA    = Math.min(t / 0.4, 1);
+    const tB    = Math.max((t - 0.4) / 0.6, 0);
+    const blend = new THREE.Color().lerpColors(cCore, cMid, tA).lerp(cOut, tB);
+    const bright = 0.60 + Math.random() * 0.40;
+    col[i*3]   = blend.r * bright;
+    col[i*3+1] = blend.g * bright;
+    col[i*3+2] = blend.b * bright;
+  }
+
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute('color',    new THREE.BufferAttribute(col, 3));
+
+  const mat = new THREE.PointsMaterial({
+    size:            2.1,
+    map:             particleSprite,
+    vertexColors:    true,
+    blending:        THREE.AdditiveBlending,
+    transparent:     true,
+    depthWrite:      false,
+    sizeAttenuation: true,
+  });
+
+  scene.add(new THREE.Points(geo, mat));
+
+  /* ── Bright centre glow sprite ── */
+  const centerGlow = new THREE.Sprite(new THREE.SpriteMaterial({
+    map: makeGlowTexture(256, [
+      [0,    'rgba(240,255,248,1)'],
+      [0.16, 'rgba(168,255,215,0.88)'],
+      [0.38, 'rgba(85,195,145,0.36)'],
+      [0.65, 'rgba(42,140,100,0.09)'],
+      [1,    'rgba(0,0,0,0)'],
+    ]),
+    blending: THREE.AdditiveBlending,
+    transparent: true,
+    depthWrite: false,
+  }));
+  centerGlow.scale.setScalar(62);
+  scene.add(centerGlow);
+
+  /* ── Responsive resize ── */
+  const ro = new ResizeObserver(() => {
+    const w = container.clientWidth, h = container.clientHeight;
+    if (!w || !h) return;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+  });
+  ro.observe(container);
+
+  /* ── Render loop — skips frames when panel is not active ── */
+  const panel2 = document.getElementById('s2-p2');
+  (function animate() {
+    requestAnimationFrame(animate);
+    if (panel2 && !panel2.classList.contains('s2-active')) return;
+    controls.update();
+    renderer.render(scene, camera);
+  })();
+
+  return true;
+}
+
+/* ── Lazy init — wait until panel 2 is first shown ── */
+let inited = false;
+
+function tryInit() {
+  if (inited) return;
+  if (initGalaxy()) { inited = true; return; }
+  /* Container not sized yet (panel hidden) — retry on next rAF */
+  requestAnimationFrame(tryInit);
+}
+
+/* Watch for panel 2 gaining .s2-active so we can init on first show */
+const panel2El = document.getElementById('s2-p2');
+if (panel2El) {
+  const mo = new MutationObserver(() => {
+    if (!inited && panel2El.classList.contains('s2-active')) {
+      /* Small delay so the browser completes layout before we read dimensions */
+      setTimeout(tryInit, 80);
+    }
+  });
+  mo.observe(panel2El, { attributes: true, attributeFilter: ['class'] });
+}
+
+/* Also attempt immediately — covers the edge case where panel 2 starts active */
+setTimeout(tryInit, 120);
+</script>
+
+</body>
+</html>

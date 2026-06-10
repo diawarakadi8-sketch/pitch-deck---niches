@@ -8,27 +8,30 @@
 
 <!-- Playfair Display (editorial serif) + DM Sans (clean body) -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="Talkspace-alternatives.png">
+<link rel="preload" as="image" href="1x/new image 1 slide 1.png">
+<link rel="preload" as="image" href="1x/slide 1 image 2.png">
 <!-- Three.js + OrbitControls (ES module, used by the Panel 2 galaxy) -->
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"}}</script>
 
 <style>
 /* ===========================================
-   CSS CUSTOM PROPERTIES — TALKSPACE PALETTE
+   CSS CUSTOM PROPERTIES TALKSPACE PALETTE
    Warm cream, deep forest green, soft coral.
    Matches talkspace.com visual identity.
    =========================================== */
 :root {
-  /* Core palette — pulled directly from Talkspace.com */
-  --cream:        #F5EEE3;   /* warm off-white — page background */
+  /* Core palette pulled directly from Talkspace.com */
+  --cream:        #F5EEE3;   /* warm off-white page background */
   --cream-light:  #FBF7F2;   /* lighter cream for cards */
-  --forest:       #1C5E52;   /* deep forest green — primary brand */
+  --forest:       #1C5E52;   /* deep forest green primary brand */
   --forest-mid:   #2E7A6A;   /* mid-green for hover / accents */
   --forest-dark:  #133F37;   /* darkest green for high-contrast text */
-  --sage:         #8CB5A7;   /* muted sage — secondary accent */
-  --sage-light:   #C8DDD8;   /* very light sage — borders, tints */
-  --coral:        #E07B5C;   /* warm coral — accent, highlights */
-  --peach:        #F5C4A8;   /* soft peach — card warmth */
-  --peach-light:  #FDF0E8;   /* near-white peach — section tint */
+  --sage:         #8CB5A7;   /* muted sage secondary accent */
+  --sage-light:   #C8DDD8;   /* very light sage borders, tints */
+  --coral:        #E07B5C;   /* warm coral accent, highlights */
+  --peach:        #F5C4A8;   /* soft peach card warmth */
+  --peach-light:  #FDF0E8;   /* near-white peach section tint */
   --warm-white:   #FEFCF8;   /* white with warmth */
   --dark:         #1A2E28;   /* very dark forest for body text */
   --text-muted:   rgba(26,46,40,0.50);
@@ -249,7 +252,7 @@ h3 {
   background: radial-gradient(ellipse, var(--peach) 0%, rgba(224,123,92,0.15) 100%);
 }
 
-/* === FOREST PANEL (replaces teal sweep — used for right panels on dark slides) === */
+/* === FOREST PANEL (replaces teal sweep used for right panels on dark slides) === */
 .forest-panel {
   background: linear-gradient(160deg, var(--forest) 0%, var(--forest-dark) 100%);
   position: relative;
@@ -349,7 +352,7 @@ h3 {
 .slide.visible .stat-fill { transform: scaleX(1); }
 
 /* =============================================
-   SLIDE 2 — STAT CAROUSEL
+   SLIDE 2 STAT CAROUSEL
    ============================================= */
 /* Body: fills space between header and footer */
 .s2-body {
@@ -361,7 +364,7 @@ h3 {
   min-height: 0;
 }
 
-/* Panel container — panels stack on top of each other */
+/* Panel container panels stack on top of each other */
 .s2-panels-wrap {
   flex: 1;
   position: relative;
@@ -607,7 +610,7 @@ h3 {
 }
 
 /* =============================================
-   SLIDE 2 PANEL 2 — 3D GALAXY
+   SLIDE 2 PANEL 2 3D GALAXY
    ============================================= */
 /* Remove padding; let the canvas fill the whole panel */
 .s2-galaxy-panel {
@@ -627,7 +630,7 @@ h3 {
   width: 100% !important;
   height: 100% !important;
 }
-/* Text overlay — left column, readable above the 3D scene */
+/* Text overlay left column, readable above the 3D scene */
 .s2-galaxy-overlay {
   position: absolute;
   inset: 0 auto 0 0;
@@ -699,10 +702,10 @@ h3 {
 }
 
 /* =============================================
-   SLIDE 3 — CARD STACK CONTENT SHOWCASE
+   SLIDE 3 CARD STACK CONTENT SHOWCASE
    ============================================= */
 
-/* CSS custom props for card dimensions — edit these to resize everything */
+/* CSS custom props for card dimensions edit these to resize everything */
 #slide-3 {
   --s3-cw: clamp(155px, 16vw, 230px);
   --s3-ch: clamp(215px, 22vw, 316px);
@@ -979,40 +982,193 @@ h3 {
 .s-approach{ font-size: var(--label-size); color: var(--text-muted); line-height: 1.4; }
 .s-hook    { font-size: var(--label-size); color: var(--forest-mid); font-weight: 500; font-style: italic; line-height: 1.4; }
 
-/* === GROWTH PROJECTIONS === */
-.proj-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(0.75rem,1.5vw,1.25rem);
+/* === SLIDE 6 GROWTH PROJECTIONS === */
+/* === SLIDE 6 GROWTH PROJECTIONS (attribution framework) === */
+.s6-inner {
+  padding: clamp(4rem,8vh,5.5rem) var(--pad) clamp(1.5rem,3vh,2.5rem);
+  justify-content: flex-start;
+  gap: clamp(0.7rem,1.8vh,1.3rem);
 }
-.proj-card {
-  background: var(--cream-light);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: clamp(1rem,2vh,1.75rem) clamp(1rem,2vw,1.6rem);
+.s6-attrib-row {
+  display: grid;
+  grid-template-columns: 0.85fr 1.3fr;
+  gap: clamp(0.75rem,1.5vw,1.5rem);
+  align-items: center;
+}
+.s6-attrib-card {
+  background: var(--forest);
+  border-radius: 18px;
+  padding: clamp(1.2rem,2.5vh,2rem) clamp(1.2rem,2.5vw,2rem);
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.8rem;
+  height: 100%;
+  justify-content: center;
 }
-.proj-label { font-size: var(--label-size); font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }
-.proj-value { font-family: var(--serif); font-size: clamp(1.75rem,3.5vw,3rem); font-weight: 700; color: var(--forest); line-height: 1; }
-.proj-tbd   { font-family: var(--serif); font-size: clamp(1.75rem,3.5vw,3rem); font-weight: 700; color: var(--coral); line-height: 1; }
-.proj-note  { font-size: var(--label-size); color: var(--text-muted); line-height: 1.45; margin-top: 0.2rem; }
-
-/* === NEXT STEPS === */
-.steps-list { display: flex; flex-direction: column; gap: clamp(0.6rem,1.2vh,1rem); }
-.step-item {
+.s6-attrib-formula {
   display: flex;
-  align-items: flex-start;
-  gap: clamp(0.75rem,1.5vw,1.25rem);
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 14px;
-  padding: clamp(0.9rem,1.8vh,1.4rem) clamp(1.2rem,2.4vw,2rem);
+  flex-direction: column;
+  gap: 0.08rem;
 }
-.step-num  { font-family: var(--serif); font-size: clamp(1.25rem,2.5vw,2rem); font-weight: 700; color: rgba(255,255,255,0.9); line-height: 1; min-width: 2ch; }
-.step-text h4 { font-family: var(--serif); font-size: clamp(0.82rem,1.3vw,1.02rem); font-weight: 600; color: var(--warm-white); margin-bottom: 0.25rem; }
-.step-text p  { font-size: var(--small-size); color: var(--text-light); line-height: 1.5; }
+.s6-formula-num {
+  font-family: var(--serif);
+  font-size: clamp(2rem,4.5vw,3.8rem);
+  font-weight: 700;
+  color: #d0ffe8;
+  line-height: 1;
+}
+.s6-formula-div {
+  font-size: var(--body-size);
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.03em;
+}
+.s6-formula-sep {
+  font-family: var(--sans);
+  font-size: var(--label-size);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin: 0.35rem 0 0.15rem;
+}
+.s6-attrib-source {
+  font-size: var(--small-size);
+  color: rgba(255,255,255,0.38);
+  font-style: italic;
+  line-height: 1.45;
+}
+.s6-proj-grid {
+  display: grid;
+  grid-template-columns: 1fr 44px 1fr;
+  gap: clamp(0.5rem,1vw,0.9rem);
+  align-items: center;
+}
+.s6-proj-col {
+  background: var(--cream-light);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: clamp(0.9rem,1.8vh,1.5rem) clamp(0.9rem,1.8vw,1.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+}
+.s6-proj-col--highlight {
+  background: #f0faf5;
+  border-color: var(--sage);
+}
+.s6-proj-label {
+  font-family: var(--sans);
+  font-size: var(--label-size);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+}
+.s6-proj-views {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem,3vw,2.5rem);
+  font-weight: 700;
+  color: var(--forest);
+  line-height: 1;
+}
+.s6-proj-views span,
+.s6-proj-dl span { font-size: var(--small-size); color: var(--text-muted); font-family: var(--sans); font-weight: 400; }
+.s6-proj-eq {
+  font-size: var(--label-size);
+  color: var(--text-muted);
+  margin: 0.3rem 0;
+}
+.s6-proj-dl {
+  font-family: var(--serif);
+  font-size: clamp(1.1rem,2.2vw,1.9rem);
+  font-weight: 700;
+  color: var(--forest-mid);
+  line-height: 1;
+}
+.s6-proj-dl--big { color: var(--coral); font-size: clamp(1.2rem,2.5vw,2.1rem); }
+.s6-proj-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  color: var(--forest);
+  font-family: var(--sans);
+  font-size: var(--small-size);
+  font-weight: 700;
+}
+.s6-niches { display: flex; flex-direction: column; gap: 0.45rem; }
+.s6-niches-label {
+  font-family: var(--sans);
+  font-size: var(--label-size);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.s6-niche-row { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+.s6-niche-badge {
+  background: var(--sage-light);
+  color: var(--forest-dark);
+  border: 1px solid var(--sage);
+  border-radius: 100px;
+  padding: 0.28rem clamp(0.7rem,1.3vw,1rem);
+  font-size: var(--small-size);
+  font-weight: 600;
+}
+
+/* === SLIDE 7 SCALE / TIMELINE === */
+.s7-tl-inner {
+  padding: clamp(4rem,8vh,5.5rem) var(--pad) clamp(1.5rem,3vh,2.5rem);
+  justify-content: flex-start;
+  gap: clamp(0.75rem,2vh,1.5rem);
+}
+.s7-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.s7-timeline::before {
+  content: '';
+  position: absolute;
+  left: clamp(3rem,6vw,5.5rem);
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--sage-light), var(--forest), var(--sage-light));
+  z-index: 0;
+}
+.s7-tl-item {
+  display: grid;
+  grid-template-columns: clamp(3rem,6vw,5.5rem) 26px 1fr;
+  gap: clamp(0.6rem,1.2vw,1.2rem);
+  align-items: center;
+  padding: clamp(0.4rem,0.9vh,0.75rem) 0;
+}
+.s7-tl-date {
+  font-family: var(--sans);
+  font-size: var(--small-size);
+  font-weight: 700;
+  color: var(--forest);
+  text-align: right;
+  white-space: nowrap;
+}
+.s7-tl-dot {
+  width: 11px;
+  height: 11px;
+  background: var(--sage);
+  border: 2.5px solid var(--cream);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--sage);
+  justify-self: center;
+  z-index: 1;
+  flex-shrink: 0;
+}
+.s7-dot--start { background: var(--coral); box-shadow: 0 0 0 2px var(--peach); }
+.s7-dot--end   { background: var(--forest-dark); box-shadow: 0 0 0 2px var(--forest); }
+.s7-tl-text { font-size: var(--body-size); color: var(--dark); line-height: 1.45; }
+.s7-tl-text strong { color: var(--forest); font-weight: 600; }
 
 /* === REVEAL ANIMATIONS === */
 .reveal {
@@ -1194,7 +1350,7 @@ body.edit-active [contenteditable] {
 }
 
 /* ============================================
-   SLIDE 05 v2 — PREMIUM EDITORIAL NICHE PLAYBOOK
+   SLIDE 05 v2 PREMIUM EDITORIAL NICHE PLAYBOOK
    Rebuilt for luxury editorial feel.
    Card is the hero. Tabs are real folders.
    ============================================ */
@@ -1292,7 +1448,7 @@ body.edit-active [contenteditable] {
 /*
   Each tab: border on 3 sides (top/left/right), none on bottom.
   Tabs share a common border-bottom on the container = the "shelf" line.
-  Active tab is taller and rises above the rest — classic folder illusion.
+  Active tab is taller and rises above the rest classic folder illusion.
 */
 .s7-tabs {
   display: flex;
@@ -1318,7 +1474,7 @@ body.edit-active [contenteditable] {
   font-weight: 600;
   letter-spacing: 0.01em;
   cursor: pointer;
-  /* 3-sided border — no bottom */
+  /* 3-sided border no bottom */
   border: 1.5px solid rgba(26,46,40,0.12);
   border-bottom: none;
   /* overlap adjacent borders so they appear shared */
@@ -1411,7 +1567,7 @@ body.edit-active [contenteditable] {
 }
 
 /* ---- THE HERO CARD ---- */
-/* Width drives height via aspect ratio — card scales with viewport width */
+/* Width drives height via aspect ratio card scales with viewport width */
 .s7-card {
   width: clamp(220px, 27vw, 390px);
   height: clamp(308px, calc(100vh - 300px), 560px);
@@ -1429,7 +1585,7 @@ body.edit-active [contenteditable] {
   cursor: none;
   transition: opacity 0.32s ease, transform 0.32s ease;
 }
-/* Directional fade — slides from right on next, from left on prev (JS toggles class) */
+/* Directional fade slides from right on next, from left on prev (JS toggles class) */
 .s7-card.fading { opacity: 0; transform: translateX(18px) scale(0.982); }
 
 /* Image portion (fills upper ~65% of card) */
@@ -1536,13 +1692,13 @@ body.edit-active [contenteditable] {
 }
 
 /* ============================================
-   SLIDE 01 v2 — INTERACTIVE CAMPAIGN MOLECULE
+   SLIDE 01 v2 INTERACTIVE CAMPAIGN MOLECULE
    Left 44%: editorial copy.
    Right 56%: SVG T-shape + metric bubbles.
    ============================================ */
 
 /* =============================================
-   SLIDE 01 — MILLIONS REACHED
+   SLIDE 01 MILLIONS REACHED
    Edit: S1_CONFIG in JS · assets/ for images
    ============================================= */
 
@@ -1680,7 +1836,7 @@ body.edit-active [contenteditable] {
   color: rgba(26,46,40,0.40);
 }
 
-/* ── RIGHT — ORBIT ── */
+/* ── RIGHT ORBIT ── */
 .s1-right {
   flex: 1;
   position: relative;
@@ -1695,7 +1851,7 @@ body.edit-active [contenteditable] {
   pointer-events: none;
 }
 
-/* Orbit container — absolute so the centre-point can be shifted
+/* Orbit container absolute so the centre-point can be shifted
    8 vw leftward: fills the screen without overflowing the right edge,
    and outer items approach (but never cross) the left-panel text. */
 .s1-orbit {
@@ -1725,7 +1881,7 @@ body.edit-active [contenteditable] {
 .s1-orbit-ring:nth-child(2) { width: 58%; height: 58%; border: 1px solid rgba(28,94,82,0.12); transition-delay: 0.32s; }
 .s1-orbit-ring:nth-child(3) { width: 84%; height: 84%; border: 1px solid rgba(28,94,82,0.10); transition-delay: 0.44s; }
 
-/* Hub — 3D floating circular badge */
+/* Hub 3D floating circular badge */
 .s1-hub {
   position: absolute;
   top: 50%; left: calc(50% - 8vw);
@@ -1904,7 +2060,7 @@ body.edit-active [contenteditable] {
   z-index: 0;
 }
 
-/* Portrait card — glass sheen */
+/* Portrait card glass sheen */
 .s1-oi-portrait::after {
   content: '';
   position: absolute;
@@ -1915,13 +2071,16 @@ body.edit-active [contenteditable] {
   border-radius: inherit;
 }
 
-/* Text card — subtle gradient lift */
+/* Text card subtle gradient lift */
 .s1-oi-text {
   background: linear-gradient(140deg, #ffffff 0%, #f6f9f8 100%);
 }
 
 /* Star icon bubble */
-.s1-icon-star { background: var(--forest-mid); }
+.s1-icon-star    { background: var(--forest-mid); }
+.s1-icon-comment { background: #1A2E28; }
+.s1-icon-share   { background: var(--sage); }
+.s1-icon-save    { background: var(--coral); }
 
 /* Stat icons */
 .s1-stat-icon {
@@ -1962,7 +2121,7 @@ body.edit-active [contenteditable] {
   50%       { transform: translateY(5px); }
 }
 
-/* CSS transition delays for new orbit items 12–17 */
+/* CSS transition delays for new orbit items 12-17 */
 #slide-1.visible #s1-oi-12 { transition-delay: 1.14s; }
 #slide-1.visible #s1-oi-13 { transition-delay: 1.20s; }
 #slide-1.visible #s1-oi-14 { transition-delay: 1.26s; }
@@ -1986,7 +2145,7 @@ body.edit-active [contenteditable] {
 </div>
 <div class="edit-hotzone" id="editHotzone"></div>
 <button class="edit-toggle" id="editToggle" title="Toggle edit mode (E)">✏ Edit</button>
-<div class="edit-banner" id="editBanner">Edit mode — click any text &nbsp;·&nbsp; <strong>Ctrl+S</strong> to save &nbsp;·&nbsp; <strong>E</strong> to exit</div>
+<div class="edit-banner" id="editBanner">Edit mode click any text &nbsp;·&nbsp; <strong>Ctrl+S</strong> to save &nbsp;·&nbsp; <strong>E</strong> to exit</div>
 
 
 <!-- =============================================
@@ -2019,7 +2178,7 @@ body.edit-active [contenteditable] {
       <!-- EDITABLE: subhead -->
       <p class="s1-subhead">Turning everyday scrolling into opportunities for awareness and action.</p>
 
-      <!-- EDITABLE: stats — change numbers and labels here -->
+      <!-- EDITABLE: stats change numbers and labels here -->
       <div class="s1-stats-row">
         <div class="s1-stat-item">
           <svg class="s1-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
@@ -2093,7 +2252,7 @@ body.edit-active [contenteditable] {
 
     <div class="s2-panels-wrap" id="s2Wrap">
 
-      <!-- Panel 1 — Live Views Counter -->
+      <!-- Panel 1 Live Views Counter -->
       <div class="s2-panel s2-active" id="s2-p1">
         <div class="s2-hero-split">
           <div class="s2-hero-left">
@@ -2108,11 +2267,11 @@ body.edit-active [contenteditable] {
         </div>
       </div>
 
-      <!-- Panel 2 — Interactive 3D Galaxy (Three.js) -->
+      <!-- Panel 2 Interactive 3D Galaxy (Three.js) -->
       <div class="s2-panel s2-galaxy-panel" id="s2-p2">
         <!-- Three.js renders into this container -->
         <div class="s2-galaxy-canvas" id="s2GalaxyContainer"></div>
-        <!-- Fixed text overlay — editable in HTML -->
+        <!-- Fixed text overlay editable in HTML -->
         <div class="s2-galaxy-overlay">
           <div class="s2-galaxy-section-num">02</div>
           <h2 class="s2-galaxy-headline">This is what<br>scale looks like.</h2>
@@ -2132,17 +2291,17 @@ body.edit-active [contenteditable] {
         </div>
       </div>
 
-      <!-- Panel 3 — Saves -->
+      <!-- Panel 3 Saves -->
       <div class="s2-panel" id="s2-p3">
         <div class="s2-stat-wrap">
           <div class="s2-counter-eyebrow">Saves</div>
           <div class="s2-big-num">199K</div>
-          <div class="s2-stat-context">People don't bookmark content they scroll past — they save what matters. 199K saves signals genuine intent to act.</div>
+          <div class="s2-stat-context">People don't bookmark content they scroll past they save what matters. 199K saves signals genuine intent to act.</div>
           <div class="s2-stat-tag">High purchase intent signal</div>
         </div>
       </div>
 
-      <!-- Panel 4 — Audience Demographics -->
+      <!-- Panel 4 Audience Demographics -->
       <div class="s2-panel" id="s2-p4">
         <div class="s2-stat-wrap">
           <div class="s2-counter-eyebrow">Your Audience</div>
@@ -2154,21 +2313,21 @@ body.edit-active [contenteditable] {
             <div class="s2-audience-divider"></div>
             <div class="s2-audience-stat">
               <div class="s2-audience-num">83%</div>
-              <div class="s2-stat-title">Female 18–34</div>
+              <div class="s2-stat-title">Female 18 34</div>
             </div>
           </div>
-          <div class="s2-stat-context">Exact match to Talkspace's core user profile — this audience isn't adjacent to your customer, it is your customer.</div>
+          <div class="s2-stat-context">Exact match to Talkspace's core user profile this audience isn't adjacent to your customer, it is your customer.</div>
         </div>
       </div>
 
-      <!-- Panel 5 — Velocity -->
+      <!-- Panel 5 Velocity -->
       <div class="s2-panel" id="s2-p5">
         <div class="s2-stat-wrap">
           <div class="s2-counter-eyebrow">Weekly Momentum</div>
           <div class="s2-big-num">2.1M</div>
           <div class="s2-stat-title">Views in the last 7 days</div>
-          <div class="s2-stat-context">The campaign isn't slowing down — it's compounding. At the current trajectory we're projecting ~8.9M views per month.</div>
-          <div class="s2-stat-tag">Not plateauing — accelerating</div>
+          <div class="s2-stat-context">The campaign isn't slowing down it's compounding. At the current trajectory we're projecting ~8.9M views per month.</div>
+          <div class="s2-stat-tag">Not plateauing accelerating</div>
         </div>
       </div>
 
@@ -2190,7 +2349,7 @@ body.edit-active [contenteditable] {
   </div><!-- /s2-body -->
 
   <div class="s-footer">
-    <span class="fn">Confidential — For Talkspace Internal Review</span>
+    <span class="fn">Confidential For Talkspace Internal Review</span>
     <span class="fn">02 / 07</span>
   </div>
 </section>
@@ -2225,7 +2384,7 @@ body.edit-active [contenteditable] {
   </div>
 
   <div class="s-footer">
-    <span class="fn">Confidential &mdash; For Talkspace Internal Review</span>
+    <span class="fn">Confidential For Talkspace Internal Review</span>
     <span class="fn">03 / 07</span>
   </div>
 </section>
@@ -2246,12 +2405,12 @@ body.edit-active [contenteditable] {
 
     <div class="reveal d1">
       <div class="eyebrow" style="margin-bottom:0.5rem;">Where We Scale Next</div>
-      <h2>5 high-signal niches<br>ready for Talkspace.</h2>
+      <h2>5 audience niches.<br><em>One CTA: download the Talkspace App.</em></h2>
     </div>
 
     <div class="niche-grid reveal d2">
 
-      <!-- POSTPARTUM — sage green -->
+      <!-- POSTPARTUM sage green -->
       <div class="niche-card niche-sage">
         <div class="niche-icon">
           <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2267,7 +2426,7 @@ body.edit-active [contenteditable] {
         <div class="niche-why">Hormonal changes, postpartum anxiety, and the quiet loss of identity, a deeply personal chapter Talkspace understands intimately.</div>
       </div>
 
-      <!-- COUPLES — salmon -->
+      <!-- COUPLES salmon -->
       <div class="niche-card niche-salmon">
         <div class="niche-icon">
           <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2284,7 +2443,7 @@ body.edit-active [contenteditable] {
         <div class="niche-why">A distinct Talkspace offering focused on relationship dynamics, communication breakdowns, conflict patterns, and emotional repair.</div>
       </div>
 
-      <!-- VETERANS — sky blue -->
+      <!-- VETERANS sky blue -->
       <div class="niche-card niche-sky">
         <div class="niche-icon">
           <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2297,7 +2456,7 @@ body.edit-active [contenteditable] {
         <div class="niche-why">Service trauma, loss of purpose, and the transition to civilian life. A Talkspace audience that requires expert psychiatric care.</div>
       </div>
 
-      <!-- OVERWHELMED PARENT — butter yellow -->
+      <!-- OVERWHELMED PARENT butter yellow -->
       <div class="niche-card niche-butter">
         <div class="niche-icon">
           <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2310,10 +2469,10 @@ body.edit-active [contenteditable] {
           </svg>
         </div>
         <div class="niche-name">Overwhelmed Parent</div>
-        <div class="niche-why">Ongoing parenting stress, emotional reactivity, and the work of breaking generational cycles. Content centered on the evolving parent-child relationship.</div>
+        <div class="niche-why">Ongoing parenting stress, emotional reactivity, and the work of breaking generational cycles. Content centered on the evolving parent child relationship.</div>
       </div>
 
-      <!-- COST-CONSCIOUS ADULT — lavender, centred in grid -->
+      <!-- COST-CONSCIOUS ADULT lavender, centred in grid -->
       <div class="niche-card niche-lavender" style="grid-column:2;">
         <div class="niche-icon">
           <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2324,7 +2483,7 @@ body.edit-active [contenteditable] {
             <line x1="27" y1="39" x2="27" y2="43" stroke="#1C5E52" stroke-width="2.2" stroke-linecap="round"/>
           </svg>
         </div>
-        <div class="niche-name">Cost-Conscious Anxious / Burnt-Out Adult</div>
+        <div class="niche-name">Cost Conscious Anxious / Burnt Out Adult</div>
         <div class="niche-why">The emotional exhaustion of modern life, anxiety, depression, and burnout met with care that feels accessible for the first time.</div>
       </div>
 
@@ -2333,14 +2492,14 @@ body.edit-active [contenteditable] {
   </div>
 
   <div class="s-footer">
-    <span class="fn">Confidential — For Talkspace Internal Review</span>
+    <span class="fn">Confidential For Talkspace Internal Review</span>
     <span class="fn">04 / 07</span>
   </div>
 </section>
 
 
 <!-- =============================================
-     SLIDE 05 · NICHE STRATEGY — INTERACTIVE PLAYBOOK
+     SLIDE 05 · NICHE STRATEGY INTERACTIVE PLAYBOOK
      Rebuilt v2: premium editorial layout.
      Left: large-type copy. Right: folder tabs + hero card.
      ============================================= -->
@@ -2361,13 +2520,13 @@ body.edit-active [contenteditable] {
         <span class="s7-hl-line1">One strategy,</span>
         <span class="s7-hl-line2">five demographics.</span>
       </div>
-      <p class="s7-body">Same proven formula rooted in platform native storytelling and high frequency publishing, tailored to each niche with precision.</p>
+      <p class="s7-body">Platform native storytelling, high frequency publishing tailored to each niche. Every account drives one single action: <strong>Download the Talkspace App.</strong></p>
     </div>
 
     <!-- RIGHT: folder tabs + carousel (tabs built by JS) -->
     <div class="s7-right" id="s7Right">
 
-      <!-- Folder tabs — built by JS, aligned to bottom (shelf line) -->
+      <!-- Folder tabs built by JS, aligned to bottom (shelf line) -->
       <div class="s7-tabs" id="s7Tabs" role="tablist" aria-label="Niche selector"></div>
 
       <!-- Carousel area: flex-centered -->
@@ -2401,7 +2560,7 @@ body.edit-active [contenteditable] {
   </div>
 
   <div class="s-footer dark-footer">
-    <span class="fn">Confidential — For Talkspace Internal Review</span>
+    <span class="fn">Confidential For Talkspace Internal Review</span>
     <span class="fn">05 / 07</span>
   </div>
 </section>
@@ -2414,11 +2573,70 @@ body.edit-active [contenteditable] {
 
   <div class="s-header">
     <div class="s-brand">Growth Projections</div>
-    <div class="s-tag">What Scaling Looks Like</div>
+    <div class="s-tag">Attribution Backed Scale</div>
+  </div>
+
+  <div class="slide-inner s6-inner">
+
+    <div class="reveal d1">
+      <p class="eyebrow" style="margin-bottom:0.4rem;">Our Attribution Framework</p>
+      <h2>We know exactly what 5&times; the views<br><em>means in downloads.</em></h2>
+    </div>
+
+    <div class="s6-attrib-row reveal d2">
+
+      <div class="s6-attrib-card">
+        <div class="s6-attrib-formula">
+          <span class="s6-formula-num">1</span>
+          <span class="s6-formula-div">app download</span>
+          <span class="s6-formula-sep">per</span>
+          <span class="s6-formula-num">4,500</span>
+          <span class="s6-formula-div">TikTok views</span>
+        </div>
+        <div class="s6-attrib-source">Tested across multiple campaigns consistent, proven conversion rate</div>
+      </div>
+
+      <div class="s6-proj-grid">
+
+        <div class="s6-proj-col">
+          <div class="s6-proj-label">Current</div>
+          <div class="s6-proj-views">8M <span>views / mo</span></div>
+          <div class="s6-proj-eq">&divide;&nbsp;4,500</div>
+          <div class="s6-proj-dl">~1,778 <span>downloads / mo</span></div>
+        </div>
+
+        <div class="s6-proj-arrow">
+          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+            <path d="M3 17h28M21 9l10 8-10 8" stroke="#1C5E52" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>5&times;</span>
+        </div>
+
+        <div class="s6-proj-col s6-proj-col--highlight">
+          <div class="s6-proj-label">5&times; Scale</div>
+          <div class="s6-proj-views">40M <span>views / mo</span></div>
+          <div class="s6-proj-eq">&divide;&nbsp;4,500</div>
+          <div class="s6-proj-dl s6-proj-dl--big">~8,889 <span>downloads / mo</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="s6-niches reveal d3">
+      <div class="s6-niches-label">5 audience niches &middot; 100 accounts each &middot; one CTA: Download the Talkspace App</div>
+      <div class="s6-niche-row">
+        <span class="s6-niche-badge">Postpartum</span>
+        <span class="s6-niche-badge">Couples</span>
+        <span class="s6-niche-badge">Veterans</span>
+        <span class="s6-niche-badge">Overwhelmed Parent</span>
+        <span class="s6-niche-badge">Burnt Out Adult</span>
+      </div>
+    </div>
+
   </div>
 
   <div class="s-footer">
-    <span class="fn">Confidential — For Talkspace Internal Review</span>
+    <span class="fn">Confidential For Talkspace Internal Review</span>
     <span class="fn">06 / 07</span>
   </div>
 </section>
@@ -2431,18 +2649,73 @@ body.edit-active [contenteditable] {
 
   <div class="s-header">
     <div class="s-brand">Scale</div>
-    <div class="s-tag"></div>
+    <div class="s-tag">Execution Timeline</div>
+  </div>
+
+  <div class="slide-inner s7-tl-inner">
+
+    <div class="reveal d1">
+      <p class="eyebrow" style="margin-bottom:0.4rem;">The Path Forward</p>
+      <h2>Aligned, launched, and optimized<br><em>in 12 weeks</em></h2>
+    </div>
+
+    <div class="s7-timeline reveal d2">
+
+      <div class="s7-tl-item">
+        <div class="s7-tl-date">June 12</div>
+        <div class="s7-tl-dot s7-dot--start"></div>
+        <div class="s7-tl-text"><strong>Scaling conversation</strong> align on path forward &amp; send updated contract</div>
+      </div>
+
+      <div class="s7-tl-item">
+        <div class="s7-tl-date">June 17</div>
+        <div class="s7-tl-dot"></div>
+        <div class="s7-tl-text"><strong>Warm 400 new accounts</strong> for 2 weeks + create niche specific content</div>
+      </div>
+
+      <div class="s7-tl-item">
+        <div class="s7-tl-date">July 1</div>
+        <div class="s7-tl-dot"></div>
+        <div class="s7-tl-text"><strong>Start posting</strong> across all accounts 1&times; per day per account</div>
+      </div>
+
+      <div class="s7-tl-item">
+        <div class="s7-tl-date">July 1 15</div>
+        <div class="s7-tl-dot"></div>
+        <div class="s7-tl-text"><strong>Constantly tracking</strong> and iterating on content to optimise accounts</div>
+      </div>
+
+      <div class="s7-tl-item">
+        <div class="s7-tl-date">July 31</div>
+        <div class="s7-tl-dot"></div>
+        <div class="s7-tl-text"><strong>Scale posting</strong> to 2 3&times; per day per account</div>
+      </div>
+
+      <div class="s7-tl-item">
+        <div class="s7-tl-date">Aug 15</div>
+        <div class="s7-tl-dot"></div>
+        <div class="s7-tl-text"><strong>Audience analysis</strong> + attribution metrics produced by end of month</div>
+      </div>
+
+      <div class="s7-tl-item">
+        <div class="s7-tl-date">Aug 31</div>
+        <div class="s7-tl-dot s7-dot--end"></div>
+        <div class="s7-tl-text"><strong>Determine</strong> which audiences to scale / remove + suggest additional testing</div>
+      </div>
+
+    </div>
+
   </div>
 
   <div class="s-footer">
-    <span class="fn">Confidential &mdash; For Talkspace Internal Review</span>
+    <span class="fn">Confidential For Talkspace Internal Review</span>
     <span class="fn">07 / 07</span>
   </div>
 </section>
 
 
 <!-- ===========================================
-     JAVASCRIPT — PRESENTATION CONTROLLER
+     JAVASCRIPT PRESENTATION CONTROLLER
      =========================================== -->
 <script>
 class SlidePresentation {
@@ -2466,7 +2739,7 @@ class SlidePresentation {
     setTimeout(() => this.slides[0]?.classList.add('visible'), 80);
   }
 
-  /* Intersection Observer — adds .visible to trigger CSS animations */
+  /* Intersection Observer adds .visible to trigger CSS animations */
   setupObserver() {
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => {
@@ -2515,9 +2788,10 @@ class SlidePresentation {
   setupWheel() {
     document.addEventListener('wheel', e => {
       if (this.isScrolling) return;
+      if (Math.abs(e.deltaY) < 20) return;
       this.isScrolling = true;
       this.go(this.current + (e.deltaY > 0 ? 1 : -1));
-      setTimeout(() => { this.isScrolling = false; }, 820);
+      setTimeout(() => { this.isScrolling = false; }, 1050);
     }, { passive: true });
   }
 
@@ -2631,7 +2905,7 @@ class InlineEditor {
 }
 
 /* ============================================
-   NICHE PLAYBOOK — Slide 7 interactive logic.
+   NICHE PLAYBOOK Slide 7 interactive logic.
    Tab clicks update background + carousel content.
    Arrows + dots control carousel per niche.
    ============================================ */
@@ -2649,10 +2923,10 @@ function initNichePlaybook() {
       slideBg: '#EEF6F1',
       slides: [
         { img: '1x/page 1 postpartum.png', grad: 'linear-gradient(160deg,#C8E6D8,#8CB5A7)', headline: "Postpartum isn't\njust tired.", sub: "It's a mental load no one\ntalks about.", cta: "You're not alone." },
-        { grad: 'linear-gradient(160deg,#B0D4BE,#6FA888)', headline: "Nobody warned me\nabout this part.", sub: "New motherhood can feel\nlike losing yourself.", cta: "Start talking." },
-        { img: CDN+'695d5179162245c581a3ec76_c4ac7a056a2c534f5e96398b3e8f6d08_Darianny.png', grad: 'linear-gradient(160deg,#C8E6D8,#8CB5A7)', headline: "Postpartum anxiety\nis real.", sub: "More common than you think —\nand very treatable.", cta: "Learn more." },
-        { grad: 'linear-gradient(160deg,#D2EADE,#90C4A2)', headline: "I thought it would\nget easier.", sub: "Therapy helped me find\nmyself again.", cta: "Try Talkspace." },
-        { grad: 'linear-gradient(160deg,#B8DCC8,#78AE8E)', headline: "Your feelings matter\ntoo, mama.", sub: "Support made for the\nseason you're in.", cta: "Get started." },
+        { img: 'slides in deck/postpartm/1x/page 2.png', grad: 'linear-gradient(160deg,#C8E6D8,#8CB5A7)', headline: "", sub: "", cta: "" },
+        { img: 'slides in deck/postpartm/1x/Page 3.png', grad: 'linear-gradient(160deg,#C8E6D8,#8CB5A7)', headline: "", sub: "", cta: "" },
+        { img: 'slides in deck/postpartm/1x/Page 4.png', grad: 'linear-gradient(160deg,#C8E6D8,#8CB5A7)', headline: "", sub: "", cta: "" },
+        { img: 'slides in deck/postpartm/1x/page 5.png', grad: 'linear-gradient(160deg,#C8E6D8,#8CB5A7)', headline: "", sub: "", cta: "" },
       ]
     },
     {
@@ -2661,10 +2935,10 @@ function initNichePlaybook() {
       slideBg: '#FDF2EC',
       slides: [
         { img: '1x/slide 1 couples.png', grad: 'linear-gradient(160deg,#F5C9B8,#D87060)', headline: "The argument is\nnot the problem.", sub: "It's the pattern\nunderneath it.", cta: "Couples therapy, online." },
-        { grad: 'linear-gradient(160deg,#F0C0A8,#CC7050)', headline: "We kept having\nthe same fight.", sub: "Until we finally\nlearned why.", cta: "Start together." },
-        { img: CDN+'695d5179162245c581a3ec82_874066c797a6b4f689060b3242a5dc57_Meghan.png', grad: 'linear-gradient(160deg,#F5C9B8,#D87060)', headline: "Communication is\na practice.", sub: "Not a skill you either\nhave or don't.", cta: "Begin now." },
-        { grad: 'linear-gradient(160deg,#F8D0BC,#E08870)', headline: "Repair is possible.", sub: "Even after the\nhardest conversations.", cta: "Talk to us." },
-        { grad: 'linear-gradient(160deg,#F0BCAC,#C86858)', headline: "This isn't\nabout blame.", sub: "It's about building\nsomething better.", cta: "Learn how." },
+        { img: 'slides in deck/couples/page 1.png', grad: 'linear-gradient(160deg,#F0C0A8,#CC7050)', headline: "", sub: "", cta: "" },
+        { img: 'slides in deck/couples/page 2.png', grad: 'linear-gradient(160deg,#F5C9B8,#D87060)', headline: "", sub: "", cta: "" },
+        { img: 'slides in deck/couples/page 3.png', grad: 'linear-gradient(160deg,#F8D0BC,#E08870)', headline: "", sub: "", cta: "" },
+        { img: 'slides in deck/couples/page 4.png', grad: 'linear-gradient(160deg,#F0BCAC,#C86858)', headline: "", sub: "", cta: "" },
       ]
     },
     {
@@ -2672,11 +2946,11 @@ function initNichePlaybook() {
       tabColor: '#C5D8F0',
       slideBg: '#EBF2FA',
       slides: [
-        { img: CDN+'695d5179162245c581a3ec85_da7ea0d5dea193a28bf7a95cb667fbda_Sal.png', grad: 'linear-gradient(160deg,#C5D8F0,#6898CC)', headline: "Coming home is\nits own transition.", sub: "We're here for that\npart too.", cta: "Veteran support." },
-        { grad: 'linear-gradient(160deg,#B8CCE8,#5888BA)', headline: "What I wish I'd\nhad when I got home.", sub: "Confidential. Accessible.\nOn your terms.", cta: "Start now." },
-        { grad: 'linear-gradient(160deg,#C8D8F0,#7090C4)', headline: "Service changes you.", sub: "Processing it doesn't\nmake you weak.", cta: "Talk to someone." },
-        { grad: 'linear-gradient(160deg,#AABEDD,#5070B8)', headline: "Mission: mental health.", sub: "For those who gave\neverything.", cta: "Get started." },
-        { grad: 'linear-gradient(160deg,#C5D8F0,#6898CC)', headline: "You served.\nNow let us support you.", sub: "Talkspace for veterans —\nnew start, same strength.", cta: "Learn more." },
+        { img: 'slides in deck/Veterans/1x/page 1_1.png', grad: 'linear-gradient(160deg,#C5D8F0,#6898CC)', headline: "", sub: "", cta: "" },
+        { img: 'slides in deck/Veterans/1x/page 2_2.png', grad: 'linear-gradient(160deg,#B8CCE8,#5888BA)', headline: "", sub: "", cta: "" },
+        { img: 'slides in deck/Veterans/1x/page 3_1.png', grad: 'linear-gradient(160deg,#C8D8F0,#7090C4)', headline: "", sub: "", cta: "" },
+        { img: 'slides in deck/Veterans/1x/page 4_1.png', grad: 'linear-gradient(160deg,#AABEDD,#5070B8)', headline: "", sub: "", cta: "" },
+        { img: 'slides in deck/Veterans/1x/page 5_2.png', grad: 'linear-gradient(160deg,#C5D8F0,#6898CC)', headline: "", sub: "", cta: "" },
       ]
     },
     {
@@ -2684,23 +2958,23 @@ function initNichePlaybook() {
       tabColor: '#F5E8BE',
       slideBg: '#FAF4E0',
       slides: [
-        { img: CDN+'695d5179162245c581a3ec79_acc25f9cd604b044fb5f9e49d11dfeb3_Julie.png', grad: 'linear-gradient(160deg,#F5E8BE,#C8A450)', headline: "I caught myself\nyelling again.", sub: "And finally did\nsomething about it.", cta: "Break the cycle." },
-        { grad: 'linear-gradient(160deg,#F0E0A8,#C09040)', headline: "I don't want to parent\nlike I was parented.", sub: "Talkspace helps you\nchange the pattern.", cta: "Start talking." },
-        { grad: 'linear-gradient(160deg,#F5E4C0,#CCA858)', headline: "Parenting is hard.\nBeing triggered is harder.", sub: "Support for the moments\nthat matter most.", cta: "Get started." },
-        { grad: 'linear-gradient(160deg,#ECD8A8,#BC9838)', headline: "My kids deserve\nmy best self.", sub: "So do I.", cta: "Begin today." },
-        { grad: 'linear-gradient(160deg,#F5E8BE,#C8A450)', headline: "Reactivity isn't\nwho you are.", sub: "It's what you learned.\nYou can unlearn it.", cta: "Learn more." },
+        { img: 'slides in deck/parents/1x/page 1.png', grad: 'linear-gradient(160deg,#F5E8BE,#C8A450)', headline: "", sub: "", cta: "" },
+        { img: 'slides in deck/parents/1x/page 2_1.png', grad: 'linear-gradient(160deg,#F0E0A8,#C09040)', headline: "", sub: "", cta: "" },
+        { img: 'slides in deck/parents/1x/page 3.png', grad: 'linear-gradient(160deg,#F5E4C0,#CCA858)', headline: "", sub: "", cta: "" },
+        { img: 'slides in deck/parents/1x/page 4.png', grad: 'linear-gradient(160deg,#ECD8A8,#BC9838)', headline: "", sub: "", cta: "" },
+        { img: 'slides in deck/parents/1x/page 5_1.png', grad: 'linear-gradient(160deg,#F5E8BE,#C8A450)', headline: "", sub: "", cta: "" },
       ]
     },
     {
-      name: 'Burnt-Out Adult',
+      name: 'Burnt Out Adult',
       tabColor: '#D8CCED',
       slideBg: '#F0EBF7',
       slides: [
-        { img: CDN+'69779e15cb30adf1f55864f3_Individual.avif', grad: 'linear-gradient(160deg,#D8CCED,#8878B8)', headline: "I finally started\ntherapy.", sub: "Here's what stopped\nme before.", cta: "Try Talkspace." },
-        { grad: 'linear-gradient(160deg,#CCB8E8,#7868A8)', headline: "Burnout isn't just\nbeing tired.", sub: "It's your whole system\nshutting down.", cta: "Get support." },
-        { img: CDN+'695d5179162245c581a3ec73_bbff073fb101da4590f8e53cd8949b77_Sidney.png', grad: 'linear-gradient(160deg,#D8CCED,#8878B8)', headline: "Therapy used to feel\nout of reach.", sub: "Talkspace starts\nat $69/week.", cta: "See plans." },
-        { grad: 'linear-gradient(160deg,#C8B8E0,#7868A8)', headline: "Anxiety doesn't\nhave to run your life.", sub: "Online therapy.\nNo waitlist.", cta: "Start today." },
-        { grad: 'linear-gradient(160deg,#D8CCED,#A898CC)', headline: "One session changed\neverything.", sub: "Real people.\nReal results.", cta: "Begin now." },
+        { img: 'slides in deck/burnout adults/cover page.png', grad: 'linear-gradient(160deg,#D8CCED,#8878B8)', headline: "", sub: "", cta: "" },
+        { img: 'slides in deck/burnout adults/page 1.png', grad: 'linear-gradient(160deg,#CCB8E8,#7868A8)', headline: "", sub: "", cta: "" },
+        { img: 'slides in deck/burnout adults/page 2.png', grad: 'linear-gradient(160deg,#D8CCED,#8878B8)', headline: "", sub: "", cta: "" },
+        { img: 'slides in deck/burnout adults/page 3.png', grad: 'linear-gradient(160deg,#C8B8E0,#7868A8)', headline: "", sub: "", cta: "" },
+        { img: 'slides in deck/burnout adults/page 4.png', grad: 'linear-gradient(160deg,#D8CCED,#A898CC)', headline: "", sub: "", cta: "" },
       ]
     },
   ];
@@ -2717,9 +2991,9 @@ function initNichePlaybook() {
   const prevBtn = document.getElementById('s7Prev');
   const nextBtn = document.getElementById('s7Next');
 
-  /* ---- Per-niche icons — same SVG paths used in slide 6 niche cards ---- */
+  /* ---- Per-niche icons same SVG paths used in slide 6 niche cards ---- */
   const nicheIcons = [
-    /* Postpartum — hands cradling a heart */
+    /* Postpartum hands cradling a heart */
     `<svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M27 34s-12-7-12-16a8 8 0 0116 0 8 8 0 0116 0c0 9-20 16-20 16z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M10 36c-3 1.5-6 3-9 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -2727,7 +3001,7 @@ function initNichePlaybook() {
       <path d="M6 30c-1.5 1.5-4 4-5 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       <path d="M48 30c1.5 1.5 4 4 5 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
     </svg>`,
-    /* Couples — two overlapping speech bubbles */
+    /* Couples two overlapping speech bubbles */
     `<svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M4 6h22c1.1 0 2 .9 2 2v13c0 1.1-.9 2-2 2H10l-6 5V23H4c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
       <circle cx="11" cy="13" r="1.8" fill="currentColor"/>
@@ -2736,12 +3010,12 @@ function initNichePlaybook() {
       <circle cx="36" cy="25" r="1.8" fill="currentColor"/>
       <circle cx="43" cy="25" r="1.8" fill="currentColor"/>
     </svg>`,
-    /* Veterans — shield with star */
+    /* Veterans shield with star */
     `<svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M27 4L5 14v16c0 12 10 20 22 22 12-2 22-10 22-22V14L27 4z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
       <polygon points="27,16 29.5,23.5 37.5,23.5 31,28 33.5,36 27,31 20.5,36 23,28 16.5,23.5 24.5,23.5" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
     </svg>`,
-    /* Parents — adult + child figures */
+    /* Parents adult + child figures */
     `<svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="20" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/>
       <path d="M8 48V36c0-6.5 5-11 12-11s12 4.5 12 11v12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
@@ -2749,7 +3023,7 @@ function initNichePlaybook() {
       <path d="M33 48V38c0-4 2.5-6.5 6-6.5s6 2.5 6 6.5v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       <path d="M20 25v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
     </svg>`,
-    /* Burnt-Out Adult — open padlock */
+    /* Burnt-Out Adult open padlock */
     `<svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M19 24V17a8 8 0 0116 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
       <rect x="12" y="24" width="30" height="22" rx="4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
@@ -2857,7 +3131,7 @@ function initNichePlaybook() {
     updateCard(1); /* always enters from right when switching niches */
   }
 
-  /* ---- Arrow clicks — stopPropagation prevents slide navigation ---- */
+  /* ---- Arrow clicks stopPropagation prevents slide navigation ---- */
   prevBtn.addEventListener('click', e => {
     e.stopPropagation();
     const len = niches[activeNiche].slides.length;
@@ -2889,14 +3163,14 @@ function initNichePlaybook() {
 }
 
 /* ===========================================
-   SLIDE 01 — INTERACTIVE CAMPAIGN MOLECULE
+   SLIDE 01 INTERACTIVE CAMPAIGN MOLECULE
    Bubbles are clickable; insight pill updates
    with context about the selected metric.
    =========================================== */
 function initCampaignGraph() {
   const insights = {
-    views:      'Consistent publishing is compounding into real reach — 34.4M views and accelerating.',
-    engagement: 'The audience isn\'t just watching — they\'re actively responding. 2× the industry average.',
+    views:      'Consistent publishing is compounding into real reach 34.4M views and accelerating.',
+    engagement: 'The audience isn\'t just watching they\'re actively responding. 2× the industry average.',
     saves:      '199K saves means people are returning to this content. High purchase intent signal.'
   };
 
@@ -2945,21 +3219,21 @@ function initCampaignGraph() {
 }
 
 /* ===========================================
-   SLIDE 01 — WATERCOLOR ATMOSPHERE
+   SLIDE 01 WATERCOLOR ATMOSPHERE
    Cursor moves over the graph → nearby atmospheric
    blobs drift toward it with spring damping.
 
    Spring model per blob:
      vel = vel × damping + (target − pos) × stiffness
      pos += vel
-   High damping (0.87–0.94) = slow, fluid, delayed.
-   Low stiffness (0.004–0.011) = soft, not snappy.
+   High damping (0.87-0.94) = slow, fluid, delayed.
+   Low stiffness (0.004-0.011) = soft, not snappy.
 
    Only the 8 atmospheric blob groups move.
    Core structure, rings, and metric bubbles are static.
    =========================================== */
 /* =============================================
-   SLIDE 01 — ORBIT SYSTEM
+   SLIDE 01 ORBIT SYSTEM
    ─────────────────────────────────────────────
    EDITABLE CONTENT: Change S1_CONFIG to update
    text, stats, card copy, images, and orbit
@@ -2968,9 +3242,8 @@ function initCampaignGraph() {
 
 // ── CONTENT CONFIG (edit here) ──────────────────
 const S1_CONFIG = {
-  orbitItems: [
-    // ── FOREGROUND (scale 1.15–1.35) ─────────────────────────────────────
-    // Mid-tier ring (r 0.38–0.47) — well spread, 40°+ between same-tier items
+    orbitItems: [
+    // FOREGROUND
     {
       id: 's1-oi-1', type: 'portrait',
       img: '1x/new image 1 slide 1.png',
@@ -2985,61 +3258,17 @@ const S1_CONFIG = {
       views: '676K views',
       r: 0.42, angle: 70, speed: 7, scale: 1.20, rotZ: 4
     },
+    // MID LAYER
     {
-      id: 's1-oi-2', type: 'text',
-      tag: 'Community',
-      head: "You're not alone.\nYou'll find your people.",
-      sub: '',
-      views: '↑ 1.4M views',
-      r: 0.44, angle: -45, speed: 7, scale: 1.18, rotZ: 3
-    },
-
-    // ── MID LAYER (scale 0.95–1.05) ──────────────────────────────────────
-    {
-      id: 's1-oi-3', type: 'text',
-      tag: 'Anxiety',
-      head: "It's more common\nthan you think.",
-      sub: '',
-      views: '↑ 890K views',
-      r: 0.47, angle: 15, speed: 5, scale: 1.00, rotZ: -6
-    },
-    {
-      id: 's1-oi-6', type: 'text',
-      tag: 'Identity',
-      head: "It's okay to take up\nspace in your story.",
-      sub: '',
-      views: '↑ 27K saves',
-      r: 0.46, angle: 130, speed: 7, scale: 0.98, rotZ: 7
-    },
-    {
-      id: 's1-oi-7', type: 'text',
-      tag: 'Dr. Ellie',
-      head: "Therapy isn't\njust for “crazy”.",
-      sub: '',
-      views: '↑ 540K views',
-      r: 0.40, angle: 175, speed: 7, scale: 1.02, rotZ: -4
-    },
-    {
-      id: 's1-oi-12', type: 'text',
-      tag: 'Mindfulness',
-      head: "Pause. Breathe.\nYou've got this.",
-      sub: '',
-      views: '↑ 312K views',
-      r: 0.44, angle: 218, speed: 6, scale: 0.96, rotZ: 5
-    },
-    // Inner-ring avatars & icons (r 0.24–0.34) — every ~60° in this tier
-    {
-      id: 's1-oi-8', type: 'avatar',
-      img: 'assets/avatars/avatar-03.jpg',
+      id: 's1-oi-8', type: 'icon', icon: 'comment',
       r: 0.33, angle: 195, speed: 5, scale: 1.00, rotZ: 0
     },
     {
-      id: 's1-oi-9', type: 'avatar',
-      img: 'assets/avatars/avatar-04.jpg',
+      id: 's1-oi-9', type: 'icon', icon: 'save',
       r: 0.28, angle: 290, speed: 9, scale: 0.98, rotZ: 0
     },
     {
-      id: 's1-oi-4',  type: 'icon', icon: 'tiktok',
+      id: 's1-oi-4', type: 'icon', icon: 'tiktok',
       r: 0.30, angle: 30, speed: 7, scale: 1.00, rotZ: 0
     },
     {
@@ -3050,50 +3279,25 @@ const S1_CONFIG = {
       id: 's1-oi-11', type: 'icon', icon: 'play',
       r: 0.32, angle: 110, speed: 7, scale: 1.00, rotZ: 0
     },
-
-    // ── BACKGROUND LAYER (scale 0.65–0.85) — outer ring (r 0.49–0.54) ───
-    // Every ~90° so they frame the orbit without crowding
+    // BACKGROUND LAYER
     {
-      id: 's1-oi-13', type: 'avatar',
-      img: 'assets/avatars/avatar-05.jpg',
+      id: 's1-oi-13', type: 'icon', icon: 'share',
       r: 0.52, angle: 50, speed: 5, scale: 0.72, rotZ: 0
     },
     {
-      id: 's1-oi-14', type: 'avatar',
-      img: 'assets/avatars/avatar-06.jpg',
+      id: 's1-oi-14', type: 'icon', icon: 'comment',
       r: 0.49, angle: 145, speed: 6, scale: 0.68, rotZ: 0
     },
     {
-      id: 's1-oi-17', type: 'text',
-      tag: 'Growth',
-      head: "Progress,\nnot perfection.",
-      sub: '',
-      views: '↑ 188K views',
-      r: 0.53, angle: 230, speed: 5, scale: 0.78, rotZ: -8
-    },
-    {
-      id: 's1-oi-15', type: 'avatar',
-      img: 'assets/avatars/avatar-07.jpg',
+      id: 's1-oi-15', type: 'icon', icon: 'save',
       r: 0.51, angle: 330, speed: 7, scale: 0.75, rotZ: 0
     },
-    // Inner-ring background icons — fill gaps left by mid-tier
     {
       id: 's1-oi-16', type: 'icon', icon: 'star',
       r: 0.28, angle: 250, speed: 8, scale: 0.75, rotZ: 15
     },
-    // Three additional cards — fill largest remaining angular gaps
     {
-      id: 's1-oi-18', type: 'text', tag: 'Healing',
-      head: "Healing looks\ndifferent for everyone.", views: '↑ 224K views',
-      r: 0.41, angle: 350, speed: 6, scale: 1.01, rotZ: 4
-    },
-    {
-      id: 's1-oi-19', type: 'text', tag: 'Growth',
-      head: "Your growth\nis real.", views: '↑ 96K saves',
-      r: 0.51, angle: 272, speed: 5, scale: 0.76, rotZ: -5
-    },
-    {
-      id: 's1-oi-20', type: 'avatar', img: 'assets/avatars/avatar-08.jpg',
+      id: 's1-oi-20', type: 'icon', icon: 'share',
       r: 0.31, angle: 88, speed: 8, scale: 1.00, rotZ: 0
     },
   ]
@@ -3168,11 +3372,17 @@ function s1BuildItem(cfg) {
       tiktok: `<svg width="55%" viewBox="0 0 24 24" fill="#fff"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>`,
       heart:  `<svg width="52%" viewBox="0 0 24 24" fill="#E07B5C"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`,
       play:   `<svg width="48%" viewBox="0 0 24 24" fill="rgba(255,255,255,0.92)"><path d="M8 5v14l11-7z"/></svg>`,
-      star:   `<svg width="54%" viewBox="0 0 24 24" fill="rgba(255,255,255,0.90)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`
+      star:    `<svg width="54%" viewBox="0 0 24 24" fill="rgba(255,255,255,0.90)"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`,
+      comment: `<svg width="52%" viewBox="0 0 24 24" fill="rgba(255,255,255,0.92)"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>`,
+      share:   `<svg width="50%" viewBox="0 0 24 24" fill="rgba(255,255,255,0.92)"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.48-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z"/></svg>`,
+      save:    `<svg width="46%" viewBox="0 0 24 24" fill="rgba(255,255,255,0.92)"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>`
     };
-    const cls = cfg.icon === 'tiktok' ? 's1-icon-tiktok'
-      : cfg.icon === 'heart' ? 's1-icon-heart'
-      : cfg.icon === 'star'  ? 's1-icon-star'
+    const cls = cfg.icon === 'tiktok'   ? 's1-icon-tiktok'
+      : cfg.icon === 'heart'   ? 's1-icon-heart'
+      : cfg.icon === 'star'    ? 's1-icon-star'
+      : cfg.icon === 'comment' ? 's1-icon-comment'
+      : cfg.icon === 'share'   ? 's1-icon-share'
+      : cfg.icon === 'save'    ? 's1-icon-save'
       : 's1-icon-play';
     return `<div id="${cfg.id}" class="s1-oi s1-oi-icon ${cls}" data-r="${cfg.r}" data-angle="${cfg.angle}" data-speed="${cfg.speed}" data-scale="${cfg.scale}" style="width:${sz};height:${sz}">${iconSvg[cfg.icon] || ''}</div>`;
   }
@@ -3238,8 +3448,13 @@ function initOrbit() {
 
       const rad    = item.angle * Math.PI / 180;
       const r      = halfSize * item.cfg.r;
+      // Each ring orbits a differently-shaped ellipse so cards at similar
+      // angles on different rings travel at different screen heights
+      const yScale = item.cfg.r <= 0.33 ? 0.82
+        : item.cfg.r <= 0.44 ? 0.65
+        : 0.48;
       const x      = Math.cos(rad) * r;
-      const y      = Math.sin(rad) * r;
+      const y      = Math.sin(rad) * r * yScale;
       const scale  = item.hovered ? item.cfg.scale * 1.12 : item.cfg.scale;
       const tz     = s1TZ(item.cfg.scale, item.hovered);
 
@@ -3278,7 +3493,7 @@ function initOrbit() {
 }
 
 /* =============================================
-   SLIDE 2 — STAT CAROUSEL + LIVE COUNTER
+   SLIDE 2 STAT CAROUSEL + LIVE COUNTER
    ============================================= */
 (function initS2() {
   const slide2   = document.getElementById('slide-2');
@@ -3365,13 +3580,13 @@ function initOrbit() {
     /* Reset display to start value */
     if (counterEl) counterEl.textContent = fmtNum(COUNTER_START);
 
-    /* Animate from start to end over ~20 s (ease-out cubic) */
+    /* Animate from start to end over ~50 s (gentle ease-out) */
     const START_TS = performance.now();
-    const DURATION = 20000;
+    const DURATION = 50000;
 
     function tick(now) {
       const t     = Math.min((now - START_TS) / DURATION, 1);
-      const eased = 1 - Math.pow(1 - t, 3);
+      const eased = 1 - Math.pow(1 - t, 1.8);
       const val   = Math.round(COUNTER_START + eased * (COUNTER_END - COUNTER_START));
       if (counterEl) counterEl.textContent = fmtNum(val);
       if (t < 1) counterRaf = requestAnimationFrame(tick);
@@ -3390,10 +3605,10 @@ function initOrbit() {
 })();
 
 /* =============================================
-   SLIDE 3 — CARD STACK SHOWCASE
+   SLIDE 3 CARD STACK SHOWCASE
    ============================================= */
 
-/* ── Content config — edit cards/creators/paths freely ── */
+/* ── Content config edit cards/creators/paths freely ── */
 const S3_CONFIG = {
   stacks: [
     {
@@ -3467,14 +3682,22 @@ function initS3() {
     stackEl.className = 's3-stack';
     stackEl.id = `s3Stack${si}`;
 
-    /* Build card elements */
-    const els = cfg.cards.map(path => {
+    /* Build card elements only first 4 images load immediately */
+    const els = cfg.cards.map((path, idx) => {
       const card = document.createElement('div');
       card.className = `s3-card s3-ph-${cfg.placeholder}`;
-      card.style.backgroundImage = `url('${path}')`;
+      card.dataset.src = path;
+      if (idx < 4) card.style.backgroundImage = `url('${path}')`;
       stackEl.appendChild(card);
       return card;
     });
+
+    function s3LoadCard(idx) {
+      const card = els[idx];
+      if (card && !card.style.backgroundImage && card.dataset.src) {
+        card.style.backgroundImage = `url('${card.dataset.src}')`;
+      }
+    }
 
     /* State: order[0] is always the index of the current top card */
     const state = { order: els.map((_, i) => i), busy: false };
@@ -3531,6 +3754,9 @@ function initS3() {
         /* Rotate queue: top goes to back */
         state.order.push(state.order.shift());
 
+        /* Pre-load the card that's about to enter the visible zone */
+        s3LoadCard(state.order[MAX_DEPTH]);
+
         /* Instantly park the recycled card at the back position, no transition */
         const recycledCard = els[state.order[state.order.length - 1]];
         recycledCard.style.transition = 'none';
@@ -3554,6 +3780,8 @@ function initS3() {
 
       /* Move last card to front */
       state.order.unshift(state.order.pop());
+      /* Pre-load new top card */
+      s3LoadCard(state.order[0]);
       const newTopCard = els[state.order[0]];
 
       /* Instantly position new top card off-screen left */
@@ -3623,7 +3851,7 @@ new SlidePresentation();
 new InlineEditor();
 
 /* ===========================================
-   T-CURSOR — square morphs to outlined T on hover
+   T-CURSOR square morphs to outlined T on hover
    Matches Talkspace.com's signature hover effect
    =========================================== */
 (function() {
@@ -3654,7 +3882,7 @@ new InlineEditor();
 </script>
 
 <!-- =============================================
-     SLIDE 2 PANEL 2 — THREE.JS PARTICLE GALAXY
+     SLIDE 2 PANEL 2 THREE.JS PARTICLE GALAXY
      ES module; runs independently of the main script block.
      ============================================= -->
 <script type="module">
@@ -3688,7 +3916,7 @@ function makeGlowTexture(size, stops) {
   return new THREE.CanvasTexture(canvas);
 }
 
-/* ── Main init — called once container has real dimensions ── */
+/* ── Main init called once container has real dimensions ── */
 function initGalaxy() {
   const container = document.getElementById('s2GalaxyContainer');
   if (!container) return false;
@@ -3701,7 +3929,7 @@ function initGalaxy() {
   scene.background = new THREE.Color(GALAXY.BG);
   scene.fog = new THREE.FogExp2(GALAXY.BG, 0.0028);
 
-  /* Camera — slightly above and back for a cinematic tilt */
+  /* Camera slightly above and back for a cinematic tilt */
   const camera = new THREE.PerspectiveCamera(62, W / H, 0.5, 1400);
   camera.position.set(0, 72, 188);
 
@@ -3711,7 +3939,7 @@ function initGalaxy() {
   renderer.setSize(W, H);
   container.appendChild(renderer.domElement);
 
-  /* OrbitControls — drag to rotate, scroll to zoom */
+  /* OrbitControls drag to rotate, scroll to zoom */
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping    = true;
   controls.dampingFactor    = 0.05;
@@ -3763,7 +3991,7 @@ function initGalaxy() {
       z = r * Math.cos(ph);
 
     } else if (rng < 0.88) {
-      /* Ringed disc — particles concentrate around the ring_radii peaks */
+      /* Ringed disc particles concentrate around the ring_radii peaks */
       const ringIdx = Math.floor(Math.random() * GALAXY.RING_RADII.length);
       const baseR   = GALAXY.RING_RADII[ringIdx];
       const spread  = (Math.random() - 0.5) * baseR * 0.30;
@@ -3777,7 +4005,7 @@ function initGalaxy() {
       y = (Math.random() - 0.5) * GALAXY.THICKNESS * Math.exp(-r / GALAXY.RADIUS * 2.6);
 
     } else {
-      /* Scattered halo — adds the out-of-plane "depth cloud" feel */
+      /* Scattered halo adds the out-of-plane "depth cloud" feel */
       const r  = GALAXY.CORE_RADIUS + Math.random() * (GALAXY.RADIUS - GALAXY.CORE_RADIUS);
       const th = Math.random() * Math.PI * 2;
       const ph = Math.acos(2 * Math.random() - 1);
@@ -3842,7 +4070,7 @@ function initGalaxy() {
   });
   ro.observe(container);
 
-  /* ── Render loop — skips frames when panel is not active ── */
+  /* ── Render loop skips frames when panel is not active ── */
   const panel2 = document.getElementById('s2-p2');
   (function animate() {
     requestAnimationFrame(animate);
@@ -3854,13 +4082,13 @@ function initGalaxy() {
   return true;
 }
 
-/* ── Lazy init — wait until panel 2 is first shown ── */
+/* ── Lazy init wait until panel 2 is first shown ── */
 let inited = false;
 
 function tryInit() {
   if (inited) return;
   if (initGalaxy()) { inited = true; return; }
-  /* Container not sized yet (panel hidden) — retry on next rAF */
+  /* Container not sized yet (panel hidden) retry on next rAF */
   requestAnimationFrame(tryInit);
 }
 
@@ -3876,7 +4104,7 @@ if (panel2El) {
   mo.observe(panel2El, { attributes: true, attributeFilter: ['class'] });
 }
 
-/* Also attempt immediately — covers the edge case where panel 2 starts active */
+/* Also attempt immediately covers the edge case where panel 2 starts active */
 setTimeout(tryInit, 120);
 </script>
 

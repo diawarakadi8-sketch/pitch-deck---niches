@@ -984,79 +984,29 @@ h3 {
 
 /* === SLIDE 6 GROWTH PROJECTIONS === */
 /* === SLIDE 6 GROWTH PROJECTIONS (attribution framework) === */
+/* === SLIDE 6 GROWTH PROJECTIONS === */
 .s6-inner {
   padding: clamp(4rem,8vh,5.5rem) var(--pad) clamp(1.5rem,3vh,2.5rem);
   justify-content: flex-start;
-  gap: clamp(0.7rem,1.8vh,1.3rem);
+  gap: clamp(0.75rem,2vh,1.4rem);
 }
-.s6-attrib-row {
+.s6-metrics-row {
   display: grid;
-  grid-template-columns: 0.85fr 1.3fr;
-  gap: clamp(0.75rem,1.5vw,1.5rem);
-  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.75rem,1.5vw,1.4rem);
+  align-items: stretch;
 }
-.s6-attrib-card {
-  background: var(--forest);
-  border-radius: 18px;
-  padding: clamp(1.2rem,2.5vh,2rem) clamp(1.2rem,2.5vw,2rem);
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  height: 100%;
-  justify-content: center;
-}
-.s6-attrib-formula {
-  display: flex;
-  flex-direction: column;
-  gap: 0.08rem;
-}
-.s6-formula-num {
-  font-family: var(--serif);
-  font-size: clamp(2rem,4.5vw,3.8rem);
-  font-weight: 700;
-  color: #d0ffe8;
-  line-height: 1;
-}
-.s6-formula-div {
-  font-size: var(--body-size);
-  color: rgba(255,255,255,0.55);
-  letter-spacing: 0.03em;
-}
-.s6-formula-sep {
-  font-family: var(--sans);
-  font-size: var(--label-size);
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
-  margin: 0.35rem 0 0.15rem;
-}
-.s6-attrib-source {
-  font-size: var(--small-size);
-  color: rgba(255,255,255,0.38);
-  font-style: italic;
-  line-height: 1.45;
-}
-.s6-proj-grid {
-  display: grid;
-  grid-template-columns: 1fr 44px 1fr;
-  gap: clamp(0.5rem,1vw,0.9rem);
-  align-items: center;
-}
-.s6-proj-col {
+.s6-metric-card {
   background: var(--cream-light);
   border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: clamp(0.9rem,1.8vh,1.5rem) clamp(0.9rem,1.8vw,1.5rem);
+  border-radius: 18px;
+  padding: clamp(1rem,2vh,1.6rem) clamp(1rem,2vw,1.6rem);
   display: flex;
   flex-direction: column;
-  gap: 0.18rem;
+  gap: 0.25rem;
 }
-.s6-proj-col--highlight {
-  background: #f0faf5;
-  border-color: var(--sage);
-}
-.s6-proj-label {
+.s6-metric-card--cpm { background: var(--forest); border-color: var(--forest-dark); }
+.s6-metric-card-label {
   font-family: var(--sans);
   font-size: var(--label-size);
   font-weight: 700;
@@ -1065,38 +1015,30 @@ h3 {
   color: var(--text-muted);
   margin-bottom: 0.3rem;
 }
-.s6-proj-views {
+.s6-metric-card--cpm .s6-metric-card-label { color: rgba(255,255,255,0.45); }
+.s6-metric-card-big {
   font-family: var(--serif);
-  font-size: clamp(1.5rem,3vw,2.5rem);
+  font-size: clamp(1.6rem,3.2vw,2.8rem);
   font-weight: 700;
   color: var(--forest);
   line-height: 1;
 }
-.s6-proj-views span,
-.s6-proj-dl span { font-size: var(--small-size); color: var(--text-muted); font-family: var(--sans); font-weight: 400; }
-.s6-proj-eq {
-  font-size: var(--label-size);
+.s6-metric-card--cpm .s6-metric-card-big { color: #d0ffe8; }
+.s6-metric-card-note {
+  font-size: var(--body-size);
   color: var(--text-muted);
-  margin: 0.3rem 0;
+  line-height: 1.4;
+  margin-top: 0.3rem;
 }
-.s6-proj-dl {
-  font-family: var(--serif);
-  font-size: clamp(1.1rem,2.2vw,1.9rem);
-  font-weight: 700;
-  color: var(--forest-mid);
-  line-height: 1;
-}
-.s6-proj-dl--big { color: var(--coral); font-size: clamp(1.2rem,2.5vw,2.1rem); }
-.s6-proj-arrow {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.2rem;
-  color: var(--forest);
-  font-family: var(--sans);
+.s6-metric-card--cpm .s6-metric-card-note { color: rgba(255,255,255,0.5); }
+.s6-metric-card-sub {
   font-size: var(--small-size);
-  font-weight: 700;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.4;
+  margin-top: 0.1rem;
 }
+.s6-metric-card--cpm .s6-metric-card-sub { color: rgba(255,255,255,0.35); }
 .s6-niches { display: flex; flex-direction: column; gap: 0.45rem; }
 .s6-niches-label {
   font-family: var(--sans);
@@ -1116,7 +1058,6 @@ h3 {
   font-size: var(--small-size);
   font-weight: 600;
 }
-
 /* === SLIDE 7 SCALE / TIMELINE === */
 .s7-tl-inner {
   padding: clamp(4rem,8vh,5.5rem) var(--pad) clamp(1.5rem,3vh,2.5rem);
@@ -2151,7 +2092,7 @@ body.edit-active [contenteditable] {
 <!-- =============================================
      SLIDE 01 · MILLIONS REACHED
      ============================================= -->
-<section class="slide" id="slide-1" aria-label="Millions Reached">
+<section class="slide" id="slide-1" aria-label="Parallel Talkspace Check-In">
 
   <!-- Hidden header/footer kept for nav consistency; visually suppressed via CSS -->
   <div class="s-header" style="display:none"><div class="s-brand">Campaign Deck</div><div class="s-tag">Talkspace × Parallel Distribution</div></div>
@@ -2171,8 +2112,8 @@ body.edit-active [contenteditable] {
 
       <!-- EDITABLE: main headline -->
       <h1 class="s1-main-headline">
-        <span class="s1-h-line1">Millions Reached.</span>
-        <span class="s1-h-line2">Millions More Ahead.</span>
+        <span class="s1-h-line1">Parallel //</span>
+        <span class="s1-h-line2">Talkspace Check-In</span>
       </h1>
 
       <!-- EDITABLE: subhead -->
@@ -2268,36 +2209,11 @@ body.edit-active [contenteditable] {
       </div>
 
       <!-- Panel 2 Interactive 3D Galaxy (Three.js) -->
-      <div class="s2-panel s2-galaxy-panel" id="s2-p2">
-        <!-- Three.js renders into this container -->
-        <div class="s2-galaxy-canvas" id="s2GalaxyContainer"></div>
-        <!-- Fixed text overlay editable in HTML -->
-        <div class="s2-galaxy-overlay">
-          <div class="s2-galaxy-section-num">02</div>
-          <h2 class="s2-galaxy-headline">This is what<br>scale looks like.</h2>
-          <p class="s2-galaxy-sub">Every dot represents<br>340 people reached.</p>
-          <div class="s2-galaxy-metric">
-            <svg class="s2-galaxy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 00-3-3.87"/>
-              <path d="M16 3.13a4 4 0 010 7.75"/>
-            </svg>
-            <div>
-              <div class="s2-galaxy-reach-num">34,373,398</div>
-              <div class="s2-galaxy-reach-lbl">People Reached</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- Panel 3 Saves -->
       <div class="s2-panel" id="s2-p3">
         <div class="s2-stat-wrap">
           <div class="s2-counter-eyebrow">Saves</div>
           <div class="s2-big-num">199K</div>
-          <div class="s2-stat-context">People don't bookmark content they scroll past they save what matters. 199K saves signals genuine intent to act.</div>
-          <div class="s2-stat-tag">High purchase intent signal</div>
         </div>
       </div>
 
@@ -2316,7 +2232,6 @@ body.edit-active [contenteditable] {
               <div class="s2-stat-title">Female 18 34</div>
             </div>
           </div>
-          <div class="s2-stat-context">Exact match to Talkspace's core user profile this audience isn't adjacent to your customer, it is your customer.</div>
         </div>
       </div>
 
@@ -2325,9 +2240,6 @@ body.edit-active [contenteditable] {
         <div class="s2-stat-wrap">
           <div class="s2-counter-eyebrow">Weekly Momentum</div>
           <div class="s2-big-num">2.1M</div>
-          <div class="s2-stat-title">Views in the last 7 days</div>
-          <div class="s2-stat-context">The campaign isn't slowing down it's compounding. At the current trajectory we're projecting ~8.9M views per month.</div>
-          <div class="s2-stat-tag">Not plateauing accelerating</div>
         </div>
       </div>
 
@@ -2573,57 +2485,43 @@ body.edit-active [contenteditable] {
 
   <div class="s-header">
     <div class="s-brand">Growth Projections</div>
-    <div class="s-tag">Attribution Backed Scale</div>
+    <div class="s-tag">What Scaling Looks Like</div>
   </div>
 
   <div class="slide-inner s6-inner">
 
     <div class="reveal d1">
-      <p class="eyebrow" style="margin-bottom:0.4rem;">Our Attribution Framework</p>
-      <h2>We know exactly what 5&times; the views<br><em>means in downloads.</em></h2>
+      <p class="eyebrow" style="margin-bottom:0.4rem;">The Proposal</p>
+      <h2>5&times; the audience reach.<br><em>5 niches. 100 accounts each.</em></h2>
     </div>
 
-    <div class="s6-attrib-row reveal d2">
+    <div class="s6-metrics-row reveal d2">
 
-      <div class="s6-attrib-card">
-        <div class="s6-attrib-formula">
-          <span class="s6-formula-num">1</span>
-          <span class="s6-formula-div">app download</span>
-          <span class="s6-formula-sep">per</span>
-          <span class="s6-formula-num">4,500</span>
-          <span class="s6-formula-div">TikTok views</span>
-        </div>
-        <div class="s6-attrib-source">Tested across multiple campaigns consistent, proven conversion rate</div>
+      <div class="s6-metric-card">
+        <div class="s6-metric-card-label">Monthly Views</div>
+        <div class="s6-metric-card-big">~11.125M</div>
+        <div class="s6-metric-card-note">100 accounts per niche posting 1 to 2&times; per day</div>
+        <div class="s6-metric-card-sub">2.225M views per niche per month</div>
       </div>
 
-      <div class="s6-proj-grid">
-
-        <div class="s6-proj-col">
-          <div class="s6-proj-label">Current</div>
-          <div class="s6-proj-views">8M <span>views / mo</span></div>
-          <div class="s6-proj-eq">&divide;&nbsp;4,500</div>
-          <div class="s6-proj-dl">~1,778 <span>downloads / mo</span></div>
-        </div>
-
-        <div class="s6-proj-arrow">
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-            <path d="M3 17h28M21 9l10 8-10 8" stroke="#1C5E52" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span>5&times;</span>
-        </div>
-
-        <div class="s6-proj-col s6-proj-col--highlight">
-          <div class="s6-proj-label">5&times; Scale</div>
-          <div class="s6-proj-views">40M <span>views / mo</span></div>
-          <div class="s6-proj-eq">&divide;&nbsp;4,500</div>
-          <div class="s6-proj-dl s6-proj-dl--big">~8,889 <span>downloads / mo</span></div>
-        </div>
-
+      <div class="s6-metric-card">
+        <div class="s6-metric-card-label">Projected Downloads</div>
+        <div class="s6-metric-card-big">~2,500</div>
+        <div class="s6-metric-card-note">per month after Month 1</div>
+        <div class="s6-metric-card-sub">~5,000 per month at maximum capacity</div>
       </div>
+
+      <div class="s6-metric-card s6-metric-card--cpm">
+        <div class="s6-metric-card-label">Current CPM</div>
+        <div class="s6-metric-card-big">~$1</div>
+        <div class="s6-metric-card-note">cost per 1,000 views</div>
+        <div class="s6-metric-card-sub">industry leading efficiency</div>
+      </div>
+
     </div>
 
     <div class="s6-niches reveal d3">
-      <div class="s6-niches-label">5 audience niches &middot; 100 accounts each &middot; one CTA: Download the Talkspace App</div>
+      <div class="s6-niches-label">5 audience niches &middot; 100 accounts each &middot; 1 CTA: Download the Talkspace App</div>
       <div class="s6-niche-row">
         <span class="s6-niche-badge">Postpartum</span>
         <span class="s6-niche-badge">Couples</span>
@@ -2641,10 +2539,6 @@ body.edit-active [contenteditable] {
   </div>
 </section>
 
-
-<!-- =============================================
-     SLIDE 05 · RECOMMENDATION
-     ============================================= -->
 <section class="slide" id="slide-7" aria-label="Scale">
 
   <div class="s-header">
@@ -2680,7 +2574,7 @@ body.edit-active [contenteditable] {
       </div>
 
       <div class="s7-tl-item">
-        <div class="s7-tl-date">July 1 15</div>
+        <div class="s7-tl-date">July 1 - 15</div>
         <div class="s7-tl-dot"></div>
         <div class="s7-tl-text"><strong>Constantly tracking</strong> and iterating on content to optimise accounts</div>
       </div>
@@ -2925,7 +2819,7 @@ function initNichePlaybook() {
         { img: '1x/page 1 postpartum.png', grad: 'linear-gradient(160deg,#C8E6D8,#8CB5A7)', headline: "Postpartum isn't\njust tired.", sub: "It's a mental load no one\ntalks about.", cta: "You're not alone." },
         { img: 'slides in deck/postpartm/1x/page 2.png', grad: 'linear-gradient(160deg,#C8E6D8,#8CB5A7)', headline: "", sub: "", cta: "" },
         { img: 'slides in deck/postpartm/1x/Page 3.png', grad: 'linear-gradient(160deg,#C8E6D8,#8CB5A7)', headline: "", sub: "", cta: "" },
-        { img: 'slides in deck/postpartm/1x/Page 4.png', grad: 'linear-gradient(160deg,#C8E6D8,#8CB5A7)', headline: "", sub: "", cta: "" },
+        { img: 'slides in deck/postpartm/1x/page talkspace.png', grad: 'linear-gradient(160deg,#C8E6D8,#8CB5A7)', headline: "", sub: "", cta: "" },
         { img: 'slides in deck/postpartm/1x/page 5.png', grad: 'linear-gradient(160deg,#C8E6D8,#8CB5A7)', headline: "", sub: "", cta: "" },
       ]
     },

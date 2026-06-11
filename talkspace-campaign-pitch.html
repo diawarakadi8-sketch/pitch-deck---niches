@@ -1071,6 +1071,38 @@ h3 {
   justify-content: flex-start;
   gap: clamp(0.75rem,2vh,1.4rem);
 }
+.s6-current-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem,1.5vw,1.25rem);
+  background: var(--sage-light);
+  border: 1px solid var(--sage);
+  border-radius: 12px;
+  padding: clamp(0.5rem,1vh,0.85rem) clamp(1rem,2vw,1.5rem);
+  flex-wrap: wrap;
+}
+.s6-current-label {
+  font-family: var(--sans);
+  font-size: var(--label-size);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--forest);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.s6-current-divider {
+  width: 1px;
+  height: 1.1em;
+  background: var(--sage);
+  flex-shrink: 0;
+}
+.s6-current-stat {
+  font-size: var(--body-size);
+  color: var(--dark);
+  line-height: 1.3;
+}
+.s6-current-stat strong { color: var(--forest); font-weight: 700; }
 .s6-metrics-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1175,6 +1207,7 @@ h3 {
   color: var(--forest);
   text-align: right;
   white-space: nowrap;
+  padding-right: clamp(0.5rem, 1vw, 0.9rem);
 }
 .s7-tl-dot {
   width: 11px;
@@ -2203,11 +2236,6 @@ body.edit-active [contenteditable] {
       <!-- EDITABLE: stats change numbers and labels here -->
       <div class="s1-stats-row">
         <div class="s1-stat-item">
-          <svg class="s1-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-          <div class="s1-stat-num">265</div>
-          <div class="s1-stat-lbl">Active Accounts</div>
-        </div>
-        <div class="s1-stat-item">
           <svg class="s1-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           <div class="s1-stat-num">34.4M+</div>
           <div class="s1-stat-lbl">Views</div>
@@ -2576,7 +2604,15 @@ body.edit-active [contenteditable] {
       <h2>5&times; the audience reach.<br><em>5 niches. 100 accounts each.</em></h2>
     </div>
 
-    <div class="s6-metrics-row reveal d2">
+    <div class="s6-current-row reveal d2">
+      <div class="s6-current-label">Current</div>
+      <div class="s6-current-divider"></div>
+      <div class="s6-current-stat">100 accounts posting at full-scale 4&times; per day</div>
+      <div class="s6-current-divider"></div>
+      <div class="s6-current-stat">Views: <strong>8.9M</strong></div>
+    </div>
+
+    <div class="s6-metrics-row reveal d3">
 
       <div class="s6-metric-card">
         <div class="s6-metric-card-label">Monthly Views</div>
@@ -2596,12 +2632,11 @@ body.edit-active [contenteditable] {
         <div class="s6-metric-card-label">Current CPM</div>
         <div class="s6-metric-card-big">~$1</div>
         <div class="s6-metric-card-note">cost per 1,000 views</div>
-        <div class="s6-metric-card-sub">industry leading efficiency</div>
       </div>
 
     </div>
 
-    <div class="s6-niches reveal d3">
+    <div class="s6-niches reveal d4">
       <div class="s6-niches-label">5 audience niches &middot; 100 accounts each &middot; 1 CTA: Download the Talkspace App</div>
       <div class="s6-niche-row">
         <span class="s6-niche-badge">Postpartum</span>

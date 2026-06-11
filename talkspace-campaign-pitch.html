@@ -2425,21 +2425,21 @@ body.edit-active [contenteditable] {
   background: var(--cream-light);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: clamp(0.75rem,1.4vh,1.1rem) clamp(1rem,2vw,1.6rem);
+  padding: clamp(0.65rem,1.2vh,1rem) clamp(1rem,2vw,1.6rem);
 }
 .s4a-pitch-points {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.35rem,0.7vh,0.55rem);
-  margin-top: 0.45rem;
+  gap: clamp(0.28rem,0.55vh,0.45rem);
+  margin-top: 0.4rem;
 }
 .s4a-pitch-point {
   display: flex;
   align-items: flex-start;
   gap: 0.65rem;
-  font-size: clamp(0.72rem,1.1vw,0.9rem);
+  font-size: clamp(0.7rem,1.05vw,0.88rem);
   color: var(--dark);
-  line-height: 1.5;
+  line-height: 1.45;
 }
 .s4a-pt-marker {
   width: 6px;
@@ -2447,9 +2447,41 @@ body.edit-active [contenteditable] {
   background: var(--forest);
   border-radius: 50%;
   flex-shrink: 0;
-  margin-top: 0.45em;
+  margin-top: 0.42em;
 }
 .s4a-pitch-point strong { color: var(--forest); font-weight: 600; }
+.s4a-charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(0.6rem,1.2vw,1rem);
+}
+.s4a-chart-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.s4a-chart-label {
+  font-family: var(--sans);
+  font-size: clamp(0.6rem,0.85vw,0.74rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: clamp(0.4rem,0.7vh,0.6rem) clamp(0.7rem,1.2vw,1rem);
+  border-bottom: 1px solid var(--border);
+  background: var(--cream-light);
+}
+.s4a-chart-img {
+  width: 100%;
+  height: auto;
+  max-height: min(28vh, 220px);
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
 .s4a-hero {
   background: var(--forest);
   border-radius: 18px;
@@ -2564,18 +2596,14 @@ body.edit-active [contenteditable] {
       <div class="s4a-credit">Pure-Lift Model &nbsp;&middot;&nbsp; Andy Hall, PhD &nbsp;&middot;&nbsp; Stanford University &nbsp;&middot;&nbsp; April 2026<br>Validated across 2 internal apps tracked full-funnel</div>
     </div>
 
-    <div class="s4a-cards reveal d3">
-      <div class="s4a-card">
-        <div class="s4a-card-big">89%</div>
-        <div class="s4a-card-text">of paid ads fall below organic CVR &mdash; organic outperforms the vast majority</div>
+    <div class="s4a-charts reveal d3">
+      <div class="s4a-chart-card">
+        <div class="s4a-chart-label">Methodology 1 &mdash; Calibration Data &nbsp;&middot;&nbsp; 89% of paid ads fall below organic CVR</div>
+        <img class="s4a-chart-img" src="Screenshot 2026-06-11 at 20.14.37.png" alt="Organic Outperforms 89% of Individual Paid Ads">
       </div>
-      <div class="s4a-card s4a-card--highlight">
-        <div class="s4a-card-big">R&sup2; = 0.92</div>
-        <div class="s4a-card-text">model accuracy trained on SwapCut pure-lift data, cross-validated at 0.56</div>
-      </div>
-      <div class="s4a-card">
-        <div class="s4a-card-big">31 / 47</div>
-        <div class="s4a-card-text">paid ads had zero conversions &mdash; only 5 ads drive 93% of all paid CVR</div>
+      <div class="s4a-chart-card">
+        <div class="s4a-chart-label">Methodology 2 &mdash; Model Performance &nbsp;&middot;&nbsp; R&sup2; = 0.92 pure-lift PDL model</div>
+        <img class="s4a-chart-img" src="Screenshot 2026-06-11 at 20.15.03.png" alt="R² = 0.92 PDL Model Trained on Pure-Lift SwapCut Data">
       </div>
     </div>
 

@@ -2421,18 +2421,35 @@ body.edit-active [contenteditable] {
   gap: clamp(0.9rem,1.8vh,1.5rem);
   justify-content: center;
 }
-.s4a-problem {
+.s4a-pitch {
   background: var(--cream-light);
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: clamp(0.75rem,1.4vh,1.1rem) clamp(1rem,2vw,1.6rem);
 }
-.s4a-problem-text {
-  font-size: clamp(0.72rem,1.1vw,0.92rem);
-  color: var(--text-muted);
-  line-height: 1.55;
-  margin-top: 0.35rem;
+.s4a-pitch-points {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.35rem,0.7vh,0.55rem);
+  margin-top: 0.45rem;
 }
+.s4a-pitch-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: clamp(0.72rem,1.1vw,0.9rem);
+  color: var(--dark);
+  line-height: 1.5;
+}
+.s4a-pt-marker {
+  width: 6px;
+  height: 6px;
+  background: var(--forest);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 0.45em;
+}
+.s4a-pitch-point strong { color: var(--forest); font-weight: 600; }
 .s4a-hero {
   background: var(--forest);
   border-radius: 18px;
@@ -2518,9 +2535,22 @@ body.edit-active [contenteditable] {
 
   <div class="slide-inner s4a-inner">
 
-    <div class="s4a-problem reveal d1">
-      <p class="eyebrow">The Problem</p>
-      <p class="s4a-problem-text">Unlike paid ads — where TikTok attributes each conversion to a specific campaign — organic impressions carry no downstream identifier. A user who watches content and downloads the app two days later is indistinguishable from a user who never saw it. Solving it requires an econometric approach.</p>
+    <div class="s4a-pitch reveal d1">
+      <p class="eyebrow">Why We're Proposing This</p>
+      <div class="s4a-pitch-points">
+        <div class="s4a-pitch-point">
+          <span class="s4a-pt-marker"></span>
+          <span>Parallel works best at full scale. This campaign is currently small scale — we believe we can drive <strong>thousands of monthly Talkspace downloads</strong> if we scale in this new way.</span>
+        </div>
+        <div class="s4a-pitch-point">
+          <span class="s4a-pt-marker"></span>
+          <span>We've been doing this for all of our other app clients. We want to extend the same models and efforts we've spent months finalizing to this campaign as well.</span>
+        </div>
+        <div class="s4a-pitch-point">
+          <span class="s4a-pt-marker"></span>
+          <span>This is a mutually beneficial shift — you get accurate download attribution, deeper audience understanding, and spend deployed on <strong>specific therapy niches</strong>.</span>
+        </div>
+      </div>
     </div>
 
     <div class="s4a-hero reveal d2">

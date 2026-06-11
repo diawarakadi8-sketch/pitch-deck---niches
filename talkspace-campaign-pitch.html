@@ -2467,7 +2467,7 @@ body.edit-active [contenteditable] {
       <div class="s4a-chart-card">
         <div class="s4a-chart-eyebrow">Methodology 1 &mdash; Calibration Data</div>
         <div class="s4a-chart-title">Organic Outperforms 89% of Individual Paid Ads</div>
-        <img src="Screenshot 2026-06-11 at 20.14.37.png" alt="Organic Outperforms 89% of Paid Ads" style="width:100%;height:auto;max-height:min(22vh,180px);object-fit:cover;object-position:top center;display:block;border-radius:6px;">
+        <img class="s4a-expandable" src="Screenshot 2026-06-11 at 20.14.37.png" alt="Organic Outperforms 89% of Paid Ads" style="width:100%;height:auto;max-height:min(22vh,180px);object-fit:cover;object-position:top center;display:block;border-radius:6px;">
         <div class="s4a-chart-footer">
           <div class="s4a-cstat"><div class="s4a-cstat-big">31/47</div><div class="s4a-cstat-lbl">paid ads: zero conversions</div></div>
           <div class="s4a-cstat"><div class="s4a-cstat-big">89%</div><div class="s4a-cstat-lbl">paid ads below organic CVR</div></div>
@@ -2479,7 +2479,7 @@ body.edit-active [contenteditable] {
       <div class="s4a-chart-card">
         <div class="s4a-chart-eyebrow">Methodology 2 &mdash; Model Performance</div>
         <div class="s4a-chart-title">R&sup2; = 0.92: Predicts Talkspace Downloads from Organic Views</div>
-        <img src="Screenshot 2026-06-11 at 20.15.03.png" alt="R squared 0.92 PDL Model" style="width:100%;height:auto;max-height:min(22vh,180px);object-fit:cover;object-position:top center;display:block;border-radius:6px;">
+        <img class="s4a-expandable" src="Screenshot 2026-06-11 at 20.15.03.png" alt="R squared 0.92 PDL Model" style="width:100%;height:auto;max-height:min(22vh,180px);object-fit:cover;object-position:top center;display:block;border-radius:6px;">
         <div class="s4a-chart-footer">
           <div class="s4a-cstat"><div class="s4a-cstat-big">0.92</div><div class="s4a-cstat-lbl">R&sup2; in-sample accuracy</div></div>
           <div class="s4a-cstat"><div class="s4a-cstat-big">0.56</div><div class="s4a-cstat-lbl">LOO cross-validated R&sup2;</div></div>
@@ -3817,6 +3817,19 @@ function initS3() {
     if (e.key === 'Escape')      lbClose();
     if (e.key === 'ArrowLeft'  && lbCtx) { lbCtx.flipPrev(); setTimeout(lbUpdateDisplay, 320); }
     if (e.key === 'ArrowRight' && lbCtx) { lbCtx.flipNext(); setTimeout(lbUpdateDisplay, 320); }
+  });
+
+  /* ── Wire slide 4 chart images to the same lightbox ── */
+  document.querySelectorAll('.s4a-expandable').forEach(img => {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', () => {
+      lbCtx = null;
+      lbImg.style.opacity = '0';
+      lbImg.src = img.src;
+      lbImg.onload = () => { lbImg.style.opacity = '1'; };
+      lbCounter.textContent = '';
+      lb.classList.add('s3-lb-open');
+    });
   });
 
   S3_CONFIG.stacks.forEach((cfg, si) => {

@@ -1139,17 +1139,19 @@ h3 {
 .s6-metric-card--cpm .s6-metric-card-big { color: #d0ffe8; }
 .s6-metric-card-note {
   font-size: var(--body-size);
-  color: var(--text-muted);
+  color: #111;
   line-height: 1.4;
   margin-top: 0.3rem;
+  font-weight: 700;
 }
 .s6-metric-card--cpm .s6-metric-card-note { color: rgba(255,255,255,0.5); }
 .s6-metric-card-sub {
   font-size: var(--small-size);
-  color: var(--text-muted);
+  color: #111;
   font-style: italic;
   line-height: 1.4;
   margin-top: 0.1rem;
+  font-weight: 700;
 }
 .s6-metric-card--cpm .s6-metric-card-sub { color: rgba(255,255,255,0.35); }
 .s6-niches { display: flex; flex-direction: column; gap: 0.45rem; }
@@ -2458,7 +2460,7 @@ body.edit-active [contenteditable] {
 
     <!-- Pitch narrative -->
     <div class="s4a-pitch reveal d1">
-      <p class="eyebrow">Why We're Proposing This</p>
+      <p class="eyebrow">Why This Approach</p>
       <div class="s4a-pitch-points">
         <div class="s4a-pitch-point"><span class="s4a-pt-marker"></span><span>Parallel works best at full scale. This campaign is currently small scale. We believe we can drive <strong>thousands of monthly Talkspace downloads</strong> if we scale in this new way.</span></div>
         <div class="s4a-pitch-point"><span class="s4a-pt-marker"></span><span>We've been doing this for all of our other app clients. We want to extend the same models and efforts we've spent months finalizing to this campaign as well.</span></div>
@@ -2492,8 +2494,50 @@ body.edit-active [contenteditable] {
       <!-- Chart 2: R² = 0.92 model accuracy line chart -->
       <div class="s4a-chart-card">
         <div class="s4a-chart-eyebrow">Methodology 2 &mdash; Model Performance</div>
-        <div class="s4a-chart-title">R&sup2; = 0.92: A PDL Model Trained on Pure-Lift SwapCut Data</div>
-        <img class="s4a-expandable" src="Screenshot 2026-06-11 at 20.15.03.png" alt="R squared 0.92 PDL Model" style="width:100%;height:auto;max-height:min(22vh,180px);object-fit:cover;object-position:top center;display:block;border-radius:6px;">
+        <div class="s4a-chart-title">R&sup2; = 0.92: Predicts Talkspace Downloads from Organic Views</div>
+        <svg class="s4a-chart-svg" viewBox="0 0 268 100" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+          <line x1="28" y1="6" x2="28" y2="80" stroke="#e0e0e0" stroke-width="1"/>
+          <line x1="28" y1="80" x2="262" y2="80" stroke="#e0e0e0" stroke-width="1"/>
+          <line x1="28" y1="54" x2="262" y2="54" stroke="#f2f2f2" stroke-width="0.7"/>
+          <line x1="28" y1="28" x2="262" y2="28" stroke="#f2f2f2" stroke-width="0.7"/>
+          <text x="24" y="83" text-anchor="end" font-size="6.5" fill="#bbb">0</text>
+          <text x="24" y="57" text-anchor="end" font-size="6.5" fill="#bbb">400</text>
+          <text x="24" y="31" text-anchor="end" font-size="6.5" fill="#bbb">800</text>
+          <rect x="31" y="74" width="7" height="6"  fill="#e8b4b4" rx="1"/>
+          <rect x="40" y="66" width="7" height="14" fill="#e8b4b4" rx="1"/>
+          <rect x="49" y="54" width="7" height="26" fill="#e8b4b4" rx="1"/>
+          <rect x="58" y="41" width="7" height="39" fill="#e8b4b4" rx="1"/>
+          <rect x="67" y="25" width="7" height="55" fill="#e8a0a0" rx="1"/>
+          <rect x="76" y="32" width="7" height="48" fill="#e8b4b4" rx="1"/>
+          <rect x="85" y="44" width="7" height="36" fill="#e8b4b4" rx="1"/>
+          <rect x="94" y="55" width="7" height="25" fill="#e8b4b4" rx="1"/>
+          <rect x="103" y="46" width="7" height="34" fill="#e8b4b4" rx="1"/>
+          <rect x="112" y="29" width="7" height="51" fill="#e8b4b4" rx="1"/>
+          <rect x="121" y="9"  width="7" height="71" fill="#e8a0a0" rx="1"/>
+          <rect x="130" y="17" width="7" height="63" fill="#e8b4b4" rx="1"/>
+          <rect x="139" y="28" width="7" height="52" fill="#e8b4b4" rx="1"/>
+          <rect x="148" y="38" width="7" height="42" fill="#e8b4b4" rx="1"/>
+          <rect x="157" y="47" width="7" height="33" fill="#e8b4b4" rx="1"/>
+          <rect x="166" y="55" width="7" height="25" fill="#e8b4b4" rx="1"/>
+          <rect x="175" y="42" width="7" height="38" fill="#e8b4b4" rx="1"/>
+          <rect x="184" y="33" width="7" height="47" fill="#e8b4b4" rx="1"/>
+          <rect x="193" y="27" width="7" height="53" fill="#e8a0a0" rx="1"/>
+          <rect x="202" y="39" width="7" height="41" fill="#e8b4b4" rx="1"/>
+          <rect x="211" y="49" width="7" height="31" fill="#e8b4b4" rx="1"/>
+          <rect x="220" y="58" width="7" height="22" fill="#e8b4b4" rx="1"/>
+          <rect x="229" y="64" width="7" height="16" fill="#e8b4b4" rx="1"/>
+          <rect x="238" y="69" width="7" height="11" fill="#e8b4b4" rx="1"/>
+          <rect x="247" y="73" width="7" height="7"  fill="#e8b4b4" rx="1"/>
+          <rect x="256" y="76" width="7" height="4"  fill="#e8b4b4" rx="1"/>
+          <polyline points="34,72 43,63 52,51 61,39 70,23 79,30 88,43 97,53 106,44 115,27 124,8 133,16 142,27 151,37 160,46 169,54 178,41 187,32 196,26 205,38 214,48 223,57 232,63 241,68 250,72 259,75" fill="none" stroke="#2d6a4f" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+          <rect x="32" y="91" width="8" height="5" fill="#e8b4b4" rx="1"/>
+          <text x="43" y="96" font-size="6" fill="#999">Actual installs</text>
+          <line x1="100" y1="93.5" x2="112" y2="93.5" stroke="#2d6a4f" stroke-width="1.5"/>
+          <text x="115" y="96" font-size="6" fill="#999">Model prediction</text>
+          <text x="60"  y="90" text-anchor="middle" font-size="6" fill="#bbb">Feb 01</text>
+          <text x="145" y="90" text-anchor="middle" font-size="6" fill="#bbb">Feb 15</text>
+          <text x="230" y="90" text-anchor="middle" font-size="6" fill="#bbb">Mar 01</text>
+        </svg>
         <div class="s4a-chart-footer">
           <div class="s4a-cstat"><div class="s4a-cstat-big">0.92</div><div class="s4a-cstat-lbl">R&sup2; in-sample accuracy</div></div>
           <div class="s4a-cstat"><div class="s4a-cstat-big">0.56</div><div class="s4a-cstat-lbl">LOO cross-validated R&sup2;</div></div>
@@ -2724,15 +2768,15 @@ body.edit-active [contenteditable] {
       <div class="s6-metric-card">
         <div class="s6-metric-card-label">Monthly Views</div>
         <div class="s6-metric-card-big">~11.125M</div>
-        <div class="s6-metric-card-note">100 accounts per niche posting 1 to 2&times; per day</div>
-        <div class="s6-metric-card-sub">2.225M views per niche per month</div>
+        <div class="s6-metric-card-note"><strong>100 accounts per niche posting 1 to 2&times; per day</strong></div>
+        <div class="s6-metric-card-sub"><strong>2.225M views per niche per month</strong></div>
       </div>
 
       <div class="s6-metric-card">
         <div class="s6-metric-card-label">Projected Downloads</div>
         <div class="s6-metric-card-big">~2,500</div>
         <div class="s6-metric-card-note">per month after Month 1</div>
-        <div class="s6-metric-card-sub">~5,000 per month at maximum capacity</div>
+        <div class="s6-metric-card-sub"><strong>~5,000 per month at maximum capacity</strong></div>
       </div>
 
 
